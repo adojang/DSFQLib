@@ -1,0 +1,27 @@
+* A Generic DSFQ AND Gate for use in simulating Logic Gates
+* Copyright (c) 2022-2024 Adriaan van Wijk, Stellenbosch University
+*
+*
+* This gate is not meant to be directly attached to PTLs as it does not support integrated PTL ports.
+* Version 1.0
+
+*$Ports 		 A B C
+.subckt DSFQ_AND A B C
+
+.model main jj(rtype=1, vg=2.8mV, cap=0.07pF, r0=160, rn=16, icrit=84uA)
+.model secondary jj(rtype=1, vg=2.8mV, cap=0.07pF, r0=160, rn=16, icrit=60uA)
+.model third jj(rtype=1, vg=2.8mV, cap=0.07pF, r0=160, rn=16, icrit=168uA)
+
+L1 A 1 12p
+L2 B 4 12p
+RD1 1 2 0.67 neb=10G
+RD2 4 5 0.67 neb=10G
+BD1 2 C secondary
+BD2 5 C secondary
+B1 1 C main
+B2 4 C main
+B3 C 0 third
+
+Ibias 0 C dc 70u
+
+.ends
