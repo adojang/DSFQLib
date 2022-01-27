@@ -1,0 +1,342 @@
+* AND Gate Including Parasitics.
+* ============================
+
+*====== Main TestBench========
+
+.param cval = 700u
+
+
+* BASIC Timing Tests are each 100ps apart:
+* =============================================================
+IsrcA 0 srcain pwl(0 0 
++100p 0 101p cval 102p 0 
++300p 0 301p cval 302p 0)
+
+IsrcB 0 srcbin pwl(0 0 
++100p 0 101p cval 102p 0 
++300p 0 301p cval 302p 0)
+
+* BASIC Timing Tests each 50ps apart:
+* =============================================================
+* IsrcA 0 srcain pwl(0 0 50p 0 51p cval 52p 0 150p 0 151p cval 152p 0)
+* IsrcB 0 srcbin pwl(0 0 100p 0 101p cval 102p 0 150p 0 151p cval 152p 0)
+
+* Advanced Tests to see how long a value is held 20ps 30ps 40ps
+* =============================================================
+* IsrcA 0 srcain pwl(0 0 50p 0 51p cval 52p 0 150p 0 151p cval 152p 0 250p 0 251p cval 252p 0)
+* IsrcB 0 srcbin pwl(0 0 70p 0 71p cval 72p 0 180p 0 181p 0 182p 0 290p 0 291p cval 292p 0)
+
+
+XSourceA LSmitll_DCSFQ srcain srcaout
+XSourceB LSmitll_DCSFQ srcbin srcbout
+
+XLoadInA LSMITLL_JTL srcaout loadaout
+XLoadInB LSMITLL_JTL srcbout loadbout
+
+XDUT DSFQ_AND loadaout loadbout dutout
+
+XLoadOut LSMITLL_JTL dutout loadout
+XSFQDC LSmitll_SFQDC loadout sfqdcout
+
+RSink sfqdcout 0 2
+
+
+
+.tran 0.25p 500p 0 0.01p
+
+
+*Print current into and out of testbench
+.print i(L6.XSourceA) i(L6.XSourceB) i(Rb3.XDUT) p(B3.XDUT) i(B3.XDUT) v(RSink) i(RSink)
+
+
+
+*====== Device Under Test ======
+*$Ports 		 A B C
+.subckt DSFQ_AND A B C
+
+.model main jj(rtype=1, vg=2.8mV, cap=0.07pF, r0=160, rn=16, icrit=84uA)
+.model secondary jj(rtype=1, vg=2.8mV, cap=0.07pF, r0=160, rn=16, icrit=60uA)
+.model third jj(rtype=1, vg=2.8mV, cap=0.07pF, r0=160, rn=16, icrit=168uA)
+
+.param pInduc = 1p
+
+L1 A 1 12p
+L2 B 4 12p
+RD1 1 2 0.67 neb=10G
+RD2 4 5 0.67 neb=10G
+
+BD1 2 C secondary
+RDp1 2 14 2.8
+Ld1 14 C pInduc
+
+BD2 5 C secondary
+RDp2 5 15 2.8
+Ld2 15 C pInduc
+
+B1 1 C main
+Rb1 1 10 2.37
+Lb1 10 C pInduc
+
+B2 4 C main
+Rb2 4 11 2.37
+Lb2 11 C pInduc
+
+B3 C 0 third
+Rb3 C 13 1.67
+Lb3 13 0 pInduc
+
+*Increasing this bias seems to be a good thing. Why? 120 great
+*Increasing this bias, decreases the time between pulse INPUT and pulse OUTPUT in the circuit.
+
+*Increasing too much makes it too sensitive to noise. 250u is limit
+
+Ibias 0 C dc 120u
+
+.ends
+
+*=========== END DUT =========
+
+
+
+*=========== DSFQ Cell Library Start =====================
+
+*===== DC to SFQ =======
+*$Ports 			a q
+.subckt LSmitll_DCSFQ a q
+.model jjmit jj(rtype=1, vg=2.8mV, cap=0.07pF, r0=160, rn=16, icrit=0.1mA)
+
+.param B0=1.0
+.param Ic0=0.0001
+.param IcRs=100u*6.859904418
+.param B0Rs=IcRs/Ic0*B0
+.param Rsheet=2 
+.param Lsheet=1.13e-12 
+.param LB=2p
+.param LP=0.2p
+
+.param B1=2.25
+.param B2=2.25
+.param B3=2.5
+.param L1=1p
+.param L2=3.9p
+.param L3=0.6p
+.param L4=1.1p
+.param L5=4.5p
+.param L6=2p
+.param IB1=275u
+.param IB2=175u
+.param LB1=LB
+.param LB2=LB
+.param LP2=LP
+.param LP3=LP
+.param RB1=B0Rs/B1
+.param RB2=B0Rs/B2
+.param RB3=B0Rs/B3
+.param LRB1=(RB1/Rsheet)*Lsheet
+.param LRB2=(RB2/Rsheet)*Lsheet
+.param LRB3=(RB3/Rsheet)*Lsheet
+
+B1 2 3 jjmit area=B1
+B2 5 6 jjmit area=B2
+B3 7 8 jjmit area=B3
+IB1 0 4 pwl(0 0 5p IB1)
+IB2 0 9 pwl(0 0 5p IB2)
+LB1 3 4 LB1
+LB2 7 9 LB2
+L1 a 1 L1
+L2 1 0 L2
+L3 1 2 L3
+L4 3 5 L4
+L5 5 7 L5
+L6 7 q L6
+LP2 6 0 LP2
+LP3 8 0 LP3
+RB1 2 102 RB1
+LRB1 102 3 LRB1
+RB2 5 105 RB2
+LRB2 105 0 LRB2
+RB3 7 107 RB3
+LRB3 107 0 LRB3
+
+.ends
+
+*===== SFQ to DC =======
+*$Ports a q
+.subckt LSmitll_SFQDC a q
+.model jjmit jj(rtype=1, vg=2.8mV, cap=0.07pF, r0=160, rn=16, icrit=0.1mA)
+.param B0=1
+.param Ic0=0.0001
+.param IcRs=100u*6.859904418
+.param B0Rs=IcRs/Ic0*B0
+.param Rsheet=2 
+.param Lsheet=1.13e-12
+.param LB=2p
+.param LP=0.5p
+
+.param B1=3.25
+.param B2=2.00
+.param B3=1.50
+.param B4=3.00
+.param B5=1.75
+.param B6=1.50
+.param B7=1.50
+.param B8=2.00
+
+.param IB1=280u
+.param IB2=150u
+.param IB3=220u
+.param IB4=80u
+
+.param L1=1.522p
+.param L3=0.827p
+.param L4=1.12884p
+.param L5=1.11098p
+.param L5b=3.216p
+.param L6=5.94p
+.param L10=0.215p
+.param L19=0.954p
+.param L13=3.699p
+.param L18=2.010p
+.param L17=1.510p
+.param LR1=0.91p
+.param R1=0.375
+
+.param RB1=B0Rs/B1
+.param RB2=B0Rs/B2
+.param RB3=B0Rs/B3
+.param RB4=B0Rs/B4
+.param RB5=B0Rs/B5
+.param RB6=B0Rs/B6
+.param RB7=B0Rs/B7
+.param RB8=B0Rs/B8
+
+.param LRB1=(RB1/Rsheet)*Lsheet
+.param LRB2=(RB2/Rsheet)*Lsheet
+.param LRB3=(RB3/Rsheet)*Lsheet
+.param LRB4=(RB4/Rsheet)*Lsheet
+.param LRB5=(RB5/Rsheet)*Lsheet
+.param LRB6=(RB6/Rsheet)*Lsheet
+.param LRB7=(RB7/Rsheet)*Lsheet
+.param LRB8=(RB8/Rsheet)*Lsheet
+
+.param LB1=LB
+.param LB2=LB
+.param LB3=LB
+.param LB4=LB
+.param LP1=LP
+.param LP4=LP
+.param LP5=LP
+.param LP7=LP
+.param LP8=LP
+
+B1 2 4 jjmit area=B1
+B2 7 10 jjmit area=B2
+B3 6 8 jjmit area=B3
+B4 10 11 jjmit area=B4
+B5 8 15 jjmit area=B5
+B6 17 18 jjmit area=B6
+B7 20 21 jjmit area=B7
+B8 24 25 jjmit area=B8
+
+IB1 0 3 pwl(0 0 5p IB1)
+IB2 0 9 pwl(0 0 5p IB2)
+IB3 0 19 pwl(0 0 5p IB3)
+IB4 0 23 pwl(0 0 5p IB4)
+
+LB1 2 3 LB1
+LB2 8 9 LB2
+LB3 18 19 LB3
+LB4 22 23 LB4
+
+L1 a 2 L1
+L3 2 5 L3
+L4 5 6 L4
+L5 5 7 L5
+L5B 10 12 L5B
+L6 8 12 L6
+L10 12 17 L10
+L13 20 22 L13
+L17 24 q L17
+L18 22 24 L18
+L19 18 20 L19
+
+LR1 12 13 LR1
+R1 13 0 R1
+
+LP1 4 0 LP1
+LP4 11 0 LP4
+LP5 15 0 LP5
+LP7 21 0 LP7
+LP8 25 0 LP8
+
+RB1 2 102 RB1
+LRB1 102 0 LRB1
+RB2 7 107 RB2
+LRB2 107 10 LRB2
+RB3 6 106 RB3
+LRB3 106 8 LRB3
+RB4 10 110 RB4
+LRB4 110 0 LRB4
+RB5 8 108 RB5
+LRB5 108 0 LRB5
+RB6 17 117 RB6
+LRB6 117 18 LRB6
+RB7 20 120 RB7
+LRB7 120 0 LRB7
+RB8 24 124 RB8
+LRB8 124 0 LRB8
+.ends
+
+
+*===== JTL LOADS =======
+*$Ports 			a q
+.subckt LSMITLL_JTL a q
+.model jjmit jj(rtype=1, vg=2.8mV, cap=0.07pF, r0=160, rn=16, icrit=0.1mA)
+.param Phi0=2.067833848E-15
+.param B0=1
+.param Ic0=0.0001
+.param IcRs=100u*6.859904418
+.param B0Rs=IcRs/Ic0*B0
+.param Rsheet=2 
+.param Lsheet=1.13e-12 
+.param LP=0.2p
+.param IC=2.5
+.param LB=2p
+.param BiasCoef=0.7
+
+.param B1=IC
+.param B2=IC
+.param IB1=(B1+B2)*Ic0*BiasCoef
+.param LB1=LB
+.param L1=Phi0/(4*B1*Ic0)
+.param L2=Phi0/(4*B1*Ic0)
+.param L3=Phi0/(4*B1*Ic0)
+.param L4=Phi0/(4*B2*Ic0)
+.param RB1=B0Rs/B1   
+.param RB2=B0Rs/B2
+.param LRB1=(RB1/Rsheet)*Lsheet+LP
+.param LRB2=(RB2/Rsheet)*Lsheet+LP
+.param LP1=LP
+.param LP2=LP
+
+B1 1 2 jjmit area=B1
+B2 6 7 jjmit area=B2
+IB1 0 5 pwl(0 0 5p IB1)
+L1 a 1 L1
+L2 1 4 L2
+L3 4 6 L3
+L4 6 q L4
+LP1 2 0 LP1
+LP2 7 0 LP2
+LB1 5 4 LB1
+RB1 1 3 RB1
+RB2 6 8 RB2
+LRB1 3 0 LRB1
+LRB2 8 0 LRB2
+
+.ends
+
+
+
+*============ EOF===============
+.end
