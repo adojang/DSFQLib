@@ -13,7 +13,7 @@ IsrcA 0 srcain pwl(0 0
 +300p 0 301p cval 302p 0)
 
 IsrcB 0 srcbin pwl(0 0 
-+100p 0 101p cval 102p 0 
++150p 0 151p cval 152p 0 
 +300p 0 301p cval 302p 0)
 
 * BASIC Timing Tests each 50ps apart:
@@ -46,7 +46,7 @@ RSink sfqdcout 0 2
 
 
 *Print current into and out of testbench
-.print i(L6.XSourceA) i(L6.XSourceB) i(Rb3.XDUT) p(B3.XDUT) i(B3.XDUT) v(RSink) i(RSink)
+.print i(L6.XSourceA) i(L6.XSourceB) p(B3.XDUT) i(B3.XDUT) v(RSink)
 
 
 
@@ -73,15 +73,21 @@ BD2 5 C secondary
 RDp2 5 15 2.8
 Ld2 15 C pInduc
 
+*Value should change from 4.
+Rh1 1 C 4
+
 B1 1 C main
 Rb1 1 10 2.37
 Lb1 10 C pInduc
+
+*Value should change from 4.
+Rh2 4 C 4
 
 B2 4 C main
 Rb2 4 11 2.37
 Lb2 11 C pInduc
 
-B3 C 0 third
+B3 0 C third
 Rb3 C 13 1.67
 Lb3 13 0 pInduc
 
