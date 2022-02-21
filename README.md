@@ -1,7 +1,4 @@
 # DSFQLib
-The Standard DSFQ Cell Library
- Author: Adriaan van Wijk
-
 Copyright (c) 2021 Adriaan van Wijk, Stellenbosch University
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
