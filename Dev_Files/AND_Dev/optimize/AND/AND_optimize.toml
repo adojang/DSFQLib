@@ -1,0 +1,30 @@
+mode="optimize"
+
+[optimize]
+method ="hybrid"
+search_radius = 0.05
+converge = 0.01
+max_iterations = 15
+
+[parameters]
+main={nominal=8.48071629e-01} 
+secondary={nominal=5.17677402e-01}
+third={nominal=1.13196361e+00 }
+
+
+Ibiasz={nominal=4.62813248e-05}
+L1={nominal=8.11392791e-12 }
+L2={nominal=8.85286944e-12 } 
+Lout={nominal=1.47191818e-12}
+retentionResistor={nominal=3.47741865e+00}
+
+
+
+[margin]
+binary_search_steps = 7
+
+[verify]
+method = "spec_file"
+file = "oAND.sp"
+circuit = "oAND.js"
+threshold = 0.25

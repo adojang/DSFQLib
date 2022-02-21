@@ -1,0 +1,7 @@
+mode="verify"
+
+[verify]
+method = "spec_file"
+file = "OR.sp"
+circuit = "OR.js"
+threshold = 0.05

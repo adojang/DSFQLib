@@ -1,0 +1,67 @@
+josim -o ./AW_OR_testbench.csv ./AW_OR_testbench.cir -V 1
+josim-plot.py ./AW_OR_testbench.csv -t stacked
+
+
+josim -o ./OR.csv ./OR.js -V 1
+josim-plot.py .\OR.csv -t stacked
+
+sp_generator.py -t 0.95 -s 30E-12 -o OR.sp -v OR.csv
+josim-tools .\OR_verify.toml
+
+
+josim-tools .\OR_margins.toml
+josim-tools .\OR_optimize.toml
+
+
+
+josim -o ./oAND.csv ./oAND.js -V 1
+josim-plot.py ./oAND.csv -t stacked
+
+sp_generator.py -t 0.80 -s 110E-12 -o oAND.sp -v oAND.csv
+josim-tools .\AND_verify.toml
+
+
+Optimized 84%
+
+  .param Bps=4.50885164e-01
+  .param Bp=6.38677328e-01
+  .param Bia=1.08143184e+00
+  .param Bib=1.20932138e+00
+  .param Bua=1.03647091e+00
+  .param Bub=1.10293987e+00
+  .param Bla=1.56845090e+00
+  .param Blb= 1.21746914e+00
+  .param Blim= 1.79155775e+00
+  
+  .param LBias =3.15085312e-10
+  .param Lpoff = 1.30321000e-11
+  .param Rs=8.18357111e-01
+  .param RH= 3.64365918e+00
+  .param IB1= 9.95006250e-05
+
+
+Bps={nominal=0.5}
+Bp={nominal=0.7}
+
+
+
+
+
+ORGINANLS
+
+.param Bps=0.5
+.param Bp=0.7
+.param Bia=1.2
+.param Bib=1.2
+.param Bua=1
+.param Bub=1
+.param Bla=1.3
+.param Blb=1.3
+.param Blim=1.8
+
+.param LBias =350p
+.param Lpoff = 16p
+.param Rs=1
+.param RH=4
+
+.param IB1=100u

@@ -1,0 +1,6 @@
+digraph DSFQ_AND {
+  node [shape = circle];
+  State0 -> State0 [label="a"];
+  State0 -> State0 [label="b"];
+  State0 [label="0"];
+}

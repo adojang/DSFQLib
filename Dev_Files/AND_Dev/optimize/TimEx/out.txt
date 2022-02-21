@@ -1,0 +1,17 @@
+TimEx v2.05 (15 May 2020). Copyright 2016-2020 Coenrad Fourie, Stellenbosch University.
+Definition file read.
+Deck for Device-Under-Test read.
+
+Finding all cycles.
+Cycles:
+
+AND.cir: Finding all states.
+States found: 1
+.....State 0: No critical timing found a->a. (5 iterations.)
+..........State 0: No critical timing found a->b. (10 iterations.)
+..........State 0: No critical timing found b->a. (10 iterations.)
+.....State 0: No critical timing found b->b. (5 iterations.)
+
+Writing Verilog and testbench files.
+
+Executing testbench simulations.

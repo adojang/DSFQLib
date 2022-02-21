@@ -1,0 +1,8 @@
+The .sp file generation is wierd. I haven't gotten it to work properly yet.
+Use the following values: (trial and error)
+
+      time    B3
+2e-11          0
+2.2901e-10     1
+4.8901e-10     2
+8.0758e-10     3

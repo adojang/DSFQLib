@@ -1,0 +1,30 @@
+mode="margin"
+
+[parameters]
+Bps={nominal=4.50885164e-01}
+Bp={nominal=6.38677328e-01}
+Bia={nominal=1.08143184e+00}
+Bib={nominal=1.20932138e+00}
+Bua={nominal=1.03647091e+00}
+Bub={nominal=1.10293987e+00}
+Bla={nominal=1.56845090e+00}
+Blb={nominal= 1.21746914e+00}
+Blim={nominal= 1.79155775e+00}
+  
+LBias ={nominal=3.15085312e-10}
+Lpoff ={nominal= 1.30321000e-11}
+Rs={nominal=8.18357111e-01}
+RH={nominal= 3.64365918e+00}
+IB1={nominal= 9.95006250e-05}
+
+
+
+
+[margin]
+binary_search_steps = 7
+
+[verify]
+method = "spec_file"
+file = "OR.sp"
+circuit = "OR.js"
+threshold = 0.2

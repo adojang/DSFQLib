@@ -18,9 +18,9 @@ XDCSFQ LSmitll_DCSFQ 5 dutout
 
 * == Main Circuit 
 IsrcA 0 srcain pwl(0 0 
++100p 0 101p cval 102p 0
 +250p 0 251p cval 252p 0
-+400p 0 451p cval 452p 0)
-
++450p 0 451p cval 452p 0)
 .param cval = 700u
 
 XSourceA LSmitll_DCSFQ srcain srcaout

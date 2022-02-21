@@ -1,0 +1,7 @@
+mode="verify"
+
+[verify]
+method = "spec_file"
+file = "oAND.sp"
+circuit = "oAND.js"
+threshold = 0.05
