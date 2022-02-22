@@ -1,5 +1,5 @@
 # DSFQLib
-Copyright (c) 2021 Adriaan van Wijk, Stellenbosch University
+Copyright (c) 2022 Adriaan van Wijk, Stellenbosch University
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this cell library and associated documentation files (the "Library"), to deal
