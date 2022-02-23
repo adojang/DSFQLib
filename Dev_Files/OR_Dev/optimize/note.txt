@@ -1,0 +1,5 @@
+TODO:
+
+
+Figure out what the VDD and VSS mean.
+Take a quick look at ERSFQ technology and see if they have something similar. Perhaps it is a voltage not a current lol.

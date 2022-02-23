@@ -64,15 +64,13 @@ r1 1 0 2
 .ENDS SINKCELL
 * ===== MAIN =====
 .param cval=600u
-
 I_a 0 1000 pwl(0 0 
 +100p 0 103p cval 105p 0 
-+130p 0 133p cval 135p 0
-+300p 0 303p cval 305p 0
++400p 0 403p cval 405p 0
++500p 0 503p cval 505p 0
++515p 0 518p cval 520p 0
 +615p 0 618p cval 620p 0
-+720p 0 723p cval 725p 0
-+820p 0 823p cval 825p 0
-+850p 0 853p cval 855p 0)
++860p 0 863p cval 865p 0)
 
 I_b 0 4000 pulse(cval 0 200p 1p 1p 3p 200p)
 
@@ -84,81 +82,102 @@ XLOADINa LOADINCELL 2000 A
 XSOURCEINb SOURCECELL 4000 5000
 XLOADINb LOADINCELL 5000 B
 XLOADOUTq LOADOUTCELL q 8000
-XSINKOUTq SINKCELL 8000
+*XSINKOUTq SINKCELL 8000
 
 *Optimized OR Gate
 
-XDUT dsfq_and A B q
+*XDUT DSFQ_OR A B q
 
 *$Ports 		 A B q
 *.subckt DSFQ_OR A B q
 
 .model jjmit jj(rtype=1, vg=2.8mV, cap=0.07pF, r0=160, rn=16, icrit=0.1mA)
 
-.param Bps=4.50885164e-01
-.param Bp=6.38677328e-01
-.param Bia=1.08143184e+00
-.param Bib=1.20932138e+00
-.param Bua=1.03647091e+00
-.param Bub=1.10293987e+00
-.param Bla=1.56845090e+00
-.param Blb= 1.21746914e+00
-.param Blim= 1.79155775e+00  
-.param LBias =3.15085312e-10
-.param Lpoff = 1.30321000e-11
-.param Rs=8.18357111e-01
-.param RH= 3.64365918e+00
-.param IB1= 9.95006250e-05
-.param parasitic_induct = 1p
 
-Bia A 1 jjmit area=Bia
-Bib B 3 jjmit area=Bib
-Bua 1 2 jjmit area=Bua
-Bub 3 2 jjmit area=Bub
-Bla 1 0 jjmit area=Bla
-Blb 3 0 jjmit area=Blb
-Bp 4 0 jjmit area=Bp
-Bps 5 0 jjmit area=Bps
-Blim 6 2 jjmit area=Blim
+*There is not enough current flowing through Blb to trigger it. LBias must increase.
+.param B_JIA=    1.08172342e+00
+.param B_JUA=    9.98731934e-01
+.param B_JLA=    9.61678975e-01
+
+.param B_JIB=    9.77749297e-01
+.param B_JUB=    1.09557322e+00
+.param B_JLB=    1.16185870e+00 
+
+.param B_JP =    5.19248148e-01
+.param B_JPS =    4.07603769e-01
+.param B_JLIM=    1.96555868e+00 
+
+.param Ibias=    2.53670849e-04 
+
+.param LBias=    3.46560565e-10
+.param Lpoff=    1.29760632e-11
+.param Rs   =    9.90210690e-01 
+.param RH   =    2.95746005e+00 
+
+.param LP  =     8.19946788e-13
+.param RP  =     1.08687967e+00
 
 
-Ria A 10 1.97
-Lia 10 1 parasitic_induct
+B_JIA A 1   jjmit area=B_JIA
+B_JUA 1 N   jjmit area=B_JUA
+B_JLA 1 0   jjmit area=B_JLA
 
-Rib B 11 1.97
-Lib 11 3 parasitic_induct
+B_JIB B 3   jjmit area=B_JIB
+B_JUB 3 N   jjmit area=B_JUB
+B_JLB 3 0   jjmit area=B_JLB
 
-Rua 1 13 2.16
-Lua 13 2 parasitic_induct
+B_JP 4 0    jjmit area=B_JP
+B_JPS 5 0   jjmit area=B_JPS
 
-Rub 3 14 2.16
-Lub 14 2 parasitic_induct
-
-Rla 1 15 1.90
-Lla 15 0 parasitic_induct
-
-Rlb 3 16 1.90
-Llb 16 0 parasitic_induct
+B_JLIM 2 6  jjmit area=B_JLIM
 
 Lpoff 2 4 Lpoff
 Rs 4 5 Rs
 RH 4 0 RH
 
-Rp 4 17 2.59
-Lp 17 0 parasitic_induct
+Lbias 0 6 Lbias
+Lcon N 2 4p
+IBM 0 N pwl(0 0 5p Ibias)
 
-Rps 5 18 2.79
-Lps 18 0 parasitic_induct
+*Parasitic Inductances and Resistances for each JJ
+RJIA A 1a RP
+RJUA 1 Na RP
+RJLA 1 G1 RP
 
-Lbias VDD 6 Lbias
+RJIB B 3b RP
+RJUB 3 Nb RP
+RJLB 3 G3 RP
 
-IB1 0 VDD pwl(0 0 5p IB1 )
+RJP 4 G4 RP
+RJPS 5 G5 RP
 
-Rlim 6 60 1.6
-Llim 60 2 parasitic_induct
+RJLIM 2 6q RP
+
+LJIA 1a 1   LP
+LJUA Na N   LP
+LJLA G1 0   LP
+
+LJIB 3b 3   LP
+LJUB Nb N   LP
+LJLB G3 0   LP
+
+LJP  G4 0   LP
+LJPS G5 0   LP
+
+LJLIM 6q 6  LP
 
 Lout 2 q 2p
-.ends
+*.ends
 
-.print i(L6.XSOURCEINa) i(L6.XSOURCEINb) p(Bia)
+Rsink 8000 0 2
+
+*.print i(L6.XSOURCEINb) i(L6.XSOURCEINa) p(Rsink)
+.print p(Rsink)
+
+*.print p(Binputb.XDUT) p(Blb.XDUT) i(Blb.XDUT) p(Bub.XDUT) v(r1.XSINKOUTq)
+
+*.print  i(Lpoff.XDUT) i(Bp.XDUT) i(Rs.XDUT) i(Bps.XDUT)
+
+*.print i(L6.XSOURCEINb) p(Bib.XDUT) p(Blb.XDUT) p(Bub.XDUT) v(Lout.XDUT)
+
 .end

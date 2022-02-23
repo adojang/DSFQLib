@@ -7,21 +7,28 @@ converge = 0.01
 max_iterations = 15
 
 [parameters]
-Bps={nominal=4.750e-01}
-Bp={nominal=6.650e-01}
-Bia={nominal=1.140}
-Bib={nominal=1.140}
-Bua={nominal= 1.050}
-Bub={nominal=1.050}
-Bla={nominal=1.365}
-Blb={nominal=1.235}
-Blim={nominal=1.890}
+B_JIA=  {nominal=     1.25442302e+00}
+B_JUA=  {nominal=     9.53510558e-01}
+B_JLA=  {nominal=     1.11725292e+00}
 
-LBias ={nominal=3.325e-10}
-Lpoff ={nominal= 1.520e-11}
-Rs={nominal=9.500e-01}
-RH={nominal= 3.800}
-IB1={nominal= 1.050e-04}
+B_JIB=  {nominal=    1.03066102e+00}
+B_JUB=  {nominal=    9.50727460e-01}
+B_JLB=  {nominal=    1.34983428e+00}
+
+B_JP =  {nominal=    6.03397228e-01}
+B_PS =  {nominal=    4.72857108e-01}
+B_JLIM= {nominal=    2.07687262e+00}
+B_JPS=  {nominal=    1.70958809e+00}
+
+Ibias=  {nominal=    2.49655281e-04}
+
+LBias=  {nominal=    3.31490054e-10}
+Lpoff=  {nominal=    1.37354192e-11}
+Rs   =  {nominal=    1.04242969e+00}
+RH   =  {nominal=    3.43478050e+00}
+
+LP  =   {nominal=     8.66457114e-13}
+RP  =   {nominal=     9.45546510e-01}
 
 
 
@@ -32,4 +39,4 @@ binary_search_steps = 7
 method = "spec_file"
 file = "OR.sp"
 circuit = "OR.js"
-threshold = 0.2
+threshold = 0.1

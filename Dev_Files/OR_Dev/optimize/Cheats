@@ -2,10 +2,12 @@ josim -o ./AW_OR_testbench.csv ./AW_OR_testbench.cir -V 1
 josim-plot.py ./AW_OR_testbench.csv -t stacked
 
 
-josim -o ./OR.csv ./OR.js -V 1
-josim-plot.py .\OR.csv -t stacked
 
-sp_generator.py -t 0.95 -s 30E-12 -o OR.sp -v OR.csv
+
+josim -o OR.csv OR.js -V 1
+josim-plot.py OR.csv -t stacked
+
+sp_generator.py -t 0.90 -s 40E-12 -o OR.sp -v OR.csv
 josim-tools .\OR_verify.toml
 
 
@@ -21,27 +23,100 @@ sp_generator.py -t 0.80 -s 110E-12 -o oAND.sp -v oAND.csv
 josim-tools .\AND_verify.toml
 
 
-Optimized 84%
+Optimized 8% Including 3 plots
 
-  .param Bps=4.50885164e-01
-  .param Bp=6.38677328e-01
-  .param Bia=1.08143184e+00
-  .param Bib=1.20932138e+00
-  .param Bua=1.03647091e+00
-  .param Bub=1.10293987e+00
-  .param Bla=1.56845090e+00
-  .param Blb= 1.21746914e+00
-  .param Blim= 1.79155775e+00
-  
-  .param LBias =3.15085312e-10
-  .param Lpoff = 1.30321000e-11
-  .param Rs=8.18357111e-01
-  .param RH= 3.64365918e+00
-  .param IB1= 9.95006250e-05
+B_JIA    ={nominal =     1.25442302e+00 }
+B_JUA    ={nominal =     9.53510558e-01 }
+B_JLA    ={nominal =     1.11725292e+00}
+
+B_JIB    ={nominal =    1.03066102e+00}
+B_JUB    ={nominal =    9.50727460e-01}
+B_JLB    ={nominal =    1.34983428e+00}
+
+B_JP     ={nominal =    6.03397228e-01
+B_PS     ={nominal =    4.72857108e-01}
+B_JLIM   ={nominal =    2.07687262e+00 }
+B_JPS    ={nominal =    1.70958809e+00 }
+
+Ibias    ={nominal =    2.49655281e-04 }
+
+LBias    ={nominal =    3.31490054e-10}
+Lpoff    ={nominal =    1.37354192e-11}
+Rs       ={nominal =    1.04242969e+00 }
+RH       ={nominal =    3.43478050e+00 }
+
+LP      ={nominal =     8.66457114e-13}
+RP      ={nominal =     9.45546510e-01}
+
+.param B_JIA=     1.25442302e+00 
+.param B_JUA=     9.53510558e-01 
+.param B_JLA=     1.11725292e+00
+
+.param B_JIB=    1.03066102e+00
+.param B_JUB=    9.50727460e-01
+.param B_JLB=    1.34983428e+00
+
+.param B_JP =    6.03397228e-01
+.param B_PS =    4.72857108e-01
+.param B_JLI=    2.07687262e+00 
+.param B_JPS=    1.70958809e+00 
+
+.param Ibias=    2.49655281e-04 
+
+.param LBias=    3.31490054e-10
+.param Lpoff=    1.37354192e-11
+.param Rs   =    1.04242969e+00 
+.param RH   =    3.43478050e+00 
+
+.param LP  =     8.66457114e-13
+.param RP  =     9.45546510e-01
 
 
-Bps={nominal=0.5}
-Bp={nominal=0.7}
+*********************************
+*12.12% Optimized Dump:
+
+1.08172342e+00
+9.98731934e-01 
+9.61678975e-01 
+9.77749297e-01
+1.09557322e+00
+1.16185870e+00 
+5.19248148e-01 
+4.07603769e-01
+1.96555868e+00 
+1.61139522e+00 
+2.53670849e-04 
+3.46560565e-10
+1.29760632e-11 
+9.90210690e-01 
+2.95746005e+00 
+8.19946788e-13
+1.08687967e+00
+
+
+.param B_JIA=    1.08172342e+00
+.param B_JUA=    9.98731934e-01
+.param B_JLA=    9.61678975e-01
+
+.param B_JIB=    9.77749297e-01
+.param B_JUB=    1.09557322e+00
+.param B_JLB=    1.16185870e+00 
+
+.param B_JP =    5.19248148e-01
+.param B_PS =    4.07603769e-01
+.param B_JLI=    1.96555868e+00 
+.param B_JPS=    1.61139522e+00 
+
+.param Ibias=    2.53670849e-04 
+
+.param LBias=    3.46560565e-10
+.param Lpoff=    1.29760632e-11
+.param Rs   =    9.90210690e-01 
+.param RH   =    2.95746005e+00 
+
+.param LP  =     8.19946788e-13
+.param RP  =     1.08687967e+00
+
 
 
 
@@ -65,3 +140,12 @@ ORGINANLS
 .param RH=4
 
 .param IB1=100u
+
++100p 0 103p cval 105p 0
++400p 0 403p cval 405p 0
++500p 0 503p cval 505p 0
++510p 0 513p cval 515p 0
++610p 0 613p cval 615p 0
++700p 0 703p cval 705p 0
++730p 0 733p cval 735p 0
++830p 0 833p cval 835p 0)

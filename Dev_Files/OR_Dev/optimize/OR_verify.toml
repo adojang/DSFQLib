@@ -4,4 +4,4 @@ mode="verify"
 method = "spec_file"
 file = "OR.sp"
 circuit = "OR.js"
-threshold = 0.05
+threshold = 0.1
