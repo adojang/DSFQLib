@@ -1,0 +1,2 @@
+josim -o ./PipeOne.csv ./AW_PipeOne_testbench.cir -V 1
+josim-plot.py ./PipeOne.csv -t stacked

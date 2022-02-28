@@ -1,0 +1,2 @@
+josim -o ./XOR.csv ./AW_XOR_testbench.cir -V 1
+josim-plot.py ./XOR.csv -t stacked
