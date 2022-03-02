@@ -1,0 +1,2 @@
+josim -o ./bAdder.csv ./AW_BASIC_ADDER_testbench.cir -V 1
+josim-plot.py ./bAdder.csv -t stacked

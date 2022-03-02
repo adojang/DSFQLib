@@ -94,39 +94,44 @@ XDUT DSFQ_AND A B q
 .subckt DSFQ_AND A B q
 .param pInduc = 1p
 
-.param main=8.13825665e-01 
-.param secondary=5.17677402e-01 
-.param third=1.13196361e+00 
+.param main=0.84
+.param secondary=0.60
+.param third=1.68
+.param pInduc = 1p
+.param retentionResistor=4
 
-.param Ibiasz=4.62813248e-05
-.param L1=8.11392791e-12
-.param L2=8.85286944e-12  
-.param Lout=1.47191818e-12 
-.param retentionResistor=3.47741865e+00
+
+.param Ibiasz=70u
+.param L1=12p
+.param L2=12p 
+.param Lout=2p
+.param retentionResistor=4
+
 
 L1 A 1 L1
 L2 B 4 L2
+
 RD1 1 2 0.67
 RD2 4 5 0.67
 BD1 2 C jjmit area=secondary
-RDp1 2 14 2.8
+RDp1 2 14 1
 Ld1 14 C pInduc
 BD2 5 C jjmit area=secondary
-RDp2 5 15 2.8
+RDp2 5 15 1
 Ld2 15 C pInduc
 Rh1 1 C retentionResistor
 Rh2 4 C retentionResistor
 B1 1 C jjmit area=main
-Rb1 1 10 2.37
+Rb1 1 10 1
 Lb1 10 C pInduc
 B2 4 C jjmit area=main
-Rb2 4 11 2.37
+Rb2 4 11 1
 Lb2 11 C pInduc
 B3 C 0 jjmit area=third
-Rb3 C 13 1.67
+Rb3 C 13 1
 Lb3 13 0 pInduc
 Ibias 0 C dc Ibiasz
-Lout C q Lout
+Lout q C Lout
 .ends
-.print i(L6.XSOURCEINa) i(L6.XSOURCEINb) p(B3.XDUT)
+.print v(L4.XLOADINa) v(L4.XLOADINb)  v(Lout.XDUT) i(r1.XSINKOUTq) p(C.XDUT)
 .end

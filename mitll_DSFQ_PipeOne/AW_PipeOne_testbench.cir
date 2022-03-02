@@ -71,7 +71,7 @@ I_a 0 1000 pwl(0 0
 *I_a 0 1000 pulse(0 600u 500p 2p 2p 1p 100p)
 I_ext_clk 0 ext_clk pulse(0 600u 100p 2p 2p 1p 100p)
 
-I_int_clk 0 int_clk pulse(0 600u 100p 2p 2p 1p 40p)
+I_int_clk 0 int_clk pulse(0 600u 100p 2p 2p 1p 20p)
 .tran 0.25p 1400p 0 0.01p
 
 XSOURCEINa SOURCECELL 1000 2000
@@ -105,8 +105,8 @@ RH out 0 4
 
 .ends
 
-
-.print i(L6.XSOURCEINa) i(I_ext_clk) i(L7.XDFF1) i(L12.XNOT1) i(L12.XNOT2) i(r1.XSINKOUTq) p(r1.XSINKOUTq)
+.print v(B) v(D)
+*.print i(L6.XSOURCEINa) i(I_ext_clk) i(L7.XDFF1) i(L12.XNOT1) i(L12.XNOT2) i(r1.XSINKOUTq) p(r1.XSINKOUTq)
 *.print i(L6.XSOURCEINa) i(r1.XSINKOUTq)
 *.print i(L4.XJTL_Delay3) i(L1.XNOT2) i(L12.XNOT2)
 

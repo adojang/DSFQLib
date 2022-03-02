@@ -170,5 +170,5 @@ Lout 2 q 2p
 .ends
 
 
-.print i(L6.XSOURCEINb) i(L6.XSOURCEINa) p(r1.XSINKOUTq)
+.print v(L4.XLOADINa) v(L4.XLOADINb) v(Lout.XDUT) p(r1.XSINKOUTq)
 .end
