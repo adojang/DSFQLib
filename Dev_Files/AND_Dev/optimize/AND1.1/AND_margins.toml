@@ -1,0 +1,22 @@
+mode="margin"
+
+[parameters]
+
+Ibias={nominal=70e-6}
+main={nominal=0.84}
+secondary={nominal=0.60}
+third={nominal=1.68}
+L1={nominal=8e-12}
+L2={nominal=8e-12}
+retentionResistor={nominal=9.8248}
+RL ={nominal= 0.667}
+Lout={nominal=2e-12}
+
+[margin]
+binary_search_steps = 7
+
+[verify]
+method = "spec_file"
+file = "AND.sp"
+circuit = "AND.js"
+threshold = 0.1

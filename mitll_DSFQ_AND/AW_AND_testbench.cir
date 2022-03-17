@@ -65,16 +65,16 @@ r1 1 0 2
 * ===== MAIN =====
 .param cval=600u
 
-I_a 0 1000 pwl(0 0 
-+100p 0 103p cval 105p 0 
-+120p 0 123p cval 125p 0
+I_a 0 4000 pwl(0 0 
++110p 0 113p cval 115p 0 
++280p 0 283p cval 285p 0
 +300p 0 303p cval 305p 0
 +400p 0 403p cval 405p 0
-+720p 0 723p cval 725p 0
++710p 0 713p cval 715p 0
 +820p 0 823p cval 825p 0
 +850p 0 853p cval 855p 0)
 
-I_b 0 4000 pulse(cval 0 100p 1p 1p 3p 200p)
+I_b 0 1000 pulse(cval 0 100p 1p 1p 3p 100p)
 
 
 XSOURCEINa SOURCECELL 1000 2000
@@ -92,46 +92,58 @@ XDUT DSFQ_AND A B q
 
 *$Ports    A B q
 .subckt DSFQ_AND A B q
-.param pInduc = 1p
 
+.param Ibias=70u
 .param main=0.84
 .param secondary=0.60
 .param third=1.68
-.param pInduc = 1p
-.param retentionResistor=4
 
+* The circuit has a hold time of approximately 10ps. This can be increased by increasing the input inductors
+* Either RH or RL must be chosen, and the other recalculated using the formula:
+* Choose L and RL.
+* RH = L/(((HoldTime/1.34) - T1)/4.5)
+* This comes from the relationship HoldTime = 1.34*(Tau1 + 4.5*Tau2) 
+* where Tau = L/R
 
-.param Ibiasz=70u
-.param L1=12p
-.param L2=12p 
+.param L1=5p
+.param L2=5p 
+.param retentionResistor=6.1405
+.param RL = 0.667
+
 .param Lout=2p
-.param retentionResistor=4
 
+*The precalculated values for the parasitic inductances and resistances
+.param RBA=11.4332
+.param LBA=6.4597p
+.param RBB=8.1666
+.param LBB=4.6141p
+.param RBC=4.0833
+.param LBC=2.3071p
 
 L1 A 1 L1
 L2 B 4 L2
 
-RD1 1 2 0.67
-RD2 4 5 0.67
+RD1 1 2 RL
+RD2 4 5 RL
 BD1 2 C jjmit area=secondary
-RDp1 2 14 1
-Ld1 14 C pInduc
+RDp1 2 14 RBA
+Ld1 14 C LBA
 BD2 5 C jjmit area=secondary
-RDp2 5 15 1
-Ld2 15 C pInduc
+RDp2 5 15 RBA
+Ld2 15 C LBA
 Rh1 1 C retentionResistor
 Rh2 4 C retentionResistor
 B1 1 C jjmit area=main
-Rb1 1 10 1
-Lb1 10 C pInduc
+Rb1 1 10 RBB
+Lb1 10 C LBB
 B2 4 C jjmit area=main
-Rb2 4 11 1
-Lb2 11 C pInduc
+Rb2 4 11 RBB
+Lb2 11 C LBB
 B3 C 0 jjmit area=third
-Rb3 C 13 1
-Lb3 13 0 pInduc
-Ibias 0 C dc Ibiasz
+Rb3 C 13 RBC
+Lb3 13 0 LBC
+Ibias 0 C dc Ibias
 Lout q C Lout
 .ends
-.print v(L4.XLOADINa) v(L4.XLOADINb)  v(Lout.XDUT) i(r1.XSINKOUTq) p(C.XDUT)
+.print v(L4.XLOADINa) v(L4.XLOADINb)  v(Lout.XDUT) p(1.XDUT) i(r1.XSINKOUTq) p(C.XDUT)
 .end

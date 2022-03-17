@@ -1,10 +1,10 @@
 * Author: Adriaan van Wijk
-* Version: 1.0
-* Last modification date: 21 Feburary 2021
+* Version: 1.1
+* Last modification date: 11 March 2022
 * Last modification by: Adriaan van Wijk
 * Based on the design by Rylov [2019]
 
-* Copyright (c) 2021 Adriaan van Wijk, Stellenbosch University
+* Copyright (c) 2022 Adriaan van Wijk, Stellenbosch University
 
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this cell library and associated documentation files (the "Library"), to deal
@@ -27,46 +27,58 @@
 *For questions about the library, contact Adriaan van Wijk, 21786275@sun.ac.za
 
 
-
 *$Ports    A B q
 .subckt DSFQ_AND A B q
-.param pInduc = 1p
 
+.param Ibias=70u
 .param main=0.84
 .param secondary=0.60
 .param third=1.68
-.param pInduc = 1p
-.param retentionResistor=4
 
+* The circuit has a hold time of approximately 10ps. This can be increased by increasing the input inductors
+* Either RH or RL must be chosen, and the other recalculated using the formula:
+* Choose L and RL.
+* RH = L/(((HoldTime/1.34) - T1)/4.5)
+* This comes from the relationship HoldTime = 1.34*(Tau1 + 4.5*Tau2) 
+* where Tau = L/R
 
-.param Ibiasz=70u
-.param L1=12p
-.param L2=12p 
+.param L1=5p
+.param L2=5p 
+.param retentionResistor=6.1405
+.param RL = 0.667
+
 .param Lout=2p
-.param retentionResistor=4
 
+*The precalculated values for the parasitic inductances and resistances
+.param RBA=11.4332
+.param LBA=6.4597p
+.param RBB=8.1666
+.param LBB=4.6141p
+.param RBC=4.0833
+.param LBC=2.3071p
 
 L1 A 1 L1
 L2 B 4 L2
-RD1 1 2 0.67
-RD2 4 5 0.67
+
+RD1 1 2 RL
+RD2 4 5 RL
 BD1 2 C jjmit area=secondary
-RDp1 2 14 2.8
-Ld1 14 C pInduc
+RDp1 2 14 RBA
+Ld1 14 C LBA
 BD2 5 C jjmit area=secondary
-RDp2 5 15 2.8
-Ld2 15 C pInduc
+RDp2 5 15 RBA
+Ld2 15 C LBA
 Rh1 1 C retentionResistor
 Rh2 4 C retentionResistor
 B1 1 C jjmit area=main
-Rb1 1 10 2.37
-Lb1 10 C pInduc
+Rb1 1 10 RBB
+Lb1 10 C LBB
 B2 4 C jjmit area=main
-Rb2 4 11 2.37
-Lb2 11 C pInduc
+Rb2 4 11 RBB
+Lb2 11 C LBB
 B3 C 0 jjmit area=third
-Rb3 C 13 1.67
-Lb3 13 0 pInduc
-Ibias 0 C dc Ibiasz
-Lout C q Lout
+Rb3 C 13 RBC
+Lb3 13 0 LBC
+Ibias 0 C dc Ibias
+Lout q C Lout
 .ends

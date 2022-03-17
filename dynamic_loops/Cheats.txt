@@ -1,0 +1,6 @@
+josim -o loops.csv loops.cir -V 1
+josim-plot.py loops.csv -t stacked
+
+
+josim -o loops.csv loops.cir -V 1
+josim-plot.py loops.csv
