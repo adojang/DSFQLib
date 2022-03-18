@@ -65,7 +65,7 @@ r1 1 0 2
 * ===== MAIN ===============================================================================
 .param cval=600u
 
-I_gg 0 1000 pwl(0 0 91p 0 94p cval 96p 0)
+I_gg 0 1000 pwl(0 0 20p 0 23p cval 25p 0)
 Rlol 1001 0 2
 I_a 0 1001 pwl(0 0 
 +100p 0 103p cval 105p 0 
@@ -94,7 +94,7 @@ XSINKOUTq SINKCELL 8000
 
 *XDUT DSFQ_AND A q
 
-.tran 0.25p 200p 0 0.01p
+.tran 0.25p 300p 0 0.01p
 .model jjmit jj(rtype=1, vg=2.8mV, cap=0.07pF, r0=160, rn=16, icrit=100uA)
 
 *$Ports    A B q
@@ -102,33 +102,35 @@ XSINKOUTq SINKCELL 8000
 *SFQ PULSE DYNAMIC STORAGE LOOP - Single Time Constant
 
 
-.param pInduc = 1p
-
-.param main=0.84
-.param secondary=0.60
-.param third=1.68
-.param retentionResistor=4
-
 *Current TAU Try TAU = 10, 20, 30p
 
 *Very sensitive to L1 and RL.
+*If BP does not trigger, decrease LD to supply more current to circuit in a shorter timeframe.
+LD A vleak 8p
+RD vleak d1 0.5
+RS vleak out 7.35
 
-L1 A 1 10p
-RL 1 d1 0.5
-RH 1 g 7.35
+*The Naming Convention is as follows:
+* RS - The DYNAMIC resistor in series with BD
+* RD - The shunt resistor across the two terminals 
+* BD - Dynamic. This JJ drives the dynamic switching action
+* BP - Pulse. This JJ produces the output SFQ pulse.
+BD d1 out jjmit area=0.7
+R1 d1 gg 9.7999
+L1 gg out 5.536p
 
-BD d1 g jjmit area=0.7
-RD1 d1 gg 9.7999
-LD1 gg g 5.536p
 
-BJ 1 g jjmit area=1
-RJ1 1 g9 6.8599
-LJ1 g9 g 3.8758p
+BS vleak out jjmit area=0.95
+R2 vleak g9 6.8599
+L2 g9 out 3.8758p
 
-Rgnd g 0 0
+Rconnect out q 0
 
-.print v(A) v(1) i(L1) p(1)
 
+.print i(LD) i(BS) i(RD) i(BD) i(RS)
+*.print i(LD) i(RD) i(BS) i(RS) p(vleak) p(out) p(BD) p(BS)
+*.print i(LD) i(RD) i(BS) i(RS)
+*.print i(Btest) p(Btest)
 
 *.ends
 
