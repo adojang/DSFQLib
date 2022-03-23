@@ -65,7 +65,7 @@ r1 1 0 2
 * ===== MAIN ===============================================================================
 .param cval=600u
 
-I_gg 0 1000 pwl(0 0 20p 0 23p cval 25p 0)
+I_gg 0 1000 pwl(0 0 91p 0 94p cval 96p 0)
 Rlol 1001 0 2
 I_a 0 1001 pwl(0 0 
 +100p 0 103p cval 105p 0 
@@ -89,7 +89,8 @@ XLOADINa LOADINCELL 2000 A
 *XDCSFQ LSmitll_DCSFQ 1000 2000
 XSOURCEINb SOURCECELL 4000 5000
 XLOADINb LOADINCELL 5000 B
-XLOADOUTq LOADOUTCELL q 8000
+XLOADOUTq LOADOUTCELL q xd1
+Rcon2 xd1 8000 0
 XSINKOUTq SINKCELL 8000
 
 *XDUT DSFQ_AND A q
@@ -105,10 +106,19 @@ XSINKOUTq SINKCELL 8000
 *Current TAU Try TAU = 10, 20, 30p
 
 *Very sensitive to L1 and RL.
-*If BP does not trigger, decrease LD to supply more current to circuit in a shorter timeframe.
-LD A vleak 8p
-RD vleak d1 0.5
-RS vleak out 7.35
+*If BS does not trigger, decrease LD to supply more current to circuit in a shorter timeframe.
+
+* 8 * 0.25 == 2.07ish.
+* 0.1 *
+
+.param LD = 7p
+.param RD = 0.5
+.param RS =  4
+
+
+LD A vleak LD
+RD vleak d1 RD
+RS vleak out RS
 
 *The Naming Convention is as follows:
 * RS - The DYNAMIC resistor in series with BD
@@ -117,17 +127,19 @@ RS vleak out 7.35
 * BP - Pulse. This JJ produces the output SFQ pulse.
 BD d1 out jjmit area=0.7
 R1 d1 gg 9.7999
-L1 gg out 5.536p
+L1 gg out 5.5369p
 
 
-BS vleak out jjmit area=0.95
+BS vleak out jjmit area=1
 R2 vleak g9 6.8599
 L2 g9 out 3.8758p
 
-Rconnect out q 0
+Rcon out q 0
 
 
-.print i(LD) i(BS) i(RD) i(BD) i(RS)
+
+.print i(LD) i(RD) i(BS) i(RS) p(vleak) p(out) v(out) i(Rcon)
+*.print i(LD) i(BS) i(RD) i(BD) i(RS) p(BS) i(Rcon) v(Rcon)
 *.print i(LD) i(RD) i(BS) i(RS) p(vleak) p(out) p(BD) p(BS)
 *.print i(LD) i(RD) i(BS) i(RS)
 *.print i(Btest) p(Btest)
