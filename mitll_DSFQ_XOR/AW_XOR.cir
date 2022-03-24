@@ -65,19 +65,19 @@ r1 1 0 2
 * ===== MAIN ===============================================================================
 .param cval=600u
 
-.tran 0.25p 900p 0 0.01p
+.tran 0.25p 400p 0 0.01p
 .model jjmit jj(rtype=1, vg=2.8mV, cap=0.07pF, r0=160, rn=16, icrit=100uA)
 
 I_A 0 1000 pwl(0 0 100p 0 103p cval 105p 0
-+300p 0 303p cval 305p 0
-+500p 0 503p cval 505p 0
-+540p 0 543p cval 545p 0
++300p 0 303p cval 305p 0)
+*+500p 0 503p cval 505p 0
+*+540p 0 543p cval 545p 0
 
 
 I_B 0 1001 pwl(0 0 200p 0 203p cval 205p 0
-+300p 0 303p cval 305p 0
-+700p 0 703p cval 705p 0
-+710p 0 713p cval 715p 0
++300p 0 303p cval 305p 0)
+*+700p 0 703p cval 705p 0
+*+710p 0 713p cval 715p 0
 
 Rlol xcx 0 2
 I_C 0 xcx pwl(0 0 
@@ -238,7 +238,9 @@ LS1 g9 q 3.8758p
 * The cell is not designed to be connected directly to passive transmission lines
 
 *$Ports a b clk q
-.subckt LSmitll_XOR	a	b	clk 	q
+.subckt LSmitll_XOR a	b	clk 	q
+*.subckt LSmitll_XOR	a	b	clk 	q
+
 .model jjmit jj(rtype=1, vg=2.8mV, cap=0.07pF, r0=160, rn=16, icrit=0.1mA)
 .param Phi0=2.067833848E-15
 .param B0=1
@@ -327,12 +329,21 @@ LB4 15 14 LB
 LB5 19 17 LB
 LB6 24 22 LB
 L1 a 1 L1
+*L1 a 25 L1
 L2 1 4 L2
+********
+
 L3 4 25 L3
+
+********
 L4 6 8 L4
 L5 b 9 L5
 L6 9 12 L6
+**********
+
 L7 12 26 L7
+
+**********
 L8 14 8 L8
 L9 8 27 L9
 L10 clk 17 L10

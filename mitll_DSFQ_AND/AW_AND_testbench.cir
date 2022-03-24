@@ -87,16 +87,11 @@ XSINKOUTq SINKCELL 8000
 
 XDUT DSFQ_AND A B q
 
-.tran 0.25p 1000p 0 0.01p
+.tran 0.25p 300 0 0.01p
 .model jjmit jj(rtype=1, vg=2.8mV, cap=0.07pF, r0=160, rn=16, icrit=100uA)
 
 *$Ports    A B q
 .subckt DSFQ_AND A B q
-
-.param Ibias=70u
-.param main=0.84
-.param secondary=0.60
-.param third=1.68
 
 * The circuit has a hold time of approximately 10ps. This can be increased by increasing the input inductors
 * Either RH or RL must be chosen, and the other recalculated using the formula:
@@ -104,6 +99,11 @@ XDUT DSFQ_AND A B q
 * RH = L/(((HoldTime/1.34) - T1)/4.5)
 * This comes from the relationship HoldTime = 1.34*(Tau1 + 4.5*Tau2) 
 * where Tau = L/R
+
+.param Ibias=70u
+.param main=0.84
+.param secondary=0.60
+.param third=1.68
 
 .param L1=5p
 .param L2=5p 
