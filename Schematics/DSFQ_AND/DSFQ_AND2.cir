@@ -1,0 +1,6 @@
+.title KiCad schematic
+L1 Net-_I1-Pad2_ Net-_B1-Pad1_ Inductor
+B1 Net-_B1-Pad1_ Net-_B1-Pad2_ jjmit
+R1 Net-_B1-Pad2_ GND Resistor
+I1 GND Net-_I1-Pad2_ pwl(0 0 100u)
+.end

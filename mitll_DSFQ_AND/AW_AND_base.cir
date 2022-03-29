@@ -1,6 +1,6 @@
 * Author: Adriaan van Wijk
-* Version: 1.1
-* Last modification date: 11 March 2022
+* Version: 1.2
+* Last modification date: 28 March 2022
 * Last modification by: Adriaan van Wijk
 * Based on the design by Rylov [2019]
 
@@ -26,7 +26,6 @@
 
 *For questions about the library, contact Adriaan van Wijk, 21786275@sun.ac.za
 
-
 *$Ports    A B q
 .subckt DSFQ_AND A B q
 
@@ -35,19 +34,19 @@
 .param secondary=0.60
 .param third=1.68
 
-* The circuit has a hold time of approximately 10ps. This can be increased by increasing the input inductors
-* Either RH or RL must be chosen, and the other recalculated using the formula:
-* Choose L and RL.
-* RH = L/(((HoldTime/1.34) - T1)/4.5)
-* This comes from the relationship HoldTime = 1.34*(Tau1 + 4.5*Tau2) 
-* where Tau = L/R
-
-.param L1=5p
-.param L2=5p 
-.param retentionResistor=6.1405
-.param RL = 0.667
-
+.param L1=8p
+.param L2=8p
 .param Lout=2p
+
+* The throughput for this logic cell is approximately 5ps with zero skew applied.
+* The skew tolerance can be adjusted using the following formula:
+* RHold = a * (16.666 * t_hold)^b
+* Where a = 3.572e-10
+* and   b = -1.023
+
+.param RHold = 3.597
+.param RS = RHold
+.param RD = RHold
 
 *The precalculated values for the parasitic inductances and resistances
 .param RBA=11.4332
@@ -60,25 +59,30 @@
 L1 A 1 L1
 L2 B 4 L2
 
-RD1 1 2 RL
-RD2 4 5 RL
+RD1 1 2 RD
+RD2 4 5 RD
 BD1 2 C jjmit area=secondary
 RDp1 2 14 RBA
 Ld1 14 C LBA
+
 BD2 5 C jjmit area=secondary
 RDp2 5 15 RBA
 Ld2 15 C LBA
-Rh1 1 C retentionResistor
-Rh2 4 C retentionResistor
+RS1 1 C RS
+RS2 4 C RS
+
 B1 1 C jjmit area=main
 Rb1 1 10 RBB
 Lb1 10 C LBB
+
 B2 4 C jjmit area=main
 Rb2 4 11 RBB
 Lb2 11 C LBB
+
 B3 C 0 jjmit area=third
 Rb3 C 13 RBC
 Lb3 13 0 LBC
+
 Ibias 0 C dc Ibias
 Lout q C Lout
 .ends
