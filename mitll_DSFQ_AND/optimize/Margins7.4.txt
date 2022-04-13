@@ -1,0 +1,135 @@
+
+
+
+Iteration 1
+#Critical Margins of 16.3%
+***************************
+	.param b1  	=	 7.49722200e-01
+	.param b2  	=	 5.28114188e-01
+	.param b5  	=	 1.65572547e+00
+	.param i1  	=	 6.37920543e-05
+	.param l1  	=	 7.28666426e-12
+	.param l2  	=	 5.30178503e-12
+	.param l3  	=	 2.06110158e-12
+	.param lp1  	=	 1.78408539e-13
+	.param lrb1  	=	 6.95794678e-12
+	.param lrb2  	=	 3.69483067e-12
+	.param lrb3  	=	 4.74039636e-12
+	.param lrb4  	=	 3.07387724e-12
+	.param lrb5  	=	 2.07008374e-12
+	.param ra  	=	 2.57288400e+00
+	.param rb1  	=	 8.42204913e+00
+	.param rb2  	=	 6.62522547e+00
+	.param rb5  	=	 5.40155665e+00
+
+    As well As
+
+    
+	b1  	=	 {nominal =  7.49722200e-01}
+	b2  	=	 {nominal =  5.28114188e-01}
+	b5  	=	 {nominal =  1.65572547e+00}
+	i1  	=	 {nominal =  6.37920543e-05}
+	l1  	=	 {nominal =  7.28666426e-12}
+	l2  	=	 {nominal =  5.30178503e-12}
+	l3  	=	 {nominal =  2.06110158e-12}
+	lp1  	=	 {nominal =  1.78408539e-13}
+	lrb1  	=	 {nominal =  6.95794678e-12}
+	lrb2  	=	 {nominal =  3.69483067e-12}
+	lrb3  	=	 {nominal =  4.74039636e-12}
+	lrb4  	=	 {nominal =  3.07387724e-12}
+	lrb5  	=	 {nominal =  2.07008374e-12}
+	ra  	=	 {nominal =  2.57288400e+00}
+	rb1  	=	 {nominal =  8.42204913e+00}
+	rb2  	=	 {nominal =  6.62522547e+00}
+	rb5  	=	 {nominal =  5.40155665e+00}
+
+    *****************************************************
+
+Iteration 2
+#Critical Margins of 18%
+
+
+
+	.param b1  	=	  7.81520912e-01
+	.param b2  	=	  5.26128710e-01
+	.param b5  	=	  1.58222401e+00
+	.param i1  	=	  7.01905461e-05
+	.param l1  	=	  6.83933744e-12
+	.param l2  	=	  4.77638912e-12
+	.param l3  	=	  2.25397188e-12
+	.param lp1  	=	  1.46102548e-13
+	.param lrb1  	=	  6.83368272e-12
+	.param lrb2  	=	  4.42901243e-12
+	.param lrb3  	=	  5.05652318e-12
+	.param lrb4  	=	  2.99294491e-12
+	.param lrb5  	=	  1.69253008e-12
+	.param ra  	=	  2.97491835e+00
+	.param rb1  	=	  7.69583504e+00
+	.param rb2  	=	  7.35215367e+00
+	.param rb5  	=	  5.47381485e+00
+
+
+
+    
+	.param b1  	=	  7.81520912e-01
+	.param b2  	=	  5.26128710e-01
+	.param b5  	=	  1.58222401e+00
+	.param i1  	=	  7.01905461e-05
+	.param l1  	=	  6.83933744e-12
+	.param l2  	=	  4.77638912e-12
+	.param l3  	=	  2.25397188e-12
+	.param lp1  	=	  1.46102548e-13
+	.param lrb1  	=	  6.83368272e-12
+	.param lrb2  	=	  4.42901243e-12
+	.param lrb3  	=	  5.05652318e-12
+	.param lrb4  	=	  2.99294491e-12
+	.param lrb5  	=	  1.69253008e-12
+	.param ra  	=	  2.97491835e+00
+	.param rb1  	=	  7.69583504e+00
+	.param rb2  	=	  7.35215367e+00
+	.param rb5  	=	  5.47381485e+00
+
+***********************************************************
+
+
+19.2% optimized :D
+
+
+
+	b1  	=	 {nominal =  7.91909175e-01}
+	b2  	=	 {nominal =  3.88405620e-01}
+	b5  	=	 {nominal =  1.37141262e+00}
+	i1  	=	 {nominal =  6.15588714e-05}
+	l1  	=	 {nominal =  6.04828954e-12}
+	l2  	=	 {nominal =  5.16650578e-12}
+	l3  	=	 {nominal =  1.64625008e-12}
+	lp1  	=	 {nominal =  1.58865300e-13}
+	lrb1  	=	 {nominal =  4.98343946e-12}
+	lrb2  	=	 {nominal =  4.80852543e-12}
+	lrb3  	=	 {nominal =  5.47327560e-12}
+	lrb4  	=	 {nominal =  2.19939296e-12}
+	lrb5  	=	 {nominal =  1.50953191e-12}
+	ra  	=	 {nominal =  2.69576890e+00}
+	rb1  	=	 {nominal =  8.33426392e+00}
+	rb2  	=	 {nominal =  9.72437113e+00}
+	rb5  	=	 {nominal =  5.92969871e+00}
+
+
+
+	.param = b1  	=	7.91909175e-01
+	.param = b2  	=	3.88405620e-01
+	.param = b5  	=	1.37141262e+00
+	.param = i1  	=	6.15588714e-05
+	.param = l1  	=	6.04828954e-12
+	.param = l2  	=	5.16650578e-12
+	.param = l3  	=	1.64625008e-12
+	.param = lp1  	=	1.58865300e-13
+	.param = lrb1  	=	4.98343946e-12
+	.param = lrb2  	=	4.80852543e-12
+	.param = lrb3  	=	5.47327560e-12
+	.param = lrb4  	=	2.19939296e-12
+	.param = lrb5  	=	1.50953191e-12
+	.param = ra  	=	2.69576890e+00
+	.param = rb1  	=	8.33426392e+00
+	.param = rb2  	=	9.72437113e+00
+	.param = rb5  	=	5.92969871e+00

@@ -1,6 +1,6 @@
 * Author: Adriaan van Wijk
 * Version: 1.2
-* Last modification date: 31 March 2022
+* Last modification date: 28 March 2022
 * Last modification by: Adriaan van Wijk
 * Based on the design by Rylov [2019]
 
@@ -34,8 +34,6 @@
 * RHold = a * (16.666 * t_hold)^b
 * Where a = 3.572e-10
 * and   b = -1.023
-* The basic cell is designed for a skew of 10ps
-
 .param 	b1  	= 0.84
 .param 	b2  	= 0.84
 .param 	b3  	= 0.6
@@ -51,10 +49,10 @@
 .param 	lrb3  	= 6.4597p
 .param 	lrb4  	= 4.6141p
 .param 	lrb5  	= 2.3071p
-.param 	r1  	= 3.079
-.param 	r2  	= 3.079
-.param 	r3  	= 3.079
-.param 	r4  	= 3.079
+.param 	r1  	= 3.597
+.param 	r2  	= 3.597
+.param 	r3  	= 3.597
+.param 	r4  	= 3.597
 .param 	rb1  	= 11.4332
 .param 	rb2  	= 8.1666
 .param 	rb3  	= 11.4332

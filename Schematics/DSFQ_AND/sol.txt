@@ -1,0 +1,8 @@
+InductEx v6.1.52 (6 December 2021). Copyright 2003-2021 Coenrad Fourie
+Licenced to:
+  Adriaan van Wijk, Stellenbosch University, until 31 Dec 2022. [Super]
+
+Execution start time stamp: 07 Apr 2022 09:15:38
+Parameter string: ANDv1.gds -n andv1.cir -l mitll_sfq5ee.ldf -th 
+
+(5) Error while trying to open netlist. Check if andv1.cir or andv1.js exists. Abort.

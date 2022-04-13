@@ -1,0 +1,22 @@
+josim -o ./AND.csv ./AW_AND_testbench_optimized.cir -V 1
+josim-plot.py ./AND.csv -t stacked
+sp_generator.py -t 0.90 -s 30E-12 -o AND.sp -v AND.csv 
+
+
+josim-tools .\AND_verify.toml
+josim-tools .\AND_margins.toml
+josim-tools .\AND_optimize.toml
+
+
+
+josim -o ./AND.csv ./AW_AND_testbench_optimized.cir -V 1
+josim-plot.py ./AND.csv -t stacked
+sp_generator.py -t 0.90 -s 20E-12 -o AND.sp -v AND.csv 
+josim-tools .\AND_verify.toml
+josim-tools .\AND_margins.toml
+
+
+josim-tools .\AND_optimize.toml
+
+
+Jo2Jo.py -i netlist.txt -m mess.txt
