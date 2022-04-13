@@ -1,4 +1,4 @@
-* JSIM deck file generated with TimEx
+* Testbench generated with TimEx
 * This testbench uses the AW_AND_base.cir file
 
 * === SOURCE DEFINITION ===
@@ -101,24 +101,24 @@ XDUT DSFQ_AND A B q
 .tran 0.25p 600p 0 0.01p
 .model jjmit jj(rtype=1, vg=2.8mV, cap=0.07pF, r0=160, rn=16, icrit=100uA)
 
-
-
 *$Ports    A B q
 .subckt DSFQ_AND A B q
 
 * The throughput for this logic cell is approximately 5ps with zero skew applied.
 * The skew tolerance can be adjusted using the following formula:
-* RHold = a * (16.666 * t_hold)^b
+* RHold = a * (18 * t_hold)^b
 * Where a = 3.572e-10
 * and   b = -1.023
+* This basic cell is designed for a skew of 10ps
+
 .param 	b1  	= 0.84
-.param 	b2  	= 0.84
-.param 	b3  	= 0.6
-.param 	b4  	= 0.6
+.param 	b2  	= 0.60
+.param 	b3 		= b1
+.param 	b4 		= b2
 .param 	b5  	= 1.68
 .param 	i1  	= 70u
 .param 	l1  	= 8p
-.param 	l2  	= 8p
+.param 	l2 		= l1
 .param 	l3  	= 2p
 .param 	lp1  	= 0.2p
 .param 	lrb1  	= 6.4597p
@@ -126,27 +126,21 @@ XDUT DSFQ_AND A B q
 .param 	lrb3  	= 6.4597p
 .param 	lrb4  	= 4.6141p
 .param 	lrb5  	= 2.3071p
-
-.param  Rhold   = 3.3248
-
-.param 	r1  	= Rhold
-.param 	r2  	= Rhold
-.param 	r3  	= Rhold
-.param 	r4  	= Rhold
-
+.param 	r1  	= 3.079
+.param 	r2  	= 3.079
+.param 	r3  	= 3.079
+.param 	r4  	= 3.079
 .param 	rb1  	= 11.4332
 .param 	rb2  	= 8.1666
-.param 	rb3  	= 11.4332
-.param 	rb4  	= 8.1666
+.param 	rb3 	= rb1
+.param 	rb4 	= rb2
 .param 	rb5  	= 4.0833
 
-
-* Back Annotated .cir file from KiCad
 b1   	4   	5   	 jjmit area=b1
 b2   	6   	7   	 jjmit area=b2
 b3   	4   	8   	 jjmit area=b3
 b4   	6   	4   	 jjmit area=b4
-b5   	4   	9   	 jjmit area=b5
+b5   	9   	4   	 jjmit area=b5
 i1   	0   	4   	pwl(0   	0   	5p   	i1)
 l1   	a   	5   	 l1
 l2   	b   	7   	 l2
@@ -168,5 +162,4 @@ rb4   	4   	13   	 rb4
 rb5   	4   	14   	 rb5
 .ends
 
-.print v(L4.XLOADINa) v(r1.XSINKOUTq) v(L4.XLOADINb) p(B5.XDUT)
-.end
+.print v(L4.XLOADINa) v(L4.XLOADINb) i(r1.XSINKOUTq) p(4.XDUT)

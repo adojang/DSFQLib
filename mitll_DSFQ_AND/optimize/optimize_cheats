@@ -5,6 +5,9 @@ sp_generator.py -t 0.90 -s 30E-12 -o AND.sp -v AND.csv
 
 josim-tools .\AND_verify.toml
 josim-tools .\AND_margins.toml
+
+
+
 josim-tools .\AND_optimize.toml
 
 

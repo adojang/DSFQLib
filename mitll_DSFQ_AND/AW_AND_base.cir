@@ -1,6 +1,6 @@
 * Author: Adriaan van Wijk
-* Version: 1.2
-* Last modification date: 31 March 2022
+* Version: 1.3
+* Last modification date: 13 April 2022
 * Last modification by: Adriaan van Wijk
 * Based on the design by Rylov [2019]
 
@@ -31,19 +31,19 @@
 
 * The throughput for this logic cell is approximately 5ps with zero skew applied.
 * The skew tolerance can be adjusted using the following formula:
-* RHold = a * (16.666 * t_hold)^b
+* RHold = a * (18 * t_hold)^b
 * Where a = 3.572e-10
 * and   b = -1.023
-* The basic cell is designed for a skew of 10ps
+* This basic cell is designed for a skew of 10ps
 
 .param 	b1  	= 0.84
-.param 	b2  	= 0.84
-.param 	b3  	= 0.6
-.param 	b4  	= 0.6
+.param 	b2  	= 0.60
+.param 	b3 		= b1
+.param 	b4 		= b2
 .param 	b5  	= 1.68
 .param 	i1  	= 70u
 .param 	l1  	= 8p
-.param 	l2  	= 8p
+.param 	l2 		= l1
 .param 	l3  	= 2p
 .param 	lp1  	= 0.2p
 .param 	lrb1  	= 6.4597p
@@ -57,12 +57,10 @@
 .param 	r4  	= 3.079
 .param 	rb1  	= 11.4332
 .param 	rb2  	= 8.1666
-.param 	rb3  	= 11.4332
-.param 	rb4  	= 8.1666
+.param 	rb3 	= rb1
+.param 	rb4 	= rb2
 .param 	rb5  	= 4.0833
 
-
-* Back Annotated .cir file from KiCad
 b1   	4   	5   	 jjmit area=b1
 b2   	6   	7   	 jjmit area=b2
 b3   	4   	8   	 jjmit area=b3
