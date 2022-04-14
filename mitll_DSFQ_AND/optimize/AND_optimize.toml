@@ -4,28 +4,21 @@ mode="optimize"
 method ="hybrid"
 search_radius = 0.1
 converge = 0.01
-max_iterations = 120
+max_iterations = 50
 
 [parameters]
 
 
 
-	b1  	=	 {nominal =  7.91909175e-01}
-	b2  	=	 {nominal =  3.88405620e-01}
-	b5  	=	 {nominal =  1.37141262e+00}
-	i1  	=	 {nominal =  6.15588714e-05}
-	l1  	=	 {nominal =  6.04828954e-12}
-	l3  	=	 {nominal =  1.64625008e-12}
-	lp1  	=	 {nominal =  1.58865300e-13}
-	lrb1  	=	 {nominal =  4.98343946e-12}
-	lrb2  	=	 {nominal =  4.80852543e-12}
-	lrb3  	=	 {nominal =  5.47327560e-12}
-	lrb4  	=	 {nominal =  2.19939296e-12}
-	lrb5  	=	 {nominal =  1.50953191e-12}
-	ra  	=	 {nominal =  2.69576890e+00}
-	rb1  	=	 {nominal =  8.33426392e+00}
-	rb2  	=	 {nominal =  9.72437113e+00}
-	rb5  	=	 {nominal =  5.92969871e+00}
+
+	 b1  	={nominal= 5.76689502e-01}
+	 b3 		={nominal= 4.09257908e-01}
+	 b5  	={nominal= 1.32818651e+00}
+	 i1  	={nominal= 3.43564189e-05}
+	 l1  	={nominal= 4.89929321e-12}
+	 l3  	={nominal= 2.05372975e-12}
+	 r1  	={nominal= 1.20105927e+00}
+	 r3  	={nominal= 2.61479210e+00}
 
 [margin]
 binary_search_steps = 7

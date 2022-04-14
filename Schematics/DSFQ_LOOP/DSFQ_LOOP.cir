@@ -1,0 +1,11 @@
+.title KiCad schematic
+LDp1 Net-_LDp1-Pad1_ Out Inductor
+LBp1 Net-_LBp1-Pad1_ Out Inductor
+RBp1 /1 Net-_LBp1-Pad1_ Resistor
+RD1 Net-_BD1-Pad2_ /1 Resistor
+BD1 Out Net-_BD1-Pad2_ jjmit
+RDp1 Net-_BD1-Pad2_ Net-_LDp1-Pad1_ Resistor
+BS1 Out /1 jjmit
+RS1 /1 Out Resistor
+LD1 In /1 Inductor
+.end

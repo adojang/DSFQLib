@@ -1,6 +1,6 @@
 * Author: Adriaan van Wijk
-* Version: 1.3
-* Last modification date: 13 April 2022
+* Version: 1.4
+* Last modification date: 14 April 2022
 * Last modification by: Adriaan van Wijk
 
 * Copyright (c) 2022 Adriaan van Wijk, Stellenbosch University
@@ -28,36 +28,38 @@
 *********************************
 * Additional Notes
 
-* The original cell was designed for a skew tolerance of 10ps. 
-* The optimized version tends to decrease ra which results in a bigger skew tolerance.
-* The skew tolerance on this optimzied circuit is in the range of 10-14 ps.
+* The optimized logic cell has a skew tolerance of ~ 11ps between inputs A and B.
 
 
 
 *$Ports    A B q
 .subckt DSFQ_AND A B q
 
-.param  b1  	=	 	 3.23682804e-01
-.param  b2  	=	 	 5.95629005e-01
-.param 	b3 		= 		 b1
-.param 	b4 		= 		 b2
-.param  b5  	=	 	 6.21776921e-01
-.param  i1  	=	 	 3.00270413e-05
-.param  l1  	=	 	 5.22896652e-12
-.param 	l2 		= 		 l1
-.param  l3  	=	 	 1.73951938e-12
-.param  lp1  	=	 	 9.19415844e-14
-.param  lrb1  	=	 	 4.30836486e-12
-.param  lrb2  	=	 	 7.59006914e-12
-.param  lrb3  	=	 	 5.78336737e-12
-.param  lrb4  	=	 	 1.55573615e-12
-.param  lrb5  	=	 	 1.06776433e-12
-.param  ra  	=	 	 2.41454521e+00
-.param  rb1  	=	 	 3.27679568e+00
-.param  rb2  	=	 	 4.66908026e+00
-.param 	rb3 	= 		 rb1
-.param 	rb4 	= 		 rb2
-.param  rb5  	=	 	 7.26286283e+00
+.param b1       =         5.16417451e-01
+.param b2       =         b1
+.param b3       =         3.12658647e-01
+.param b4       =         b3
+.param b5       =         1.05188201e+00
+.param i1       =         3.26322383e-05
+.param l1       =         3.51004037e-12
+.param l2       =         l1
+.param l3       =         1.17410569e-12
+.param lp1      =         1.40215763e-13
+.param lrb1     =         2.99321337e-12
+.param lrb2     =         4.83421859e-12
+.param lrb3     =         3.70854087e-12
+.param lrb4     =         1.79101012e-12
+.param lrb5     =         1.95576828e-12
+.param r1       =         8.40028656e-01
+.param r2       =         r1
+.param r3       =         1.76782953e+00
+.param r4       =         r3
+.param rb1      =         3.42859137e+00
+.param rb2      =         9.41371385e+00
+.param rb3      =         4.60171344e+00
+.param rb4      =         5.75143516e+00
+.param rb5      =         2.79007373e+00
+
 
 b1   	4   	5   	 jjmit area=b1
 b2   	6   	7   	 jjmit area=b2
@@ -66,22 +68,21 @@ b4   	6   	4   	 jjmit area=b4
 b5   	4   	9   	 jjmit area=b5
 i1   	0   	4   	pwl(0   	0   	5p   	i1)
 l1   	a   	5   	 l1
-l2   	b   	7   	 l1
+l2   	b   	7   	 l2
 l3   	4   	q   	 l3
 lp1   	9   	0   	 lp1
 lrb1   	10   	4   	 lrb1
 lrb2   	11   	6   	 lrb2
-lrb3   	12   	4   	 lrb1
-lrb4   	13   	6   	 lrb2
+lrb3   	12   	4   	 lrb3
+lrb4   	13   	6   	 lrb4
 lrb5   	14   	0   	 lrb5
-r1   	8   	5   	 rA
-r2   	4   	7   	 rA
-r3   	5   	4   	 rA
-r4   	7   	6   	 rA
+r1   	8   	5   	 r1
+r2   	4   	7   	 r2
+r3   	5   	4   	 r3
+r4   	7   	6   	 r4
 rb1   	5   	10   	 rb1
 rb2   	7   	11   	 rb2
 rb3   	8   	12   	 rb3
 rb4   	4   	13   	 rb4
 rb5   	4   	14   	 rb5
-
 .ends
