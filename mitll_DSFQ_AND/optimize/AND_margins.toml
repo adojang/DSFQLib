@@ -4,15 +4,25 @@ mode="margin"
 
 
 
-b1  =    {nominal =    5.16417451e-01}
-b3  =    {nominal =    3.12658647e-01}
-b5  =    {nominal =    1.05188201e+00}
-i1  =    {nominal =    3.26322383e-05}
-l1  =    {nominal =    3.51004037e-12}
-l3  =    {nominal =    1.17410569e-12}
-r1  =    {nominal =    8.40028656e-01}
-r3  =    {nominal =    1.76782953e+00}
-
+l1      ={nominal=                3.09037291e-12}
+l3      ={nominal=                2.03058886e-12}
+r1      ={nominal=                7.04349127e-01}
+r3      ={nominal=                1.34323634e+00}
+rbias   ={nominal=                1.00298596e+02}
+b1      ={nominal=         5.16417451e-01}
+b3      ={nominal=         3.12658647e-01}
+b5      ={nominal=         1.05188201e+00}
+rb1     ={nominal=         14.50859137e+00}
+rb2     ={nominal=         14.50371385e+00}
+rb3     ={nominal=         25.97171344e+00}
+rb4     ={nominal=         25.97143516e+00}
+rb5     ={nominal=         6.97007373e+00}
+lrb1    ={nominal=         6.99321337e-13}
+lrb2    ={nominal=         6.83421859e-13}
+lrb3    ={nominal=         1.60854087e-12}
+lrb4    ={nominal=         1.69101012e-12}
+lrb5    ={nominal=         1.23576828e-12}
+lp1     ={nominal=         7.91215763e-13}
 
 
 

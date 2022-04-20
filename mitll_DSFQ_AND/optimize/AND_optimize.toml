@@ -2,7 +2,7 @@ mode="optimize"
 
 [optimize]
 method ="hybrid"
-search_radius = 0.1
+search_radius = 0.05
 converge = 0.01
 max_iterations = 50
 
@@ -11,14 +11,12 @@ max_iterations = 50
 
 
 
-	 b1  	={nominal= 5.76689502e-01}
-	 b3 		={nominal= 4.09257908e-01}
-	 b5  	={nominal= 1.32818651e+00}
-	 i1  	={nominal= 3.43564189e-05}
-	 l1  	={nominal= 4.89929321e-12}
-	 l3  	={nominal= 2.05372975e-12}
-	 r1  	={nominal= 1.20105927e+00}
-	 r3  	={nominal= 2.61479210e+00}
+l1       ={nominal=               3.09037291e-12}
+l3       ={nominal=               2.03058886e-12}
+r1       ={nominal=               7.04349127e-01}
+r3       ={nominal=               1.34323634e+00}
+rbias    ={nominal=               1.00298596e+02}
+
 
 [margin]
 binary_search_steps = 7

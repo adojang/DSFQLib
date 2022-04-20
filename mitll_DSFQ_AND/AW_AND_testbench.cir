@@ -119,9 +119,9 @@ XDUT DSFQ_AND A B q
 .param lrb3     =         3.70854087e-12
 .param lrb4     =         1.79101012e-12
 .param lrb5     =         1.95576828e-12
-.param r1       =         8.40028656e-01
+.param r1       =         1.76782953e+00
 .param r2       =         r1
-.param r3       =         1.76782953e+00
+.param r3       =         8.40028656e-01
 .param r4       =         r3
 .param rb1      =         3.42859137e+00
 .param rb2      =         9.41371385e+00
@@ -135,7 +135,12 @@ b2   	6   	7   	 jjmit area=b2
 b3   	4   	8   	 jjmit area=b3
 b4   	6   	4   	 jjmit area=b4
 b5   	4   	9   	 jjmit area=b5
-i1   	0   	4   	pwl(0   	0   	5p   	i1)
+v1   	0   	bias   	pwl(0   	0   	5p   	2.06m)
+Rbias   bias    bias1   63.2
+Lbias   bias1   4       9.32p
+
+
+
 l1   	a   	5   	 l1
 l2   	b   	7   	 l2
 l3   	4   	q   	 l3
@@ -145,10 +150,10 @@ lrb2   	11   	6   	 lrb2
 lrb3   	12   	4   	 lrb3
 lrb4   	13   	6   	 lrb4
 lrb5   	14   	0   	 lrb5
-r1   	8   	5   	 r1
-r2   	4   	7   	 r2
-r3   	5   	4   	 r3
-r4   	7   	6   	 r4
+r1   	5   	4   	 r1
+r2   	7   	6   	 r2
+r3   	8   	5   	 r3
+r4   	4   	7   	 r4
 rb1   	5   	10   	 rb1
 rb2   	7   	11   	 rb2
 rb3   	8   	12   	 rb3
