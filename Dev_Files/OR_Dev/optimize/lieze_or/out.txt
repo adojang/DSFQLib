@@ -1,2 +1,0 @@
-TimEx v2.05 (15 May 2020). Copyright 2016-2020 Coenrad Fourie, Stellenbosch University.
-(20) Error while trying to open definitions file. Check if definitions.txt exists. Abort.
