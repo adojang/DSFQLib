@@ -1,0 +1,28 @@
+mode="optimize"
+
+[optimize]
+method ="hybrid"
+search_radius = 0.05
+converge = 0.01
+max_iterations = 50
+
+[parameters]
+
+
+
+
+l1       ={nominal=               3.09037291e-12}
+l3       ={nominal=               2.03058886e-12}
+r1       ={nominal=               7.04349127e-01}
+r3       ={nominal=               1.34323634e+00}
+rbias    ={nominal=               1.00298596e+02}
+
+
+[margin]
+binary_search_steps = 7
+
+[verify]
+method = "spec_file"
+file = "AND.sp"
+circuit = "AW_AND_testbench_optimized.cir"
+threshold = 0.1

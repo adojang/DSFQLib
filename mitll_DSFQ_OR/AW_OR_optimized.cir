@@ -1,6 +1,6 @@
 * Author: Adriaan van Wijk
-* Version: 1.0
-* Last modification date: 21 Feburary 2021
+* Version: 1.1
+* Last modification date: 05 May 2022
 * Last modification by: Adriaan van Wijk
 * Based on the design by Rylov [2019]
 
@@ -32,77 +32,88 @@
 
 .model jjmit jj(rtype=1, vg=2.8mV, cap=0.07pF, r0=160, rn=16, icrit=0.1mA)
 
-.param B_JIA=    1.08172342e+00
-.param B_JUA=    9.98731934e-01
-.param B_JLA=    9.61678975e-01
+*Optimized Variables
+.param b1  	=	     1.30033373e+00
+.param b3  	=	     1.74400646e+00
+.param b4  	=	     6.79982243e-01
+.param b7  	=	     5.26031505e-01
+.param b8  	=	     1.32265353e+00
+.param b9  	=	     8.16000559e-01
+.param i1  	=	     2.32768744e-04
+.param l1  	=	     4.22915406e-12
+.param l3  	=	     2.49358577e-12
+.param l4  	=	     1.18894186e-11
+.param l5  	=	     1.74432575e-10
+.param l6  	=	     1.29835538e-12
+.param r1   =	     5.33437400e-01
 
-.param B_JIB=    9.77749297e-01
-.param B_JUB=    1.09557322e+00
-.param B_JLB=    1.16185870e+00 
+*Unchanging Variables
+.param 	b2  	= b1
+.param 	b5  	= b3
+.param 	b6  	= b4
+.param 	l2  	= l1
+.param 	lp1  	= 1p
+.param 	lp2  	= 1p
+.param 	lp3  	= 1p
+.param 	lp4  	= 1p
+.param 	lrb1  	= 3.229p
+.param 	lrb2  	= lrb1
+.param 	lrb3  	= 3.8758p
+.param 	lrb4  	= 2.9814p
+.param 	lrb5  	= lrb3
+.param 	lrb6  	= lrb4
+.param 	lrb7  	= 5.5369p
+.param 	lrb8  	= 2.1532p
+.param 	lrb9  	= 7.7517p
+.param 	rb1  	= 5.7166
+.param 	rb2  	= rb1
+.param 	rb3  	= 6.8599
+.param 	rb4  	= 5.2768
+.param 	rb5  	= rb3
+.param 	rb6  	= rb4
+.param 	rb7  	= 9.799
+.param 	rb8  	= 3.811
+.param 	rb9  	= 13.7198
 
-.param B_JP =    5.19248148e-01
-.param B_JPS =   4.07603769e-01
-.param B_JLIM=   1.96555868e+00 
 
-
-.param Ibias=    2.53670849e-04 
-
-.param LBias=    3.46560565e-10
-.param Lpoff=    1.29760632e-11
-.param Rs   =    9.90210690e-01 
-.param RH   =    2.95746005e+00 
-
-.param LP  =     8.19946788e-13
-.param RP  =     1.08687967e+00
-
-
-B_JIA A 1   jjmit area=B_JIA
-B_JUA 1 N   jjmit area=B_JUA
-B_JLA 1 0   jjmit area=B_JLA
-
-B_JIB B 3   jjmit area=B_JIB
-B_JUB 3 N   jjmit area=B_JUB
-B_JLB 3 0   jjmit area=B_JLB
-
-B_JP 4 0    jjmit area=B_JP
-B_JPS 5 0   jjmit area=B_JPS
-
-B_JLIM 2 6  jjmit area=B_JLIM
-
-Lpoff 2 4 Lpoff
-Rs 4 5 Rs
-RH 4 0 RH
-
-Lbias 0 6 Lbias
-Lcon N 2 4p
-IBM 0 N pwl(0 0 5p Ibias)
-
-*Parasitic Inductances and Resistances for each JJ
-RJIA A 1a RP
-RJUA 1 Na RP
-RJLA 1 G1 RP
-
-RJIB B 3b RP
-RJUB 3 Nb RP
-RJLB 3 G3 RP
-
-RJP 4 G4 RP
-RJPS 5 G5 RP
-
-RJLIM 2 6q RP
-
-LJIA 1a 1   LP
-LJUA Na N   LP
-LJLA G1 0   LP
-
-LJIB 3b 3   LP
-LJUB Nb N   LP
-LJLB G3 0   LP
-
-LJP  G4 0   LP
-LJPS G5 0   LP
-
-LJLIM 6q 6  LP
-
-Lout 2 q 2p
+* Back Annotated .cir file from KiCad
+b1   	2   	3   	 jjmit area=b1
+b2   	4   	5   	 jjmit area=b2
+b3   	2   	6   	 jjmit area=b3
+b4   	7   	2   	 jjmit area=b4
+b5   	4   	6   	 jjmit area=b5
+b6   	8   	4   	 jjmit area=b6
+b7   	9   	10   	 jjmit area=b7
+b8   	11   	12   	 jjmit area=b8
+b9   	13   	14   	 jjmit area=b9
+i1   	0   	6   	pwl(0   	0   	5p      i1)
+l1   	a   	3   	 l1
+l2   	b   	5   	 l2
+l3   	6   	12   	 l3
+l4   	12   	10   	 l4
+l5   	11   	0   	 l5
+l6   	12   	q   	 l6
+lp1   	7   	0   	 lp1
+lp2   	8   	0   	 lp2
+lp3   	9   	0   	 lp3
+lp4   	13   	0   	 lp4
+lrb1   	15   	2   	 lrb1
+lrb2   	16   	4   	 lrb2
+lrb3   	17   	2   	 lrb3
+lrb4   	18   	0   	 lrb4
+lrb5   	19   	4   	 lrb5
+lrb6   	20   	0   	 lrb6
+lrb7   	21   	0   	 lrb7
+lrb8   	22   	11   	 lrb8
+lrb9   	23   	0   	 lrb9
+r1   	10   	14   	 r1
+rb1   	3   	15   	 rb1
+rb2   	5   	16   	 rb2
+rb3   	6   	17   	 rb3
+rb4   	2   	18   	 rb4
+rb5   	6   	19   	 rb5
+rb6   	4   	20   	 rb6
+rb7   	10   	21   	 rb7
+rb8   	12   	22   	 rb8
+rb9   	14   	23   	 rb9
 .ends

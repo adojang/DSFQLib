@@ -10,7 +10,7 @@ r1      ={nominal=                7.04349127e-01}
 r3      ={nominal=                1.34323634e+00}
 rbias   ={nominal=                1.00298596e+02}
 b1      ={nominal=         5.16417451e-01}
-b3      ={nominal=         3.12658647e-01}
+b3      ={nominal=         3.5e-01}
 b5      ={nominal=         1.05188201e+00}
 rb1     ={nominal=         14.50859137e+00}
 rb2     ={nominal=         14.50371385e+00}

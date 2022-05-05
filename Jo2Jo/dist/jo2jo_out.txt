@@ -1,0 +1,17 @@
+
+	=	 {nominal = b1  	=	 {nominal =	 3.23682804e-01}
+	=	 {nominal = b2  	=	 {nominal =	 5.95629005e-01}
+	=	 {nominal = b5  	=	 {nominal =	 6.21776921e-01}
+	=	 {nominal = i1  	=	 {nominal =	 3.00270413e-05}
+	=	 {nominal = l1  	=	 {nominal =	 5.22896652e-12}
+	=	 {nominal = l3  	=	 {nominal =	 1.73951938e-12}
+	=	 {nominal = lp1  	=	 {nominal =	 9.19415844e-14}
+	=	 {nominal = lrb1  	=	 {nominal =	 4.30836486e-12}
+	=	 {nominal = lrb2  	=	 {nominal =	 7.59006914e-12}
+	=	 {nominal = lrb3  	=	 {nominal =	 5.78336737e-12}
+	=	 {nominal = lrb4  	=	 {nominal =	 1.55573615e-12}
+	=	 {nominal = lrb5  	=	 {nominal =	 1.06776433e-12}
+	=	 {nominal = ra  	=	 {nominal =	 2.41454521e+00}
+	=	 {nominal = rb1  	=	 {nominal =	 3.27679568e+00}
+	=	 {nominal = rb2  	=	 {nominal =	 4.66908026e+00}
+	=	 {nominal = rb5  	=	 {nominal =	 7.26286283e+00}

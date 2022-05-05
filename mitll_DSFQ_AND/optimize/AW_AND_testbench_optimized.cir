@@ -103,42 +103,36 @@ XSINKOUTq SINKCELL 8000
 
 
 
-
+*Tuned Parameters
 .param l1       =                3.09037291e-12
 .param l3       =                2.03058886e-12
 .param r1       =                7.04349127e-01
 .param r3       =                1.34323634e+00
 .param rbias    =                1.00298596e+02
 
-
 .param l2       =         l1
 .param r2       =         r1
 .param r4       =         r3
 
-
-
-*These shall not change:
-
+*Static Parameters
 .param b1       =         5.16417451e-01
 .param b2       =         b1
-.param b3       =         3.12658647e-01
+.param b3       =         3.5e-01
 .param b4       =         b3
 .param b5       =         1.05188201e+00
 
-.param rb1      =         14.50859137e+00
-.param rb2      =         14.50371385e+00
-.param rb3      =         25.97171344e+00
-.param rb4      =         25.97143516e+00
-.param rb5      =         6.97007373e+00
+.param rb1      =         12.92859137e+00
+.param rb2      =         12.92013085e+00
+.param rb3      =         19.98871344e+00
+.param rb4      =         19.98963516e+00
+.param rb5      =         6.566007373e+00
 
-.param lrb1     =         6.99321337e-13
-.param lrb2     =         6.83421859e-13
-.param lrb3     =         1.60854087e-12
-.param lrb4     =         1.69101012e-12
-.param lrb5     =         1.23576828e-12
-.param lp1      =         7.91215763e-13
-****************************************************************
-
+.param lrb1     =         3.94321337e-13
+.param lrb2     =         5.33421859e-13
+.param lrb3     =         1.39314087e-12
+.param lrb4     =         1.41001012e-12
+.param lrb5     =         1.19776828e-12
+.param lp1      =         8.25215763e-13
 
 b1   	4   	5   	 jjmit area=b1
 b2   	6   	7   	 jjmit area=b2
@@ -147,8 +141,7 @@ b4   	6   	4   	 jjmit area=b4
 b5   	4   	9   	 jjmit area=b5
 v1   	0   	bias   	pwl(0   	0   	5p   	2.067m)
 Rbias   bias    bias1   Rbias
-Lbias   bias1   4       9.32p
-
+Lbias   bias1   4       12p
 
 l1   	a   	5   	 l1
 l2   	b   	7   	 l2

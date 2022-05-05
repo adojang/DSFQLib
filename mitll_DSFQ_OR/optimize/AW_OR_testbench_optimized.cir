@@ -1,0 +1,195 @@
+* JSIM deck file generated with TimEx
+* === DEVICE-UNDER-TEST ===
+
+* === SOURCE DEFINITION ===
+.SUBCKT SOURCECELL  8 11
+b1   1  2  jjmitll100 area=2.25
+b2   3  4  jjmitll100 area=2.25
+b3   5  6  jjmitll100 area=2.5
+ib1  0  2  pwl(0 0 5p 275ua)
+ib2  0  5  pwl(0 0 5p 175ua)
+l1   8  7  1p
+l2   7  0  3.9p
+l3   7  1  0.6p
+l4   2  3  1.1p
+l5   3  5  4.5p
+l6   5  11 2p
+lp2  4  0  0.2p
+lp3  6  0  0.2p
+lrb1 9  2  1p
+lrb2 10 4  1p
+lrb3 12 6  1p
+rb1  1  9  4.31
+rb2  3  10 4.31
+rb3  5  12 3.88
+.model jjmitll100 jj(rtype=1, vg=2.8mv, cap=0.07pf, r0=160, rn=16, icrit=0.1ma)
+.ENDS SOURCECELL
+* === INPUT LOAD DEFINITION ===
+.SUBCKT LOADINCELL  2 5
+b1 1 6 jjmitll100 area=2.5
+b2 4 8 jjmitll100 area=2.5
+ib1 0 3 pwl(0 0 5p 350ua)
+l1 2 1 2p
+l2 1 3 2p
+l3 3 4 2p
+l4 4 5 2p
+lb1 7 6 1p
+lb2 9 8 1p
+lp1 6 0 0.2p
+lp2 8 0 0.2p
+rb1 1 7 3.88
+rb2 4 9 3.88
+.model jjmitll100 jj(rtype=1, vg=2.8mv, cap=0.07pf, r0=160, rn=16, icrit=0.1ma)
+.ENDS LOADINCELL
+* === OUTPUT LOAD DEFINITION ===
+.SUBCKT LOADOUTCELL  2 5
+b1 1 6 jjmitll100 area=2.5
+b2 4 8 jjmitll100 area=2.5
+ib1 0 3 pwl(0 0 5p 350ua)
+l1 2 1 2p
+l2 1 3 2p
+l3 3 4 2p
+l4 4 5 2p
+lb1 7 6 1p
+lb2 9 8 1p
+lp1 6 0 0.2p
+lp2 8 0 0.2p
+rb1 1 7 3.88
+rb2 4 9 3.88
+.model jjmitll100 jj(rtype=1, vg=2.8mv, cap=0.07pf, r0=160, rn=16, icrit=0.1ma)
+.ENDS LOADOUTCELL
+* === SINK DEFINITION ===
+.SUBCKT SINKCELL  1
+r1 1 0 2
+.ENDS SINKCELL
+* ===== MAIN =====
+.param cval=600u
+I_a 0 1000 pwl(0 0 
++100p 0 103p cval 105p 0
++300p 0 303p cval 305p 0
++350p 0 353p cval 355p 0
++400p 0 403p cval 405p 0
++450p 0 453p cval 455p 0
++500p 0 503p cval 505p 0
++710p 0 713p cval 715p 0
++820p 0 823p cval 825p 0
++850p 0 853p cval 855p 0)
+
+I_b 0 4000 pwl(0 0 
++200p 0 203p cval 205p 0
++300p 0 303p cval 305p 0
++350p 0 353p cval 355p 0
++405p 0 408p cval 410p 0
++460p 0 463p cval 465p 0
++512p 0 515p cval 517p 0
++710p 0 713p cval 715p 0
++820p 0 823p cval 825p 0
++850p 0 853p cval 855p 0)
+
+.tran 0.25p 700p 0 0.01p
+
+XSOURCEINa SOURCECELL 1000 2000
+XLOADINa LOADINCELL 2000 A
+
+XSOURCEINb SOURCECELL 4000 5000
+XLOADINb LOADINCELL 5000 B
+XLOADOUTq LOADOUTCELL q 8000
+XSINKOUTq SINKCELL 8000
+
+*Optimized OR Gate
+
+*XDUT DSFQ_OR A B q
+
+*$Ports 		 A B q
+*.subckt DSFQ_OR A B q
+
+.model jjmit jj(rtype=1, vg=2.8mV, cap=0.07pF, r0=160, rn=16, icrit=0.1mA)
+
+*Optimized Variables
+.param b1  	=	     1.30033373e+00
+.param b3  	=	     1.74400646e+00
+.param b4  	=	     6.79982243e-01
+.param b7  	=	     5.26031505e-01
+.param b8  	=	     1.32265353e+00
+.param b9  	=	     8.16000559e-01
+.param i1  	=	     2.32768744e-04
+.param l1  	=	     4.22915406e-12
+.param l3  	=	     2.49358577e-12
+.param l4  	=	     1.18894186e-11
+.param l5  	=	     1.74432575e-10
+.param l6  	=	     1.29835538e-12
+.param r1   =	     5.33437400e-01
+
+*Unchanging Variables
+.param 	b2  	= b1
+.param 	b5  	= b3
+.param 	b6  	= b4
+.param 	l2  	= l1
+.param 	lp1  	= 1p
+.param 	lp2  	= 1p
+.param 	lp3  	= 1p
+.param 	lp4  	= 1p
+.param 	lrb1  	= 3.229p
+.param 	lrb2  	= lrb1
+.param 	lrb3  	= 3.8758p
+.param 	lrb4  	= 2.9814p
+.param 	lrb5  	= lrb3
+.param 	lrb6  	= lrb4
+.param 	lrb7  	= 5.5369p
+.param 	lrb8  	= 2.1532p
+.param 	lrb9  	= 7.7517p
+.param 	rb1  	= 5.7166
+.param 	rb2  	= rb1
+.param 	rb3  	= 6.8599
+.param 	rb4  	= 5.2768
+.param 	rb5  	= rb3
+.param 	rb6  	= rb4
+.param 	rb7  	= 9.799
+.param 	rb8  	= 3.811
+.param 	rb9  	= 13.7198
+
+
+* Back Annotated .cir file from KiCad
+b1   	2   	3   	 jjmit area=b1
+b2   	4   	5   	 jjmit area=b2
+b3   	2   	6   	 jjmit area=b3
+b4   	7   	2   	 jjmit area=b4
+b5   	4   	6   	 jjmit area=b5
+b6   	8   	4   	 jjmit area=b6
+b7   	9   	10   	 jjmit area=b7
+b8   	11   	12   	 jjmit area=b8
+b9   	13   	14   	 jjmit area=b9
+i1   	0   	6   	pwl(0   	0   	5p      i1)
+l1   	a   	3   	 l1
+l2   	b   	5   	 l2
+l3   	6   	12   	 l3
+l4   	12   	10   	 l4
+l5   	11   	0   	 l5
+l6   	12   	q   	 l6
+lp1   	7   	0   	 lp1
+lp2   	8   	0   	 lp2
+lp3   	9   	0   	 lp3
+lp4   	13   	0   	 lp4
+lrb1   	15   	2   	 lrb1
+lrb2   	16   	4   	 lrb2
+lrb3   	17   	2   	 lrb3
+lrb4   	18   	0   	 lrb4
+lrb5   	19   	4   	 lrb5
+lrb6   	20   	0   	 lrb6
+lrb7   	21   	0   	 lrb7
+lrb8   	22   	11   	 lrb8
+lrb9   	23   	0   	 lrb9
+r1   	10   	14   	 r1
+rb1   	3   	15   	 rb1
+rb2   	5   	16   	 rb2
+rb3   	6   	17   	 rb3
+rb4   	2   	18   	 rb4
+rb5   	6   	19   	 rb5
+rb6   	4   	20   	 rb6
+rb7   	10   	21   	 rb7
+rb8   	12   	22   	 rb8
+rb9   	14   	23   	 rb9
+*.ends
+
+.print p(r1.XSINKOUTq)
+.end
