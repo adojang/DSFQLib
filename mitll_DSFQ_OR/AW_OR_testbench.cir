@@ -112,13 +112,16 @@ XDUT DSFQ_OR A B q
 .param b7  	=	     5.26031505e-01
 .param b8  	=	     1.32265353e+00
 .param b9  	=	     8.16000559e-01
-.param i1  	=	     2.32768744e-04
+*.param i1  	=	     2.32768744e-04
 .param l1  	=	     4.22915406e-12
 .param l3  	=	     2.49358577e-12
 .param l4  	=	     1.18894186e-11
 .param l5  	=	     1.74432575e-10
 .param l6  	=	     1.29835538e-12
 .param r1   =	     5.33437400e-01
+
+*Replace with Resistor
+.param v1 = 2.5m
 
 *Unchanging Variables
 .param 	b2  	= b1
@@ -159,7 +162,9 @@ b6   	8   	4   	 jjmit area=b6
 b7   	9   	10   	 jjmit area=b7
 b8   	11   	12   	 jjmit area=b8
 b9   	13   	14   	 jjmit area=b9
-i1   	0   	6   	pwl(0   	0   	5p      i1)
+v1   	6r   	0   	pwl(0   	0   	5p      v1)
+r1v     6r      6       10.73
+
 l1   	a   	3   	 l1
 l2   	b   	5   	 l2
 l3   	6   	12   	 l3

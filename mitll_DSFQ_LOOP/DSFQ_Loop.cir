@@ -95,7 +95,7 @@ XSINKOUTq SINKCELL 8000
 
 *XDUT DSFQ_AND A q
 
-.tran 0.25p 1000p 0 0.01p
+.tran 0.25p 300p 0 0.01p
 .model jjmit jj(rtype=1, vg=2.8mV, cap=0.07pF, r0=160, rn=16, icrit=100uA)
 
 *$Ports    A B q
@@ -111,9 +111,10 @@ XSINKOUTq SINKCELL 8000
 * 8 * 0.25 == 2.07ish.
 * 0.1 *
 
-.param LD = 7p
-.param RD = 2
-.param RS =  2
+*Wokring Values
+.param LD = 7.8p
+.param RD = 6.26
+.param RS = 6.26
 
 
 *.param LD = 7.8p
@@ -132,18 +133,18 @@ RS leak out RS
 * BD - Dynamic. This JJ drives the dynamic switching action
 * BP - Pulse. This JJ produces the output SFQ pulse.
 BD d1 out jjmit area=0.7
-R1 d1 gg 9.7999
-L1 gg out 5.5369p
+RBD d1 gg 9.7999
+LBD gg out 5.5369p
 
 
 BS leak out jjmit area=1
-R2 leak g9 6.8599
-L2 g9 out 3.8758p
+RBS leak g9 6.8599
+LBS g9 out 3.8758p
 
 Rcon out q 0
 
 *.print i(LD) p(leak) i(BS) i(BD) i(RS) i(RD) p(out)
-.print i(LD) p(leak) p(BS) p(BD) i(RS) i(RD) p(out)
+.print i(LD) p(leak) i(BS) i(BD) i(RS) i(RD) p(out) i(Rcon)
 
 
 *.print i(LD) i(RD) i(BD) p(out) p(BD) p(BS)
