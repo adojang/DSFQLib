@@ -4,3 +4,17 @@ josim-plot.py ./XOR.csv -t stacked
 josim -o ./XOR.csv ./AW_XOR.cir -V 1
 josim-plot.py ./XOR.csv
 
+
+
+
+
+
+josim -o ./XOR.csv ./l_xor.cir -V 1
+josim-plot.py ./XOR.csv
+
+
+
+
+
+josim -o ./XOR2.csv ./AW_XOR2.ckt -V 1
+josim-plot.py ./XOR2.csv

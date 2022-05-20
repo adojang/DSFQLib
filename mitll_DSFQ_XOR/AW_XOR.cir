@@ -167,14 +167,6 @@ Lco q1 enable 2p
 
 
 
-
-.print v(A) v(B) v(output)
-*.print v(A1) v(B1) i(Bia1.XCLK) i(Bib1.XCLK) p(Bia1.XCLK) p(Bib1.XCLK) i(Lii.XCLK) v(Lco.XCLK)
-*.print v(A1) v(B1) i(Lia) i(Lib) i(Bia1) i(Bib1) p(Bia1) p(Bib1) i(Lii) v(a1) i(Bclk) p(Bclk)
-
-
-
-
 ********************************* DSFQ_LOOP ***************************************************************************
 * $Ports    A q
 .subckt DSFQ_Loop A q
