@@ -141,11 +141,14 @@ BS leak out jjmit area=1
 RBS leak g9 6.8599
 LBS g9 out 3.8758p
 
-Rcon out q 0
+*Rcon out q 0
+
+ROUT out q 0
 
 *.print i(LD) p(leak) i(BS) i(BD) i(RS) i(RD) p(out)
-.print i(LD) p(leak) i(BS) i(BD) i(RS) i(RD) p(out) i(Rcon)
+*.print i(LD) p(leak) i(BS) i(BD) i(RS) i(RD) p(out) i(Rcon)
 
+.print v(A) i(ROUT) p(A) p(out)
 
 *.print i(LD) i(RD) i(BD) p(out) p(BD) p(BS)
 *.print i(LD) i(RD) i(BS) i(RS) p(leak) p(out) v(out) i(Rcon)

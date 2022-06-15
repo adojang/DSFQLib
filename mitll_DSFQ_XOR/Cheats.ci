@@ -23,3 +23,5 @@ josim-plot.py ./XOR2.csv
 
 josim -o ./adder.csv ./XOR_ADDER_FULL.ckt -V 1
 josim-plot.py ./adder.csv
+sp_generator.py -t 0.90 -s 20E-12 -o adder.sp -v adder.csv 
+brush.py -sp adder.sp -p cake.s
