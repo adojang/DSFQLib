@@ -18,7 +18,12 @@
 
 I_a0 0 I_a0 pwl(0 0 100p 0 103p cval 105p 0 300p 0 303p cval 305p 0)
 I_b0 0 I_b0 pwl(0 0 200p 0 203p cval 205p 0 300p 0 303p cval 305p 0)
-I_s0 0 I_s0 pwl(0 0 200p 0 203p cval 205p 0 300p 0 303p cval 305p 0)
+*IMPORTANT! The s0 line requires VERY fine timing for the NOT gate to work. It might be worth adding something on both ends of the NOT gate to enable a little bit of play. It will extend the time the not gate takes to trigger, but it will probably be worth it.
+
+I_s0 0 I_s0 pwl(0 0 107p 0 110p cval 112p 0 300p 0 303p cval 305p 0)
+* A = 1 B = 0 S = 1
+
+*I_s0 0 I_s0 pwl(0 0 200p 0 203p cval 205p 0 300p 0 303p cval 305p 0)
 
 
 .tran 0.25p 1500p 0 0.01p
@@ -54,5 +59,6 @@ R_out Qload 0 2
 .model jjmit jj(rtype=1, vg=2.8mV, cap=0.07pF, r0=160, rn=16, icrit=100uA)
 
 
-.print v(A0) v(B0) v(S1) v(CLK) v(A2) v(S0) v(R_out)
+*.print v(A0) v(B0) v(S1) v(CLK) v(A2) v(S0) v(R_out)
+.print v(A1) v(S1) v(CLK_BOOST) v(A2) v(Q1) v(Q2) v(QQ)
 .end

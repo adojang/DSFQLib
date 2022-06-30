@@ -1,0 +1,71 @@
+* DSFQ Self clocked Multiplexor
+* Author: Adriaan van Wijk
+* Version: 1.0
+* Last modification date: 21 June 2022
+* Last modification by: Adriaan van Wijk
+* This testbench uses cells from LS's library of RSFQ cells. This was the version that was tested for layout.
+
+.include cells\LSmitll_DCSFQ_v2p1_optimized.cir
+*JTL Conflicts with what is already in the MUX cell. It is a Bug(?).
+.include cells\LSmitll_JTL_v2p1_optimized.cir
+.include cells\AW_2_1_MUX.cir
+
+*SPLIT Conflicts with what is already in the MUX Cell. It is a Bug.
+.include cells\LSmitll_SPLIT_v2p1_optimized.cir 
+
+.param cval=600u
+
+
+I_i1 0 i_i0 pwl(0 0 100p 0 103p cval 105p 0 200p 0 203p 0 205p 0 300p 0 303p 0 305p 0 400p 0 403p 0 405p 0 500p 0 503p cval 505p 0)
+I_i2 0 i_i1 pwl(0 0 100p 0 103p 0 105p 0 200p 0 203p cval 205p 0 300p 0 303p 0 305p 0 400p 0 403p 0 405p 0 500p 0 503p 0 505p 0)
+I_i3 0 i_i2 pwl(0 0 100p 0 103p cval 105p 0 200p 0 203p 0 205p 0 300p 0 303p cval 305p 0 400p 0 403p 0 405p 0 500p 0 503p 0 505p 0)
+I_i4 0 i_i3 pwl(0 0 100p 0 103p cval 105p 0 200p 0 203p 0 205p 0 300p 0 303p 0 305p 0 400p 0 403p cval 405p 0 500p 0 503p 0 505p 0)
+I_s0 0 i_s0 pwl(0 0 100p 0 103p 0 105p 0 200p 0 203p 0 205p 0 300p 0 303p cval 305p 0 400p 0 403p cval 405p 0 500p 0 503p 0 505p 0)
+I_s1 0 i_s1 pwl(0 0 105p 0 108p cval 110p 0 200p 0 203p cval 205p 0 300p 0 303p 0 305p 0 400p 0 403p cval 405p 0 500p 0 503p 0 505p 0)
+
+
+
+
+.tran 0.25p 1000p 0 0.01p
+
+Xsrc_i0 LSmitll_DCSFQ i_i0 src_i0
+Xsrc_i1 LSmitll_DCSFQ i_i1 src_i1
+Xsrc_i2 LSmitll_DCSFQ i_i2 src_i2
+Xsrc_i3 LSmitll_DCSFQ i_i3 src_i3
+Xsrc_s0 LSmitll_DCSFQ i_s0 src_s0
+Xsrc_s1 LSmitll_DCSFQ i_s1 src_s1
+
+
+Xload_i0 LSMITLL_JTL src_i0 i0
+Xload_i1 LSMITLL_JTL src_i1 i1
+Xload_i2 LSMITLL_JTL src_i2 i2
+Xload_i3 LSMITLL_JTL src_i3 i3
+Xload_s0 LSMITLL_JTL src_s0 S0
+Xload_s1 LSMITLL_JTL src_s1 S1
+
+*The second split is for line balancing.
+*XPLITS0 LSMITLL_SPLIT S0 S0a S0b
+*XSPLITS1 LSMITLL_SPLIT S1 S1a S1b
+* S1 Might require a SPLIT cell since it is 2.
+
+
+
+
+XMUXA   DSFQ_2_1_MUX i0 i1 S1 Q1
+XMUXB   DSFQ_2_1_MUX i2 i3 S1 Q2
+XMUXC   DSFQ_2_1_MUX Q1 Q2 S0 QQ
+
+
+
+Xloadout_s0 LSMITLL_JTL QQ Qload
+R_out Qload 0 2
+
+
+
+.model jjmit jj(rtype=1, vg=2.8mV, cap=0.07pF, r0=160, rn=16, icrit=100uA)
+.print v(i0) v(i1) v(i2) v(i3) v(s0) v(s1) v(Q1) v(Q2) v(QQ) v(R_out)
+*.print v(i0) v(S1.XMUXA) v(CLK.XMUXA) v(A2.XMUXA) v(Q1.XMUXA) v(Q2.XMUXA) v(Q1)
+*.print v(S0) v(S1) v(AA)
+
+
+.end

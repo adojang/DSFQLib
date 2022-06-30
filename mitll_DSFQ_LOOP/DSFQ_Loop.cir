@@ -111,10 +111,15 @@ XSINKOUTq SINKCELL 8000
 * 8 * 0.25 == 2.07ish.
 * 0.1 *
 
-*Wokring Values
-.param LD = 7.8p
-.param RD = 6.26
-.param RS = 6.26
+*About an 8ps hold time.
+.param LD = 6.5p
+.param RD = 70
+.param RS = 70
+
+*Original Values for atime of about 150ps.
+* .param LD = 7.8p
+* .param RD = 6.26
+* .param RS = 6.26
 
 
 *.param LD = 7.8p
@@ -132,6 +137,44 @@ RS leak out RS
 * RD - The shunt resistor across the two terminals 
 * BD - Dynamic. This JJ drives the dynamic switching action
 * BP - Pulse. This JJ produces the output SFQ pulse.
+
+
+
+
+
+
+****************************************************************************************************************************************
+
+
+
+
+
+
+*The shunted resistor across BD affects the other once since they just combine in paralell. This should be taken into account when doing another review of the NOT gate....
+
+
+
+
+
+
+
+
+
+****************************************************************************************************************************************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 BD d1 out jjmit area=0.7
 RBD d1 gg 9.7999
 LBD gg out 5.5369p
