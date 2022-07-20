@@ -16,12 +16,13 @@
 .param cval=600u
 
 
-I_a0 0 I_a0 pwl(0 0 100p 0 103p cval 105p 0 300p 0 303p cval 305p 0)
-I_b0 0 I_b0 pwl(0 0 200p 0 203p cval 205p 0 300p 0 303p cval 305p 0)
+I_a0 0 I_a0 pwl(0 0 200p 0 203p cval 205p 0 300p 0 303p cval 305p 0)
+I_b0 0 I_b0 pwl(0 0 85p 0 88p cval 90p 0 300p 0 303p cval 305p 0)
 *IMPORTANT! The s0 line requires VERY fine timing for the NOT gate to work. It might be worth adding something on both ends of the NOT gate to enable a little bit of play. It will extend the time the not gate takes to trigger, but it will probably be worth it.
 
-I_s0 0 I_s0 pwl(0 0 107p 0 110p cval 112p 0 300p 0 303p cval 305p 0)
-* A = 1 B = 0 S = 1
+I_s0 0 I_s0 pwl(0 0 107p 0 110p cval 112p 0 307p 0 310p cval 312p 0)
+*S = 0 - Select A
+*S = 1 - Select B
 
 *I_s0 0 I_s0 pwl(0 0 200p 0 203p cval 205p 0 300p 0 303p cval 305p 0)
 
@@ -60,5 +61,5 @@ R_out Qload 0 2
 
 
 *.print v(A0) v(B0) v(S1) v(CLK) v(A2) v(S0) v(R_out)
-.print v(A1) v(S1) v(CLK_BOOST) v(A2) v(Q1) v(Q2) v(QQ)
+.print v(A1) v(S1) v(CLK_BOOST) v(A2) p(Q1) p(Q2) p(QQ)
 .end

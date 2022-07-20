@@ -69,16 +69,16 @@ r1 1 0 2
 .model jjmit jj(rtype=1, vg=2.8mV, cap=0.07pF, r0=160, rn=16, icrit=100uA)
 
 I_a 0 1000 pwl(0 0 150p 0 153p cval 155p 0
-+156p 0 159p cval 161p 0
-+162p 0 165p cval 167p 0
-+168p 0 171p cval 173p 0
-+174p 0 177p cval 179p 0
-+250p 0 253p cval 255p 0
-+400p 0 403p cval 405p 0
-+650p 0 653p cval 655p 0)
+ +160p 0 163p cval 165p 0)
+ *+170p 0 173p cval 175p 
+* +168p 0 171p cval 173p 0
+* +174p 0 177p cval 179p 0
+* +250p 0 253p cval 255p 0
+* +400p 0 403p cval 405p 0
+* +650p 0 653p cval 655p 0)
 *+800p 0 803p cval 805p 0)
 
-I_b 0 1001  pwl(0 0 650p 0 653p cval 655p 0
+I_b 0 1001  pwl(0 0 266p 0 269p cval 271p 0
 +800p 0 803p cval 805p 0)
 *+700p 0 703p cval 705p 0
 *+710p 0 713p cval 715p 0
@@ -98,8 +98,8 @@ XMRGCLK LSmitll_MERGE A2 B2 MRGCLK
 XXOR LSmitll_XOR A1 B1 MRGCLK q
 
 
-.print i(L1.XSPLITA) i(L1.XSPLITB) i(L9.XMRGCLK) v(r1.XINK) v(MRGCLK) i(B9.XXOR) i(B7.XXOR) i(B10.XXOR) p(l1.XLDQ) i(l1.XLDQ)
-
+*.print i(L1.XSPLITA) i(L1.XSPLITB) i(L9.XMRGCLK) v(r1.XINK) v(MRGCLK) i(B9.XXOR) i(B7.XXOR) i(B10.XXOR) i(l1.XLDQ)
+.print v(A) v(A1) v(q) p(q) p(q)
 
 
 ********************************* DSFQ_MERGECLK ********************

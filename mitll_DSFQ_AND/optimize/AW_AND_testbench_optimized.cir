@@ -67,6 +67,7 @@ r1 1 0 2
 
 I_a 0 1000 pwl(0 0 
 +100p 0 103p cval 105p 0
++110p 0 113p cval 115p 0
 +300p 0 303p cval 305p 0
 +350p 0 353p cval 355p 0
 +400p 0 403p cval 405p 0
@@ -77,6 +78,8 @@ I_a 0 1000 pwl(0 0
 +850p 0 853p cval 855p 0)
 
 I_b 0 4000 pwl(0 0 
++100p 0 103p cval 105p 0
++110p 0 113p cval 115p 0
 +200p 0 203p cval 205p 0
 +300p 0 303p cval 305p 0
 +350p 0 353p cval 355p 0

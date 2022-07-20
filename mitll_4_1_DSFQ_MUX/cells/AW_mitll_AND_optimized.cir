@@ -35,7 +35,7 @@
 
 *$Ports    A B q
 .subckt DSFQ_AND A B q
-
+.model jjmit jj(rtype=1, vg=2.8mV, cap=0.07pF, r0=160, rn=16, icrit=100uA)
 *Tuned Parameters
 .param l1       =                3.09037291e-12
 .param l3       =                2.03058886e-12
@@ -72,6 +72,7 @@ b2   	6   	7   	 jjmit area=b2
 b3   	4   	8   	 jjmit area=b3
 b4   	6   	4   	 jjmit area=b4
 b5   	4   	9   	 jjmit area=b5
+*i1   	0   	4   	pwl(0   	0   	5p   	20u)
 v1   	0   	bias   	pwl(0   	0   	5p   	2.067m)
 Rbias   bias    bias1   Rbias
 Lbias   bias1   4       12p

@@ -1,5 +1,6 @@
-josim -o ./AND.csv ./AW_AND_testbench_optimized.cir -V 1
+josim -o ./AND.csv ./AW_mitll_AND_testbench.cir -V 1
 josim-plot.py ./AND.csv -t stacked
+
 
 sp_generator.py -t 0.90 -s 20E-12 -o AND.sp -v AND.csv 
 

@@ -3,7 +3,6 @@
 .include AW_mitll_XOR.cir
 .include LSmitll_BUFF_v2p1_optimized.cir
 *.include LSmitll_JTL_v2p1_optimized.cir
-
 .subckt FULL_ADDER A B Cin Cout S
 XXOR1 DSFQ_XOR A B 1
 XXOR2 DSFQ_XOR 1 Cin S

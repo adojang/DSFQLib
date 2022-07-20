@@ -77,6 +77,7 @@ I_a 0 1000 pwl(0 0
 +850p 0 853p cval 855p 0)
 
 I_b 0 4000 pwl(0 0 
++100p 0 103p cval 105p 0
 +200p 0 203p cval 205p 0
 +300p 0 303p cval 305p 0
 +350p 0 353p cval 355p 0

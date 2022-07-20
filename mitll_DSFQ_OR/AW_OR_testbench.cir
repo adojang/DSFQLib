@@ -64,29 +64,31 @@ r1 1 0 2
 .ENDS SINKCELL
 * ===== MAIN =====
 .param cval=600u
-I_a 0 1000 pwl(0 0 
-+100p 0 103p cval 105p 0
-+300p 0 303p cval 305p 0
-+350p 0 353p cval 355p 0
-+400p 0 403p cval 405p 0
-+450p 0 453p cval 455p 0
-+500p 0 503p cval 505p 0
-+710p 0 713p cval 715p 0
-+820p 0 823p cval 825p 0
-+850p 0 853p cval 855p 0)
+ I_a 0 1000 pwl(0 0 
+ +100p 0 103p cval 105p 0)
+ *+300p 0 303p cval 305p 0
+* +350p 0 353p cval 355p 0
+* +400p 0 403p cval 405p 0
+* +450p 0 453p cval 455p 0
+* +500p 0 503p cval 505p 0
+* +710p 0 713p cval 715p 0
+* +800p 0 803p cval 805p 0
+* +850p 0 853p cval 855p 0)
 
-I_b 0 4000 pwl(0 0 
-+200p 0 203p cval 205p 0
-+300p 0 303p cval 305p 0
-+350p 0 353p cval 355p 0
-+405p 0 408p cval 410p 0
-+460p 0 463p cval 465p 0
-+512p 0 515p cval 517p 0
-+710p 0 713p cval 715p 0
-+820p 0 823p cval 825p 0
-+850p 0 853p cval 855p 0)
+ I_b 0 4000 pwl(0 0 
+ +829p 0 132p cval 134p 0)
+ *+300p 0 303p cval 305p 0
+* +350p 0 353p cval 355p 0
+* +405p 0 408p cval 410p 0
+* +460p 0 463p cval 465p 0
+* +512p 0 515p cval 517p 0
+* +715p 0 718p cval 720p 0
+* +820p 0 823p cval 825p 0)
+*+900p 0 903p cval 905p 0)
 
-.tran 0.25p 700p 0 0.01p
+*Steps in 5, 10, 12, 15, 20, 25 ps skew
+
+.tran 0.25p 1100p 0 0.01p
 
 XSOURCEINa SOURCECELL 1000 2000
 XLOADINa LOADINCELL 2000 A

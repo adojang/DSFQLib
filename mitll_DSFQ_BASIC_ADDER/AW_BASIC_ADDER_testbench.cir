@@ -1,3 +1,4 @@
+* This Basic Adder does not use XOR gates, but instead tries to reconstruct them using a mixture of DSFQ and RSFQ architecture.
 * JSIM deck file generated with TimEx
 * === DEVICE-UNDER-TEST ===
 
