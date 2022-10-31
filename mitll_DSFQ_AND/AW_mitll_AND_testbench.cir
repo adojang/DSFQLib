@@ -77,7 +77,7 @@ I_a 0 1000 pwl(0 0
 +850p 0 853p cval 855p 0)
 
 I_b 0 4000 pwl(0 0 
-+100p 0 103p cval 105p 0
++106p 0 109p cval 111p 0
 +200p 0 203p cval 205p 0
 +300p 0 303p cval 305p 0
 +350p 0 353p cval 355p 0
@@ -161,4 +161,6 @@ rb3   	8   	12   	 rb3
 rb4   	4   	13   	 rb4
 rb5   	4   	14   	 rb5
 .ends
-.print v(L4.XLOADINa) v(L4.XLOADINb) i(r1.XSINKOUTq) p(4.XDUT)
+
+*.print v(L4.XLOADINa) v(L4.XLOADINb) i(r1.XSINKOUTq) p(4.XDUT)
+.print v(L4.XLOADINa) v(L4.XLOADINb) v(8000)

@@ -80,20 +80,19 @@ I_a 0 1001 pwl(0 0
 +950p 0 953p cval 955p 0)
 
 
-*I_b 0 4000 pulse(cval 0 100p 1p 1p 3p 200p)
 
 
 XSOURCEINa SOURCECELL 1000 2000
 XLOADINa LOADINCELL 2000 A
 
 *XDCSFQ LSmitll_DCSFQ 1000 2000
-XSOURCEINb SOURCECELL 4000 5000
-XLOADINb LOADINCELL 5000 B
+*XSOURCEINb SOURCECELL 4000 5000
+*XLOADINb LOADINCELL 5000 B
 XLOADOUTq LOADOUTCELL q xd1
 Rcon2 xd1 8000 0
 XSINKOUTq SINKCELL 8000
 
-*XDUT DSFQ_AND A q
+
 
 .tran 0.25p 300p 0 0.01p
 .model jjmit jj(rtype=1, vg=2.8mV, cap=0.07pF, r0=160, rn=16, icrit=100uA)
@@ -112,39 +111,24 @@ XSINKOUTq SINKCELL 8000
 * 0.1 *
 
 *About an 8ps hold time.
-.param LD = 6.5p
-.param RD = 70
-.param RS = 70
+*.param LD = 6.5p
+*.param RD = 70
+*.param RS = 70
 
 *Original Values for atime of about 150ps.
-* .param LD = 7.8p
-* .param RD = 6.26
-* .param RS = 6.26
+ *.param LD = 5.8p
+ .param RD = 6.26
+ .param RS = 6.26
 
 
-*.param LD = 7.8p
+.param LD = 7.8p
 *.param Rval = 0.4
 *.param RD = rval
 *.param RS = rval
 
-
-LD A leak LD
-RD leak d1 RD
-RS leak out RS
-
-*The Naming Convention is as follows:
-* RS - The DYNAMIC resistor in series with BD
-* RD - The shunt resistor across the two terminals 
-* BD - Dynamic. This JJ drives the dynamic switching action
-* BP - Pulse. This JJ produces the output SFQ pulse.
-
-
-
-
-
-
-****************************************************************************************************************************************
-
+LD A B LD
+RD B C RD
+RS B D RS
 
 
 
@@ -154,49 +138,33 @@ RS leak out RS
 
 
 
+BD C D jjmit area=0.7
+RBD C gg 9.7999
+LBD gg D 5.5369p
 
 
+BS B D jjmit area=1
+RBS B g9 6.8599
+LBS g9 D 3.8758p
 
+*Rcon D q 0
 
+ROUT D q 0
 
+*.print p(A) i(LD) p(B) p(D)
 
-****************************************************************************************************************************************
+*.print p(A) p(B) p(C) p(D) i(BS) i(RS) i(BD) i(RD) v(B) v(D)
+.print i(LD) i(BD) i(BS) i(ROUT) p(BD)
 
+*.print p(A) i(LD) p(B) i(BS) i(BD) i(RS) i(RD) p(D)
+*.print i(LD) p(B) i(BS) i(BD) i(RS) i(RD) p(D) i(Rcon)
 
+*.print v(A) i(ROUT) p(A) p(D)
 
-
-
-
-
-
-
-
-
-
-
-
-BD d1 out jjmit area=0.7
-RBD d1 gg 9.7999
-LBD gg out 5.5369p
-
-
-BS leak out jjmit area=1
-RBS leak g9 6.8599
-LBS g9 out 3.8758p
-
-*Rcon out q 0
-
-ROUT out q 0
-
-*.print i(LD) p(leak) i(BS) i(BD) i(RS) i(RD) p(out)
-*.print i(LD) p(leak) i(BS) i(BD) i(RS) i(RD) p(out) i(Rcon)
-
-.print v(A) i(ROUT) p(A) p(out)
-
-*.print i(LD) i(RD) i(BD) p(out) p(BD) p(BS)
-*.print i(LD) i(RD) i(BS) i(RS) p(leak) p(out) v(out) i(Rcon)
+*.print i(LD) i(RD) i(BD) p(D) p(BD) p(BS)
+*.print i(LD) i(RD) i(BS) i(RS) p(B) p(D) v(D) i(Rcon)
 *.print i(LD) i(BS) i(RD) i(BD) i(RS) p(BS) i(Rcon) v(Rcon)
-*.print i(LD) i(RD) i(BS) i(RS) p(leak) p(out) p(BD) p(BS)
+*.print i(LD) i(RD) i(BS) i(RS) p(B) p(D) p(BD) p(BS)
 *.print i(LD) i(RD) i(BS) i(RS)
 *.print i(Btest) p(Btest)
 

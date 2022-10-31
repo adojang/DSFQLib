@@ -1,0 +1,80 @@
+.param 	b1  	= 
+.param 	b2  	= 
+.param 	b3  	= 
+.param 	b4  	= 
+.param 	b5  	= 
+.param 	l1  	= 
+.param 	l2  	= 
+.param 	l3  	= 
+.param 	lc1  	= 
+.param 	lc2  	= 
+.param 	lc5  	= 
+.param 	lca1  	= 
+.param 	lcb1  	= 
+.param 	lj1  	= 
+.param 	lj2  	= 
+.param 	lj3  	= 
+.param 	lj4  	= 
+.param 	lj5  	= 
+.param 	lp1  	= 
+.param 	lrbias1  	= 
+.param 	plr1  	= 
+.param 	plr2  	= 
+.param 	plr3  	= 
+.param 	plr4  	= 
+.param 	prb1  	= 
+.param 	prb2  	= 
+.param 	prb3  	= 
+.param 	prb4  	= 
+.param 	prb5  	= 
+.param 	r1  	= 
+.param 	r2  	= 
+.param 	r3  	= 
+.param 	r4  	= 
+.param 	rb1  	= 
+.param 	rb2  	= 
+.param 	rb3  	= 
+.param 	rb4  	= 
+.param 	rb5  	= 
+
+
+* Back Annotated .cir file from KiCad
+b1   	101   	10a   	 jjmit area=b1
+b2   	201   	20a   	 jjmit area=b2
+b3   	110   	11   	 jjmit area=b3
+b4   	220   	21   	 jjmit area=b4
+b5   	80   	8   	 jjmit area=b5
+l1   	a   	10   	 l1
+l2   	b   	20   	 l2
+l3   	8   	q   	 l3
+lc1   	3   	7   	 lc1
+lc2   	5   	7   	 lc2
+lc5   	7   	8   	 lc5
+lca1   	10   	10a   	 lca1
+lcb1   	20   	20a   	 lcb1
+lj1   	101   	3   	 lj1
+lj2   	201   	5   	 lj2
+lj3   	110   	7   	 lj3
+lj4   	220   	7   	 lj4
+lj5   	80   	90   	 lj5
+lp1   	90   	0   	 lp1
+lrbias1   	bias   	8   	 lrbias1
+plr1   	100   	3   	 plr1
+plr2   	200   	5   	 plr2
+plr3   	11x   	11   	 plr3
+plr4   	21x   	21   	 plr4
+prb1   	102   	3   	 prb1
+prb2   	202   	5   	 prb2
+prb3   	111   	7   	 prb3
+prb4   	221   	7   	 prb4
+prb5   	81   	90   	 prb5
+r1   	10   	100   	 r1
+r2   	20   	200   	 r2
+r3   	11x   	10a   	 r3
+r4   	21x   	20a   	 r4
+rb1   	10a   	102   	 rb1
+rb2   	20a   	202   	 rb2
+rb3   	11   	111   	 rb3
+rb4   	21   	221   	 rb4
+rb5   	8   	81   	 rb5
+.end

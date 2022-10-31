@@ -25,22 +25,22 @@
 *Suggest a MUX redesign to balance things properly, and a better overview.
 ********************************************* THROUGHPUT TIMES ROUGHLY ********************************************
 
-I_i0 0 i_i0 pwl(0 0 100p 0 103p 0 105p 0 200p 0 203p 0 205p 0 300p 0 303p 0 305p 0 400p 0 403p 0 405p 0 500p 0 503p cval 505p 0)
-I_i1 0 i_i1 pwl(0 0 100p 0 103p 0 105p 0 200p 0 203p 0 205p 0 300p 0 303p 0 305p 0 400p 0 403p 0 405p 0 500p 0 503p 0 505p 0)
-I_i2 0 i_i2 pwl(0 0 100p 0 103p 0 105p 0 200p 0 203p 0 205p 0 300p 0 303p 0 305p 0 400p 0 403p 0 405p 0 500p 0 503p 0 505p 0)
-I_i3 0 i_i3 pwl(0 0 100p 0 103p cval 105p 0 200p 0 203p 0 205p 0 300p 0 303p 0 305p 0 400p 0 403p 0 405p 0 500p 0 503p 0 505p 0)
+* I_i0 0 i_i0 pwl(0 0 100p 0 103p 0 105p 0 200p 0 203p 0 205p 0 300p 0 303p 0 305p 0 400p 0 403p 0 405p 0 500p 0 503p cval 505p 0)
+* I_i1 0 i_i1 pwl(0 0 100p 0 103p 0 105p 0 200p 0 203p 0 205p 0 300p 0 303p 0 305p 0 400p 0 403p 0 405p 0 500p 0 503p 0 505p 0)
+* I_i2 0 i_i2 pwl(0 0 100p 0 103p 0 105p 0 200p 0 203p 0 205p 0 300p 0 303p 0 305p 0 400p 0 403p 0 405p 0 500p 0 503p 0 505p 0)
+* I_i3 0 i_i3 pwl(0 0 100p 0 103p cval 105p 0 200p 0 203p 0 205p 0 300p 0 303p 0 305p 0 400p 0 403p 0 405p 0 500p 0 503p 0 505p 0)
 
-I_s0 0 i_s0 pwl(0 0 130p 0 133p cval 135p 0 200p 0 203p 0 205p 0 320p 0 323p 0 325p 0 420p 0 423p 0 425p 0 500p 0 503p 0 505p 0)
-I_s1 0 i_s1 pwl(0 0 100p 0 103p cval 105p 0 200p 0 203p 0 205p 0 300p 0 303p 0 305p 0 400p 0 403p 0 405p 0 500p 0 503p 0 505p 0)
+* I_s0 0 i_s0 pwl(0 0 130p 0 133p cval 135p 0 200p 0 203p 0 205p 0 320p 0 323p 0 325p 0 420p 0 423p 0 425p 0 500p 0 503p 0 505p 0)
+* I_s1 0 i_s1 pwl(0 0 100p 0 103p cval 105p 0 200p 0 203p 0 205p 0 300p 0 303p 0 305p 0 400p 0 403p 0 405p 0 500p 0 503p 0 505p 0)
 
 
-* I_i0 0 i_i0 pwl(0 0 100p 0 103p cval 105p 0 200p 0 203p 0 205p 0 300p 0 303p 0 305p 0 400p 0 403p 0 405p 0 500p 0 503p cval 505p 0)
-* I_i1 0 i_i1 pwl(0 0 100p 0 103p 0 105p 0 200p 0 203p cval 205p 0 300p 0 303p 0 305p 0 400p 0 403p 0 405p 0 500p 0 503p 0 505p 0)
-* I_i2 0 i_i2 pwl(0 0 100p 0 103p 0 105p 0 200p 0 203p 0 205p 0 300p 0 303p cval 305p 0 400p 0 403p 0 405p 0 500p 0 503p 0 505p 0)
-* I_i3 0 i_i3 pwl(0 0 100p 0 103p 0 105p 0 200p 0 203p 0 205p 0 300p 0 303p 0 305p 0 400p 0 403p cval 405p 0 500p 0 503p 0 505p 0)
+I_i0 0 i_i0 pwl(0 0 100p 0 103p cval 105p 0 200p 0 203p 0 205p 0 300p 0 303p 0 305p 0 400p 0 403p 0 405p 0 500p 0 503p 0 505p 0)
+I_i1 0 i_i1 pwl(0 0 100p 0 103p 0 105p 0 200p 0 203p cval 205p 0 300p 0 303p 0 305p 0 400p 0 403p 0 405p 0 500p 0 503p 0 505p 0)
+I_i2 0 i_i2 pwl(0 0 100p 0 103p 0 105p 0 200p 0 203p 0 205p 0 300p 0 303p cval 305p 0 400p 0 403p 0 405p 0 500p 0 503p 0 505p 0)
+I_i3 0 i_i3 pwl(0 0 100p 0 103p 0 105p 0 200p 0 203p 0 205p 0 300p 0 303p 0 305p 0 400p 0 403p cval 405p 0 500p 0 503p 0 505p 0)
 
-* I_s0 0 i_s0 pwl(0 0 100p 0 103p 0 105p 0 200p 0 203p 0 205p 0 320p 0 323p cval 325p 0 420p 0 423p cval 425p 0 500p 0 503p 0 505p 0)
-* I_s1 0 i_s1 pwl(0 0 100p 0 103p 0 105p 0 200p 0 203p cval 205p 0 300p 0 303p 0 305p 0 400p 0 403p cval 405p 0 500p 0 503p 0 505p 0)
+I_s0 0 i_s0 pwl(0 0 100p 0 103p 0 105p 0 200p 0 203p 0 205p 0 320p 0 323p cval 325p 0 420p 0 423p cval 425p 0 500p 0 503p 0 505p 0)
+I_s1 0 i_s1 pwl(0 0 100p 0 103p 0 105p 0 200p 0 203p cval 205p 0 300p 0 303p 0 305p 0 400p 0 403p cval 405p 0 500p 0 503p 0 505p 0)
 
 *S0 must be delayed by ~30ps for things to work properly. This realtes to Q2's MUX.
 
@@ -52,7 +52,7 @@ I_s1 0 i_s1 pwl(0 0 100p 0 103p cval 105p 0 200p 0 203p 0 205p 0 300p 0 303p 0 3
 *Design a test which outputs i0 i1 i2 i3 sucessfully.
 
 
-.tran 0.25p 300p 0 0.01p
+.tran 0.25p 600p 0 0.01p
 .model jjmit jj(rtype=1, vg=2.8mV, cap=0.07pF, r0=160, rn=16, icrit=100uA)
 
 Xsrc_i0 LSmitll_DCSFQ i_i0 src_i0
@@ -85,12 +85,12 @@ R_out Qload 0 2
 
 *I might need to insert a small JTL type element on A1 and B1 inside the 2:1 MUX for stability. Might need to do the same for Q1 and Q2 in teh 2-1 MUX.
 
-*.print v(i0) v(Q1) p(src_i0) p(i0) p(A1.XMUXA) p(A_CLK.XMUXA) p(A2.XMUXA) p(Q1.XMUXA) v(Q1) p(Q1)
+*.print v(i2) v(Q2)  p(A1.XMUXB) v(A_clk.XMUXB) v(S1.XMUXB) v(A2.XMUXB) p(A2.XMUXB) p(Q1.XMUXB)
 
 
 
 *1 2 3 4 Test Pattern Print Confirmation
-.print v(i0) v(i2) v(i1) v(i3) v(Q1) v(Q2) v(s1) v(s0)  p(QQ)
+.print v(i0) v(i2) v(i1) v(i3) v(Q1) v(Q2) v(s1) v(s0)  v(QQ)
 
 
 *Test Confirmation:

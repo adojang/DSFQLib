@@ -1,2 +1,2 @@
-josim -o DSFQ_Loop.csv DSFQ_Loop.cir -V 1
-josim-plot.py DSFQ_Loop.csv
+josim -o basicloop.csv basicloop.cir -V 1
+python josim-plot.py basicloop.csv

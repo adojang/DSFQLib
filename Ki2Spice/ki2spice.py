@@ -8,13 +8,13 @@ from lib2to3.pgen2.token import EQUAL
 # Main function
 def main():
   # Version info
-  vers = "KiCad to JoSim's SPICE Syntax Translator, version 1.0"
+  vers = "KiCad to JoSim's SPICE Syntax Translator, version 1.1 AJ van Wijk"
 
   # Initiate the parser
   parser = argparse.ArgumentParser(description=vers)
 
   # Add possible parser arguments
-  parser.add_argument("input", help="Typical Use-  Ki2Spice.py FILE.cir")
+  parser.add_argument("input", help="Typical Use:  Ki2Spice.py FILE.cir")
   #parser.add_argument("-o", "--output", help="the output file name with supported extensions: png, jpeg, webp, svg, eps, pdf")
   #parser.add_argument("-V", "--version", action='version', help="show script version", version=vers)
 
@@ -51,6 +51,7 @@ def main():
   netlist = netlist.replace("GND", "0")
   netlist = netlist.replace("Inductor", "")
   netlist = netlist.replace("Resistor", "")
+  netlist = netlist.replace("/", "")
   netlistlow = str.lower(netlist)
   node = 0
 
@@ -62,9 +63,9 @@ def main():
         replace_text = str(node)
 
         node+=1
-        netlistlow = netlistlow.replace(search_text, replace_text)
+        netlistlow = netlistlow.replace(search_text, search_text)
         #print(f"Replaced {wordx} with {replace_text}")
-  netlistout = netlistlow.replace(".title kicad schematic", "* Back Annotated .cir file from KiCad")
+  netlistout = netlistlow.replace(".title kicad schematic", "* Translated .cir file from KiCad to Spice using Transkei")
 
   #Split each line 
   splot = netlistout.splitlines( )
