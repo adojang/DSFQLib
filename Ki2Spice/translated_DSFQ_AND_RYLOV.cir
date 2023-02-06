@@ -1,0 +1,40 @@
+.param 	b1  	= 
+.param 	b2  	= 
+.param 	b3  	= 
+.param 	bd1  	= 
+.param 	bd2  	= 
+.param 	i1  	= 
+.param 	l1  	= 
+.param 	l2  	= 
+.param 	l3  	= 
+.param 	ldp1  	= 
+.param 	ldp2  	= 
+.param 	lhp1  	= 
+.param 	lhp2  	= 
+.param 	lp1  	= 
+.param 	rd1  	= 
+.param 	rd2  	= 
+.param 	rh1  	= 
+.param 	rh2  	= 
+
+
+* Back Annotated .cir file from KiCad
+b1   	30   	10   	 jjmit area=b1
+b2   	30   	20   	 jjmit area=b2
+b3   	31   	30   	 jjmit area=b3
+bd1   	30   	12   	 jjmit area=bd1
+bd2   	30   	22   	 jjmit area=bd2
+i1   	0   	30   	pwl(0   	0   	5p   	i1)
+l1   	a   	10   	 l1
+l2   	b   	20   	 l2
+l3   	30   	q   	 l3
+ldp1   	11   	12   	 ldp1
+ldp2   	21   	22   	 ldp2
+lhp1   	13   	30   	 lhp1
+lhp2   	23   	30   	 lhp2
+lp1   	31   	0   	 lp1
+rd1   	11   	10   	 rd1
+rd2   	21   	20   	 rd2
+rh1   	13   	10   	 rh1
+rh2   	23   	20   	 rh2
+.end

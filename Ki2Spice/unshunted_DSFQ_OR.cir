@@ -1,0 +1,25 @@
+.title KiCad schematic
+L2 B /2 Inductor
+B2 /4 /2 jjmit
+B4 /5 /3 jjmit
+I1 GND /10 pwl(0 0 100u)
+B3 /3 /10 jjmit
+L1 A /1 Inductor
+B1 /3 /1 jjmit
+LP1 /5 GND Inductor
+B5 /4 /10 jjmit
+L3 /10 /30 Inductor
+LP2 /6 GND Inductor
+B6 /6 /4 jjmit
+L6 /30 Q Inductor
+B8 /30 /31 jjmit
+LP4 /31 GND Inductor
+B7 /24 /20 jjmit
+LP3 /24 GND Inductor
+L4 /30 /20 Inductor
+R1 /21 /20 Resistor
+L5 /21 /24 Inductor
+B9 /24 /23 jjmit
+L7 /22 /23 Inductor
+R2 /22 /20 Resistor
+.end

@@ -7,8 +7,9 @@ To run the file:
 
 then copy and paste the following:
 
-josim -o AW_OR_mitll_testbench.csv AW_mitll_OR_testbench.cir -V 1
-josim-plot.py AW_mitll_OR_testbench.csv -t stacked
+josim -o testbench.csv AW_OR_testbench.cir -V 1
+
+python josim-plot.py AW_mitll_OR_testbench.csv -t stacked
 
 ==========================================================================
 ==========================================================================

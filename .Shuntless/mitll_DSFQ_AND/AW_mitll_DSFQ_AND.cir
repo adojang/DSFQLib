@@ -1,0 +1,44 @@
+.subckt DSFQ_AND A B Q
+.param b1  	=	 1.39878486e+00
+.param bd1  =	 1.38855937e+00
+.param l1  	=	 1.64204687e-12
+.param rd1  =	 6.00718616e-01
+.param i1  	=	 1.54457273e-05
+.param b3  	=	 1.51517089e+00
+.param l3  	=	 4.24567618e-13
+.param rh1  =	 4.76237371e+00
+
+*Parasitics and Matching
+.param 	ldp1  	= 1e-12
+.param 	b2  	= b1
+.param 	bd2  	= bd1
+.param 	l2  	= l1
+.param 	ldp2  	= ldp1
+.param 	rd2  	= rd1
+.param 	lp1  	= 0.2e-12
+.param 	lhp1  	= 1e-12
+.param 	lhp2  	= lhp1
+.param 	rh2  	= rh1
+
+.model jjmit jj(rtype=1, vg=2.8mV, cap=0.07pF, r0=160, rn=16, icrit=0.1mA)
+
+* Back Annotated .cir file from KiCad
+b1   	30   	10   	 jjmit area=b1
+b2   	30   	20   	 jjmit area=b2
+b3   	31   	30   	 jjmit area=b3
+bd1   	30   	12   	 jjmit area=bd1
+bd2   	30   	22   	 jjmit area=bd2
+i1   	0   	30   	pwl(0   	0   	5p   	i1)
+l1   	a   	10   	 l1
+l2   	b   	20   	 l2
+l3   	30   	q   	 l3
+ldp1   	11   	12   	 ldp1
+ldp2   	21   	22   	 ldp2
+lhp1   	13   	30   	 lhp1
+lhp2   	23   	30   	 lhp2
+lp1   	31   	0   	 lp1
+rd1   	11   	10   	 rd1
+rd2   	21   	20   	 rd2
+rh1   	13   	10   	 rh1
+rh2   	23   	20   	 rh2
+.ends

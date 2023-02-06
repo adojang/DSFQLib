@@ -1,0 +1,62 @@
+.subckt DSFQ_ANDOR A B AND OR
+.model jjmit jj(rtype=1, vg=2.8mV, cap=0.07pF, r0=160, rn=16, icrit=0.1mA)
+.param 	b1  	= 0.84
+.param 	b2  	= 0.84
+.param 	b3  	= 0.60
+.param 	b4  	= 0.60
+.param 	b5  	= 1.68
+.param 	b6  	= 0.70
+.param 	b7  	= 1.00
+.param  b8      = 1.40
+.param 	i1  	= 160u
+.param 	i2  	= 100u
+.param 	l1  	= 7p
+.param 	l2  	= 7p
+.param 	l3  	= 4p
+.param 	l4  	= 2p
+.param 	l5  	= 2p
+.param 	l6  	= 2p
+.param 	lp1  	= 0.2p
+.param 	lp7  	= 0.2p
+.param 	lrb5  	= 2.3p
+.param 	lrb6  	= 2.3p
+.param 	lrb7  	= 2.3p
+.param 	r1  	= 4
+.param 	r2  	= 4
+.param 	r3  	= 0.68
+.param 	r4  	= 0.68
+.param 	rb5  	= 4.08
+.param 	rb6  	= 4.08
+.param 	rb7  	= 4.08
+
+
+* Back Annotated .cir file from KiCad
+b1   	30   	10   	 jjmit area=b1
+b2   	30   	20   	 jjmit area=b2
+b3   	30   	12   	 jjmit area=b3
+b4   	30   	22   	 jjmit area=b4
+b5   	31   	30   	 jjmit area=b5
+b6   	40   	50   	 jjmit area=b6
+b7   	41   	40   	 jjmit area=b7
+b8   	51   	0   	 jjmit area=b8
+i1   	0   	30   	pwl(0   	0   	5p   	i1)
+i2   	0   	51   	pwl(0   	0   	5p   	i2)
+l1   	a   	10   	 l1
+l2   	b   	20   	 l2
+l3   	30   	40   	 l3
+l4   	50   	51   	 l4
+l5   	40   	OR   	 l5
+l6   	51   	AND   	 l6
+lp1   	31   	0   	 lp1
+lp7   	41   	0   	 lp7
+lrb5   	32   	0   	 lrb5
+lrb6   	43   	40   	 lrb6
+lrb7   	42   	0   	 lrb7
+r1   	10   	30   	 r1
+r2   	20   	30   	 r2
+r3   	12   	10   	 r3
+r4   	22   	20   	 r4
+rb5   	30   	32   	 rb5
+rb6   	50   	43   	 rb6
+rb7   	40   	42   	 rb7
+.ends

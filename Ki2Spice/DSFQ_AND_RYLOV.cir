@@ -1,0 +1,20 @@
+.title KiCad schematic
+RD2 /21 /20 Resistor
+LDp2 /21 /22 Inductor
+B1 /30 /10 jjmit
+RD1 /11 /10 Resistor
+LDp1 /11 /12 Inductor
+RH2 /23 /20 Resistor
+LHp2 /23 /30 Inductor
+B2 /30 /20 jjmit
+BD2 /30 /22 jjmit
+RH1 /13 /10 Resistor
+LHp1 /13 /30 Inductor
+L1 A /10 Inductor
+L2 B /20 Inductor
+BD1 /30 /12 jjmit
+LP1 /31 GND Inductor
+L3 /30 Q Inductor
+I1 GND /30 pwl(0 0 5p REF)
+B3 /31 /30 jjmit
+.end

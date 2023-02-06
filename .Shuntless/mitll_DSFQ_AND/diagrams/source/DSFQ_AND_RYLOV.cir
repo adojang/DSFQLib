@@ -1,0 +1,22 @@
+.title KiCad schematic
+LRB1 /32 GND Inductor
+LP1 /31 GND Inductor
+RB1 /30 /32 Resistor
+L3 /30 Q Inductor
+B5 /31 /30 jjmit
+I1 GND /30 pwl(0 0 5p REF)
+LRS2 Net-_LRS2-Pad1_ /30 Inductor
+RS2 /20 Net-_LRS2-Pad1_ Resistor
+B1 /30 /10 jjmit
+RD1 Net-_LD1-Pad1_ /10 Resistor
+LD2 Net-_LD2-Pad1_ /21 Inductor
+RD2 Net-_LD2-Pad1_ /20 Resistor
+B2 /30 /11 jjmit
+LD1 Net-_LD1-Pad1_ /11 Inductor
+LX1 A /10 Inductor
+LX2 B /20 Inductor
+B3 /30 /20 jjmit
+B4 /30 /21 jjmit
+LRS1 Net-_LRS1-Pad1_ /30 Inductor
+RS1 /10 Net-_LRS1-Pad1_ Resistor
+.end
