@@ -1,0 +1,98 @@
+.param 	b1  	= 
+.param 	b10  	= 
+.param 	b11  	= 
+.param 	b12  	= 
+.param 	b13  	= 
+.param 	b14  	= 
+.param 	b15  	= 
+.param 	b16  	= 
+.param 	b2  	= 
+.param 	b3  	= 
+.param 	b4  	= 
+.param 	b5  	= 
+.param 	b6  	= 
+.param 	b7  	= 
+.param 	b8  	= 
+.param 	b9  	= 
+.param 	i1  	= 
+.param 	i2  	= 
+.param 	i3  	= 
+.param 	i4  	= 
+.param 	l1  	= 
+.param 	l10  	= 
+.param 	l11  	= 
+.param 	l12  	= 
+.param 	l13  	= 
+.param 	l14  	= 
+.param 	l15  	= 
+.param 	l16  	= 
+.param 	l2  	= 
+.param 	l3  	= 
+.param 	l4  	= 
+.param 	l5  	= 
+.param 	l6  	= 
+.param 	l7  	= 
+.param 	l8  	= 
+.param 	l9  	= 
+.param 	lp1  	= 
+.param 	lp2  	= 
+.param 	lp3  	= 
+.param 	lp4  	= 
+.param 	lp5  	= 
+.param 	lp6  	= 
+.param 	lp7  	= 
+.param 	lp8  	= 
+.param 	lp9  	= 
+.param 	r1  	= 
+.param 	r2  	= 
+
+
+* Back Annotated .cir file from KiCad
+b1   	3   	1   	 jjmit area=b1
+b10   	6   	5   	 jjmit area=b10
+b11   	7   	10   	 jjmit area=b11
+b12   	12   	11   	 jjmit area=b12
+b13   	12   	4   	 jjmit area=b13
+b14   	8   	12   	 jjmit area=b14
+b15   	14   	13   	 jjmit area=b15
+b16   	15   	17   	 jjmit area=b16
+b2   	4   	2   	 jjmit area=b2
+b3   	3   	10   	 jjmit area=b3
+b4   	5   	3   	 jjmit area=b4
+b5   	4   	10   	 jjmit area=b5
+b6   	6   	4   	 jjmit area=b6
+b7   	24   	20   	 jjmit area=b7
+b8   	30   	31   	 jjmit area=b8
+b9   	24   	23   	 jjmit area=b9
+i1   	0   	10   	pwl(0   	0   	100u) i1
+i2   	0   	9   	pwl(0   	0   	5p   	ref) i2
+i3   	0   	4   	pwl(0   	0   	5p   	ref) i3
+i4   	0   	16   	pwl(0   	0   	5p   	ref) i4
+l1   	a   	1   	 l1
+l10   	9   	10   	 l10
+l11   	10   	11   	 l11
+l12   	a   	4   	 l12
+l13   	12   	13   	 l13
+l14   	13   	16   	 l14
+l15   	16   	17   	 l15
+l16   	17   	q   	 l16
+l2   	b   	2   	 l2
+l3   	10   	30   	 l3
+l4   	30   	20   	 l4
+l5   	21   	24   	 l5
+l6   	30   	clk   	 l6
+l7   	22   	23   	 l7
+l8   	clk   	5   	 l8
+l9   	5   	9   	 l9
+lp1   	5   	0   	 lp1
+lp2   	6   	0   	 lp2
+lp3   	24   	0   	 lp3
+lp4   	31   	0   	 lp4
+lp5   	6   	0   	 lp5
+lp6   	7   	0   	 lp6
+lp7   	8   	0   	 lp7
+lp8   	14   	0   	 lp8
+lp9   	15   	0   	 lp9
+r1   	21   	20   	 r1
+r2   	22   	20   	 r2
+.end

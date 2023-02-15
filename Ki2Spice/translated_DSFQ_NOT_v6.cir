@@ -1,0 +1,74 @@
+.param 	b1  	= 
+.param 	b10  	= 
+.param 	b11  	= 
+.param 	b12  	= 
+.param 	b2  	= 
+.param 	b3  	= 
+.param 	b4  	= 
+.param 	b5  	= 
+.param 	b6  	= 
+.param 	b7  	= 
+.param 	b8  	= 
+.param 	b9  	= 
+.param 	i1  	= 
+.param 	i2  	= 
+.param 	i3  	= 
+.param 	i4  	= 
+.param 	l1  	= 
+.param 	l10  	= 
+.param 	l11  	= 
+.param 	l12  	= 
+.param 	l2  	= 
+.param 	l3  	= 
+.param 	l4  	= 
+.param 	l5  	= 
+.param 	l6  	= 
+.param 	l7  	= 
+.param 	l8  	= 
+.param 	l9  	= 
+.param 	lp1  	= 
+.param 	lp2  	= 
+.param 	lp3  	= 
+.param 	lp4  	= 
+.param 	lp5  	= 
+.param 	lp6  	= 
+.param 	lp7  	= 
+
+
+* Back Annotated .cir file from KiCad
+b1   	5   	55   	 jjmit area=b1
+b10   	102   	101   	 jjmit area=b10
+b11   	103   	102   	 jjmit area=b11
+b12   	106   	105   	 jjmit area=b12
+b2   	6   	5   	 jjmit area=b2
+b3   	7   	10   	 jjmit area=b3
+b4   	12   	11   	 jjmit area=b4
+b5   	4   	44   	 jjmit area=b5
+b6   	12   	4   	 jjmit area=b6
+b7   	8   	12   	 jjmit area=b7
+b8   	14   	13   	 jjmit area=b8
+b9   	15   	17   	 jjmit area=b9
+i1   	0   	9   	pwl(0   	0   	5p   	i1)
+i2   	0   	4   	pwl(0   	0   	5p   	i2)
+i3   	0   	16   	pwl(0   	0   	5p   	i3)
+i4   	unconnected-_i4-pad1_   	104   	pwl(0   	0   	5p   	i4)
+l1   	clk   	55   	 l1
+l10   	102   	104   	 l10
+l11   	104   	105   	 l11
+l12   	105   	44   	 l12
+l2   	5   	9   	 l2
+l3   	9   	10   	 l3
+l4   	10   	11   	 l4
+l5   	a   	101   	 l5
+l6   	12   	13   	 l6
+l7   	13   	16   	 l7
+l8   	16   	17   	 l8
+l9   	17   	q   	 l9
+lp1   	6   	0   	 lp1
+lp2   	7   	0   	 lp2
+lp3   	8   	0   	 lp3
+lp4   	14   	0   	 lp4
+lp5   	15   	0   	 lp5
+lp6   	103   	0   	 lp6
+lp7   	106   	0   	 lp7
+.end

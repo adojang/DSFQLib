@@ -1,6 +1,0 @@
-
-l1       =	 {nominal =          3.09037291e-12}
-l3       =	 {nominal =          1.03058886e-12}
-r1       =	 {nominal =          7.04349127e-01}
-r3       =	 {nominal =          1.34323634e+00}
-rbias    =	 {nominal =          1.57298596e+02}

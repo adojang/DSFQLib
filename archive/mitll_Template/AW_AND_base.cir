@@ -1,0 +1,94 @@
+* Author: Adriaan van Wijk
+* Version: 1.4
+* Last modification date: 14 April 2022
+* Last modification by: Adriaan van Wijk
+* Based on the design by Rylov [2019]
+
+* Copyright (c) 2022 Adriaan van Wijk, Stellenbosch University
+
+* Permission is hereby granted, free of charge, to any person obtaining a copy
+* of this cell library and associated documentation files (the "Library"), to deal
+* in the Library without restriction, including without limitation the rights
+* to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+* copies of the Library, and to permit persons to whom the Library is
+* furnished to do so, subject to the following conditions:
+
+* The above copyright notice and this permission notice shall be included in all
+* copies or substantial portions of the Library.
+
+* THE LIBRARY IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+* OUT OF OR IN CONNECTION WITH THE LIBRARY OR THE USE OR OTHER DEALINGS IN THE
+* LIBRARY.
+
+*For questions about the library, contact Adriaan van Wijk, 21786275@sun.ac.za
+
+*********************************
+* Additional Notes
+
+* The throughput for this logic cell is approximately 5ps with zero skew applied.
+* The skew tolerance can be adjusted using the following formula:
+* RHold = a * (18 * t_hold)^b
+* Where a = 3.572e-10
+* and   b = -1.023
+* This basic cell is designed for a skew of ~10ps
+
+
+*$Ports    A B q
+.subckt DSFQ_AND A B q
+
+
+
+.param 	b1  	= 0.84
+.param 	b2  	= 0.84
+.param 	b3 		= 0.6
+.param 	b4 		= 0.6
+.param 	b5  	= 1.68
+.param 	i1  	= 70u
+.param 	l1  	= 8p
+.param 	l2 		= l1
+.param 	l3  	= 2p
+.param 	lp1  	= 0.2p
+.param 	lrb1  	= 6.4597p
+.param 	lrb2  	= 4.6141p
+.param 	lrb3  	= 6.4597p
+.param 	lrb4  	= 4.6141p
+.param 	lrb5  	= 2.3071p
+.param 	r1  	= 3.079
+.param 	r2  	= 3.079
+.param 	r3  	= 3.079
+.param 	r4  	= 3.079
+.param 	rb1  	= 11.4332
+.param 	rb2  	= rb1
+.param 	rb3 	= 8.1666
+.param 	rb4 	= rb3
+.param 	rb5  	= 4.0833
+
+b1   	4   	5   	 jjmit area=b1
+b2   	6   	7   	 jjmit area=b2
+b3   	4   	8   	 jjmit area=b3
+b4   	6   	4   	 jjmit area=b4
+b5   	4   	9   	 jjmit area=b5
+i1   	0   	4   	pwl(0   	0   	5p   	i1)
+l1   	a   	5   	 l1
+l2   	b   	7   	 l2
+l3   	4   	q   	 l3
+lp1   	9   	0   	 lp1
+lrb1   	10   	4   	 lrb1
+lrb2   	11   	6   	 lrb2
+lrb3   	12   	4   	 lrb3
+lrb4   	13   	6   	 lrb4
+lrb5   	14   	0   	 lrb5
+r1   	5   	4   	 r1
+r2   	7   	6   	 r2
+r3   	8   	5   	 r3
+r4   	4   	7   	 r4
+rb1   	5   	10   	 rb1
+rb2   	7   	11   	 rb2
+rb3   	8   	12   	 rb3
+rb4   	4   	13   	 rb4
+rb5   	4   	14   	 rb5
+.ends

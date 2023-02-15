@@ -1,7 +1,0 @@
-mode="verify"
-
-[verify]
-method = "spec_file"
-file = "AND.sp"
-circuit = "AW_AND_testbench_optimized.cir"
-threshold = 0.1

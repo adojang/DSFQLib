@@ -1,0 +1,30 @@
+.title KiCad schematic
+L4 /5 /9 Inductor
+I1 GND /9 pwl(0 0 5p REF)
+L3 CLK /5 Inductor
+LP1 /6 GND Inductor
+B5 /6 /5 jjmit
+L5 /9 /10 Inductor
+L6 /10 /11 Inductor
+LP2 /7 GND Inductor
+B6 /7 /10 jjmit
+B2 /3 /2 jjmit
+L1 A /1 Inductor
+B1 /3 /1 jjmit
+R2 /1 /3 Resistor
+R1 /2 /1 Resistor
+B3 /12 /4 jjmit
+B4 /12 /11 jjmit
+L8 /13 /16 Inductor
+L7 /12 /13 Inductor
+LP3 /14 GND Inductor
+B7 /14 /13 jjmit
+B9 /8 /12 jjmit
+LP5 /8 GND Inductor
+L2 /3 /4 Inductor
+L9 /16 /17 Inductor
+L10 /17 Q Inductor
+B8 /15 /17 jjmit
+LP4 /15 GND Inductor
+I2 GND /16 pwl(0 0 5p REF)
+.end

@@ -1,50 +1,41 @@
 DSFQ OR Cell with Rylov's DSFQ Loop with Dual Time Constants Characterisation Information
 
 
-/* Garbage */
-
-Min time between sucessive is 6ps.
-
-Anything after that will trigger the cell twice.
-
-
-
-
-
 /* Characteristics */
 
-Designed Skew Tolerance: xxx
-True Skew Tolerance: xxx
+Designed Skew Tolerance: 15ps
+True Skew Tolerance: 9ps
 Cell Propagation Time - The time bewteen which the inputs are 4.44 RAD (0.707 * 2pi) and the output is 4.44 RAD
-Cell Propagation Time: xxx
-Mininum Time between sucessive 0 skew inputs: 24ps xxxxxxxxxx
-Reccomended Time Between Inputs: 25ps - this includes a little bit of tolerance for skew on the second set of inputs.
+Cell Propagation Time for Single Input: ~2.575ps
+Cell Propagation Time for Double Input: ~1.575ps
+Cell Propagation Time for two stacked OR gates: 6ps
+
+Average Propagation Time: ~3ps
+Mininum Time between sucessive 0 skew inputs: 8ps
+
+Reccomended Time Between Inputs: 15ps - this is what the gate was optimized for.
 
 /* Margins */
 
-Critical Margin: 25.8% xx
-Critical  Component (B1 -) xx
-Margin of 2ps: 25.8% (B1 -) xx 
-Margin of 1ps: 14.9% (B1 -)xx 
-Margin of 0ps: 5.50% (B1 -)xx
-
-A Margin of 2ps means that we design for a margin of 10ps, but the true skew tolerance limit is 12ps. xx
-
-
+Critical Margin: 20.0% for 15ps skew
+Critical  Component   (I1 -)
+Margin of 20ps: 7.8/% (I1 -)
+Margin of 15ps: 20.0% (I1 -)
+Margin of 10ps: 3.6% (I1 -)
+Margin of 9ps:  14.9% (I1 -)x
 
 
 /* Margin Test Parameters */
 
 Test Inputs:
 
-I_A0 0 xa pwl(0 0 20p 0 23p cval 25p 0 100p 0 103p cval 105p 0 200p 0 203p cval 205p 0) 
-I_B0 0 xb pwl(0 0 20p 0 23p cval 25p 0 110p 0 113p cval 115p 0 220p 0 223p cval 225p 0)
-
+I_A0 0 xa pwl(0 0 100p 0 103p cval 105p 0 200p 0 203p cval 205p 0 300p 0 303p cval 305p 0) 
+I_B0 0 xb pwl(0 0 100p 0 103p 0 105p 0 200p 0 203p cval 205p 0 315p 0 318p cval 320p 0)
 
 Test SP File:
 
-       time    QQ
-2e-11           0
-5.66e-11        1
-1.45475e-10     2
-2.65e-10        2
+       time    Q
+2e-11          0
+1.63425e-10    1
+2.61775e-10    2
+3.63425e-10    4

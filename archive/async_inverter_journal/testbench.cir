@@ -1,0 +1,137 @@
+* Author: A. van Wijk
+* Version: x.x
+* Last modification date: 10 October 2022
+* Last modification by: L. Schindler
+* Copyright (c) 2022 Adriaan van Wijk, Stellenbosch University
+* Permission is hereby granted, free of charge, to any person obtaining a copy
+* of this cell library and associated documentation files (the "Library"), to deal
+* in the Library without restriction, including without limitation the rights
+* to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+* copies of the Library, and to permit persons to whom the Library is
+* furnished to do so, subject to the following conditions:
+* The above copyright notice and this permission notice shall be included in all
+* copies or substantial portions of the Library.
+* THE LIBRARY IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+* OUT OF OR IN CONNECTION WITH THE LIBRARY OR THE USE OR OTHER DEALINGS IN THE
+* LIBRARY.
+*For questions about the library, contact Adriaan van Wijk, jacowijka@gmail.com
+* The cell is not designed to be connected directly to passive transmission lines
+
+.include cells\LSmitll_DCSFQ_v2p1_optimized.cir
+.include cells\LSmitll_SFQDC_v2p1_optimized.cir
+.include cells\LSmitll_JTL_v2p1_optimized.cir
+.include cells\LSmitll_NOT_v2p1_optimized.cir
+.include cells\AW_mitll_OR_optimized.cir
+.include cells\LSmitll_SPLIT_v2p1_optimized.cir
+.include cells\LSmitll_BUFF_v2p1_optimized.cir
+.include DSFQ_ANDOR.cir
+*.include translated_RYLOV.cir
+*.include translated_shunt.cir
+
+.tran 0.025p 300p 0
+.param cval= 600u
+*I_A0 0 xa pwl(0 0 100p 0 103p 0 105p 0 200p 0 203p 0 205p 0 300p 0 303p cval 305p 0 400p 0 403p cval 405p 0) 
+*I_B0 0 xb pwl(0 0 100p 0 103p 0 105p 0 200p 0 203p cval 205p 0 300p 0 303p 0 305p 0 400p 0 403p cval 405p 0)
+I_A0 0 xa pwl(0 0 100p 0 103p cval 105p 0 200p 0 203p 0 205p 0 300p 0 303p cval 305p 0 400p 0 403p 0 405p 0) 
+I_B0 0 xb pwl(0 0 100p 0 103p cval 105p 0 200p 0 203p cval 205p 0 305p 0 308p cval 310p 0 405p 0 409p 0 411p 0)
+
+*With Buffer: 100-101p valid and less
+*Wihtout Buffer 101-100p valid
+
+XDCSFQA LSmitll_DCSFQ xa xa1 
+XDCSFQB LSmitll_DCSFQ xb xb1
+*XDCSFQS LSmitll_DCSFQ xs xs1
+
+XJTLA LSMITLL_JTL xa1 A1
+XJTLB LSMITLL_JTL xb1 B1
+
+XSPLITA LSmitll_SPLIT A1 A A_CLK
+XSPLITB LSmitll_SPLIT B1 B B_CLK
+
+XDSFQOR DSFQ_OR A_CLK B_CLK CLK
+
+*XANDOR DSFQ_ANDOR A_CLK B_CLK blank CLKp
+
+
+*XBUFF LSMITLL_BUFF CLKp CLK
+*XJTLBB LSMITLL_JTL xb2 CLK
+*XJTLS LSMITLL_JTL xs1 S
+
+*XNOT LSMITLL_NOT AA BBclk TT 
+*XJTLT LSMITLL_JTL TT T1
+*RT T1 0 2
+
+*.print i(B5.xnot) i(B7.xnot) i(B8.xnot) i(L11.xnot)
+
+*XDSFQOR DSFQ_OR       A_CLK B_CLK JTLIN
+*XSPLITA LSmitll_SPLIT A A1 A_CLK
+*XSPLITB LSmitll_SPLIT B B1 B_CLK
+
+*XJTLC LSMITLL_JTL JTLIN CLK
+
+.model jjmit jj(rtype=1, vg=2.8mV, cap=0.07pF, r0=160, rn=16, icrit=0.1mA)
+	.param  b3 =    1.173e+00
+	.param  b4 =    1.156e+00
+	.param  b5 =    8.500e-01
+	.param  b6 =    8.500e-01
+	.param  b7 =    8.500e-01
+	.param  b8 =    8.500e-01
+	.param  b9 =    6.800e-01
+	.param  i1 =    1.190e-04
+	.param  i2 =    1.190e-04
+	.param  i3 =    9.500e-05
+	.param  l10 =   1.700e-12
+	.param  l2 =    1.700e-12
+	.param  l3 =    1.700e-12
+	.param  l4 =    1.700e-12
+	.param  l5 =    1.700e-12
+	.param  l6 =    3.400e-12
+	.param  l7 =    1.700e-12
+	.param  l8 =    1.700e-12
+	.param  l9 =    1.700e-12
+.param 	lp1  	= 0.2p
+.param 	lp2  	= 0.2p
+.param 	lp3  	= 0.2p
+.param 	lp4  	= 0.2p
+.param 	lp5  	= 0.2p
+
+
+* Back Annotated .cir file from KiCad
+b3   	12   	4   	 jjmit area=b3
+b4   	12   	11   	 jjmit area=b4
+b5   	6   	5   	 jjmit area=b5
+b6   	7   	10   	 jjmit area=b6
+b7   	14   	13   	 jjmit area=b7
+b8   	15   	17   	 jjmit area=b8
+b9   	8   	12   	 jjmit area=b9
+i1   	0   	9   	pwl(0   	0   	5p   	i1)
+i2   	0   	16   	pwl(0   	0   	5p   	i2)
+i3   	0   	4   	pwl(0   	0   	5p   	i3)
+l10   	17   	q   	 l10
+l2   	a   	4   	 l2
+l3   	clk   	5   	 l3
+l4   	5   	9   	 l4
+l5   	9   	10   	 l5
+l6   	10   	11   	 l6
+l7   	12   	13   	 l7
+l8   	13   	16   	 l8
+l9   	16   	17   	 l9
+lp1   	6   	0   	 lp1
+lp2   	7   	0   	 lp2
+lp3   	14   	0   	 lp3
+lp4   	15   	0   	 lp4
+lp5   	8   	0   	 lp5
+
+
+
+XJTLC LSMITLL_JTL Q Q1
+Rout Q1 0 2
+
+.print p(A) p(B) p(CLK) p(Rout)
+*.print i(L2) p(B3) i(L6) p(B4) i(L7) p(B9) p(Rout)
+
+*.print v(A) v(B) i(B6) i(B7) i(B8) p(B6) p(B7) p(B8) v(RC) v(RD) i(L3)

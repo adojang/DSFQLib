@@ -1,0 +1,17 @@
+* DSFQ NOT
+* Author: Adriaan van Wijk
+* Version: 1.0
+* Last modification date: 30 June 2022
+* Last modification by: Adriaan van Wijk
+* This testbench uses cells from LS's library of RSFQ cells.
+
+.include not_source\LSmitll_NOT_v2p1_optimized.cir
+.include not_source\DSFQ_NOT_LOOP.cir
+*.include cells\LSmitll_JTL_v2p1_optimized.cir
+.subckt DSFQ_NOT A CLK Q
+XLOOPA  DSFQ_LOOP           A       A1
+XBOOSTA  LSMITLL_JTL        A1      A2
+XLOOPCLK  DSFQ_LOOP         CLK     CLK1
+XBOOSTCLK  LSMITLL_JTL      CLK1    CLK2
+XNOT    LSMITLL_NOT         A2      CLK2     Q
+.ends

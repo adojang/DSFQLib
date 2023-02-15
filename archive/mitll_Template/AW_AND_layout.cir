@@ -1,0 +1,70 @@
+*File for Inductex. What a time to be alive.
+
+* Pure Inductance: 		inductex ANDv5_optimized.gds  -n andv1.cir -l mitll_sfq5ee.ldf -th
+
+* With Resistance:    	inductex ANDv5_optimized.gds  -n andv3.cir -l mitll_sfq5ee_res.ldf -th
+
+*Important note, In this file, R1 and R2 have traded places with R3 and R4 - it just makes more sense.
+*So in the .cir, R1 = 0.84 Ohm, but here R1 = 1.74 Ohm. See the .param file for more info.
+
+* Ports Input and Output
+P1	a		0
+P2 	q 		0
+P3	b		0
+P4 	bias	0
+
+* Input/Output Inductors [in H]
+L1	a	10	3.09p
+L2 	b	20	3.09p
+L3 	8 	q	2.03p
+
+*Experimental
+LCa 10 10a
+LCb 20 20a
+
+*JJs [ in A]
+J1 10a 101 51.6u
+J2 20a 201 51.6u
+J3 11 110 31.2u
+J4 21 220 31.2u
+J5 8  80  105u
+
+*Connection Inductors
+LC1 3 7
+LC2 5 7
+LC5 7 8
+
+*JJ Internal Inductance
+LJ1 101 3 0.05p
+LJ3 110 7 0.05p
+LJ2 201 5 0.05p
+LJ4 220 7 0.05p
+LJ5 80 	90 0.05p
+Lp1 90 	0  0.9p
+
+*JJ Internal and Shunt Resistances
+LRB1 10a 	102 0.9p
+LRB2 20a 	202 0.9p
+LRB3 11 	111 0.9p
+LRB4 21 	221 0.9p
+LRB5 8 	81  0.9p
+
+PRB1	102	3
+PRB2	202	5
+PRB3	111	7
+PRB4	221	7
+PRB5	81	90
+
+*Resistor Branches
+LR1 10 100 	1p res=7.043
+LR2 20 200 	1p res=7.043
+LR3 10a 11x 	1p res=1.3432
+LR4 20a 21x 	1p res=1.3432
+
+PLR1 100 3
+PLR2 200 5
+PLR3 11x 11
+PLR4 21x 21
+
+*Current Source
+LRBIAS	bias	8 	2p res=100

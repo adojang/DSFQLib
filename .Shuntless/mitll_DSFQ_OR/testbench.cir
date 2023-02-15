@@ -3,29 +3,29 @@
 .include cells\LSmitll_DCSFQ_v2p1_optimized.cir
 .include cells\LSmitll_SFQDC_v2p1_optimized.cir
 .include cells\LSmitll_JTL_v2p1_optimized.cir
+.include AW_mitll_DSFQ_OR.cir
 
-.tran 0.015p 350p 0
+.tran 0.025p 500p 0
 .param cval= 600u
 I_A0 0 xa pwl(0 0 100p 0 103p cval 105p 0 200p 0 203p cval 205p 0 300p 0 303p cval 305p 0) 
-I_B0 0 xb pwl(0 0 100p 0 103p 0 105p 0 200p 0 203p cval 205p 0 305p 0 308p cval 310p 0)
-* I_A1 0 xc pwl(0 0 100p 0 103p cval 105p 0 200p 0 203p 0 205p 0) 
-* I_B1 0 xd pwl(0 0 100p 0 103p cval 105p 0 213p cval 216p 0 218p 0)
+I_B0 0 xb pwl(0 0 100p 0 103p 0 105p 0 200p 0 203p cval 205p 0 315p 0 318p cval 320p 0)
+
 
 XDCSFQA LSmitll_DCSFQ xa xa1 
 XDCSFQB LSmitll_DCSFQ xb xb1
-* XDCSFQC LSmitll_DCSFQ xc xc1 
-* XDCSFQD LSmitll_DCSFQ xd xd1
+XDCSFQC LSmitll_DCSFQ xc xc1 
+XDCSFQD LSmitll_DCSFQ xd xd1
 
 
 XJTLA LSMITLL_JTL xa1 A
 XJTLB LSMITLL_JTL xb1 B
 
-* XJTLC LSMITLL_JTL xc1 C
-* XJTLD LSMITLL_JTL xd1 D
+XJTLC LSMITLL_JTL xc1 C
+XJTLD LSMITLL_JTL xd1 D
 
 * INSERT CELL HERE
-* XDUT0 DSFQ_AND A B q
-
+XDUT0 DSFQ_OR A B C
+XDUT1 DSFQ_OR C D q
 
 XLOAD LSMITLL_JTL q qq
 
@@ -34,64 +34,7 @@ Rsink qq 0 2
 * .print p(A) p(B) p(C) p(D) p(Q0) p(Q1) p(Q)
 .print p(q)
 
-
-.model jjmit jj(rtype=1, vg=2.8mV, cap=0.07pF, r0=160, rn=16, icrit=0.1mA)
-
-*Confluence Buffer A
-.param 	l1  	= 2.22915406e-12
-.param 	b1  	= 1.30033373e+00
-.param 	b3  	= 1.74400646e+00
-.param 	b4  	= 6.79982243e-01
-
-*Confluence Buffer B
-.param 	l2  	= L1
-.param 	b2  	= B1
-.param 	b5  	= B3
-.param 	b6  	= B4
-
-*Parasitics
-.param 	lp1  	= 0.2e-12
-.param 	lp2  	= 0.2e-12
-.param 	lp3  	= 0.2e-12
-.param 	lp4  	= 0.2e-12
-
-* AND GATE LOOP
-.param 	l4  	= 3.64204687e-12
-.param 	b7  	= 1.39878486e+00
-.param 	b8  	= 1.51517089e+00
-.param 	l7  	= 4.24567618e-13
-.param 	r1  	= 4.76237371e+00
-.param 	r2  	= 6.00718616e-01
-.param 	l5  	= 1.74432575e-10
-
-* Output Stage
-.param 	b9  	= 8.16000559e-01
-.param 	i1  	= 300.327687e-06
-.param 	l3  	= 2.49358577e-12
-.param 	l6  	= 1.29835538e-12
-
-* Back Annotated .cir file from KiCad
-b1   	3   	1   	 jjmit area=b1
-b2   	4   	2   	 jjmit area=b2
-b3   	3   	10   	 jjmit area=b3
-b4   	5   	3   	 jjmit area=b4
-b5   	4   	10   	 jjmit area=b5
-b6   	6   	4   	 jjmit area=b6
-b7   	24   	20   	 jjmit area=b7
-b8   	30   	31   	 jjmit area=b8
-b9   	24   	23   	 jjmit area=b9
-i1   	0   	10   	pwl(0   	0   	5p      i1)
-l1   	a   	1   	 l1
-l2   	b   	2   	 l2
-l3   	10   	30   	 l3
-l4   	30   	20   	 l4
-l5   	21   	24   	 l5
-l6   	30   	q   	 l6
-l7   	22   	23   	 l7
-lp1   	5   	0   	 lp1
-lp2   	6   	0   	 lp2
-lp3   	24   	0   	 lp3
-lp4   	31   	0   	 lp4
-r1   	21   	20   	 r1
-r2   	22   	20   	 r2
+*110ps
+*116.025ps
+*Avg about 3ps
 .end
