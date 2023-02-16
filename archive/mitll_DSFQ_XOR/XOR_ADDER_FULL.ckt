@@ -1,0 +1,119 @@
+* Adapted from DSFQ_XOR Gate by Schindler
+* Author: Adriaan van Wijk
+* Version: 1.2
+* Last modification date: 24 May 2022
+* Last modification by: Adriaan van Wijk
+* This testbench uses cells from LS's library of RSFQ cells. This was the version that was tested for layout.
+
+.include cells\LSmitll_DCSFQ_v2p1_optimized.cir
+.include cells\LSmitll_JTL_v2p1_optimized.cir
+.include cells\AW_mitll_4bitAdder.cir
+
+
+
+
+.param cval=600u
+
+* I_a0 0 i_a0 pwl(0 0 100p 0 103p cval 105p 0)
+* I_b0 0 i_b0 pwl(0 0 100p 0 103p cval 105p 0)
+* I_a1 0 i_a1 pwl(0 0 100p 0 103p cval 105p 0)
+* I_b1 0 i_b1 pwl(0 0 100p 0 103p cval 105p 0)
+* I_a2 0 i_a2 pwl(0 0 100p 0 103p cval 105p 0)
+* I_b2 0 i_b2 pwl(0 0 100p 0 103p cval 105p 0)
+* I_a3 0 i_a3 pwl(0 0 100p 0 103p cval 105p 0)
+* I_b3 0 i_b3 pwl(0 0 100p 0 103p cval 105p 0)
+
+*Offset of 13, so input should arrive at exactly 100ps. Output should be at around 150ps.
+
+
+I_A0 0 I_A0 pwl(0 0 87p 0 90p 0 92p 0 187p 0 190p 0 192p 0 287p 0 290p cval 292p 0 387p 0 390p 0 392p 0 487p 0 490p 0 492p 0 587p 0 590p 0 592p 0 687p 0 690p 0 692p 0 787p 0 790p 0 792p 0 887p 0 890p 0 892p 0 987p 0 990p cval 992p 0 1087p 0 1090p 0 1092p 0 1187p 0 1190p 0 1192p 0 1287p 0 1290p 0 1292p 0 )
+I_A1 0 I_A1 pwl(0 0 87p 0 90p 0 92p 0 187p 0 190p cval 192p 0 287p 0 290p 0 292p 0 387p 0 390p 0 392p 0 487p 0 490p 0 492p 0 587p 0 590p 0 592p 0 687p 0 690p 0 692p 0 787p 0 790p cval 792p 0 887p 0 890p 0 892p 0 987p 0 990p 0 992p 0 1087p 0 1090p 0 1092p 0 1187p 0 1190p 0 1192p 0 1287p 0 1290p 0 1292p 0 )
+I_A2 0 I_A2 pwl(0 0 87p 0 90p 0 92p 0 187p 0 190p 0 192p 0 287p 0 290p 0 292p 0 387p 0 390p 0 392p 0 487p 0 490p 0 492p 0 587p 0 590p cval 592p 0 687p 0 690p 0 692p 0 787p 0 790p 0 792p 0 887p 0 890p 0 892p 0 987p 0 990p 0 992p 0 1087p 0 1090p 0 1092p 0 1187p 0 1190p 0 1192p 0 1287p 0 1290p cval 1292p 0 )
+I_A3 0 I_A3 pwl(0 0 87p 0 90p 0 92p 0 187p 0 190p 0 192p 0 287p 0 290p 0 292p 0 387p 0 390p cval 392p 0 487p 0 490p 0 492p 0 587p 0 590p 0 592p 0 687p 0 690p 0 692p 0 787p 0 790p 0 792p 0 887p 0 890p 0 892p 0 987p 0 990p 0 992p 0 1087p 0 1090p 0 1092p 0 1187p 0 1190p cval 1192p 0 1287p 0 1290p 0 1292p 0 )
+I_B0 0 I_B0 pwl(0 0 87p 0 90p 0 92p 0 187p 0 190p 0 192p 0 287p 0 290p 0 292p 0 387p 0 390p 0 392p 0 487p 0 490p 0 492p 0 587p 0 590p 0 592p 0 687p 0 690p 0 692p 0 787p 0 790p 0 792p 0 887p 0 890p cval 892p 0 987p 0 990p cval 992p 0 1087p 0 1090p 0 1092p 0 1187p 0 1190p 0 1192p 0 1287p 0 1290p 0 1292p 0 )
+I_B1 0 I_B1 pwl(0 0 87p 0 90p cval 92p 0 187p 0 190p cval 192p 0 287p 0 290p 0 292p 0 387p 0 390p 0 392p 0 487p 0 490p 0 492p 0 587p 0 590p 0 592p 0 687p 0 690p 0 692p 0 787p 0 790p 0 792p 0 887p 0 890p 0 892p 0 987p 0 990p 0 992p 0 1087p 0 1090p 0 1092p 0 1187p 0 1190p 0 1192p 0 1287p 0 1290p 0 1292p 0 )
+I_B2 0 I_B2 pwl(0 0 87p 0 90p 0 92p 0 187p 0 190p 0 192p 0 287p 0 290p 0 292p 0 387p 0 390p 0 392p 0 487p 0 490p cval 492p 0 587p 0 590p 0 592p 0 687p 0 690p 0 692p 0 787p 0 790p 0 792p 0 887p 0 890p 0 892p 0 987p 0 990p 0 992p 0 1087p 0 1090p 0 1092p 0 1187p 0 1190p 0 1192p 0 1287p 0 1290p cval 1292p 0 )
+I_B3 0 I_B3 pwl(0 0 87p 0 90p 0 92p 0 187p 0 190p 0 192p 0 287p 0 290p 0 292p 0 387p 0 390p cval 392p 0 487p 0 490p 0 492p 0 587p 0 590p 0 592p 0 687p 0 690p 0 692p 0 787p 0 790p 0 792p 0 887p 0 890p 0 892p 0 987p 0 990p 0 992p 0 1087p 0 1090p cval 1092p 0 1187p 0 1190p 0 1192p 0 1287p 0 1290p 0 1292p 0 )
+I_Cin0 0 I_Cin0 pwl(0 0 87p 0 90p 0 92p 0 187p 0 190p 0 192p 0 287p 0 290p 0 292p 0 387p 0 390p 0 392p 0 487p 0 490p 0 492p 0 587p 0 590p 0 592p 0 687p 0 690p cval 692p 0 787p 0 790p 0 792p 0 887p 0 890p 0 892p 0 987p 0 990p 0 992p 0 1087p 0 1090p 0 1092p 0 1187p 0 1190p 0 1192p 0 1287p 0 1290p 0 1292p 0 )
+
+
+
+* I_A0 0 I_A0 pwl(0 0 100p 0 103p cval 105p 0 300p 0 303p cval 305p 0 500p 0 503p cval 505p 0 700p 0 703p cval 705p 0 900p 0 903p cval 905p 0 1100p 0 1103p cval 1105p 0 1300p 0 1303p cval 1305p 0 1500p 0 1503p cval 1505p 0
+* + 1700p 0 1703p cval 1705p 0 1900p 0 1903p cval 1905p 0 2100p 0 2103p cval 2105p 0 2300p 0 2303p cval 2305p 0 2500p 0 2503p cval 2505p 0 2700p 0 2703p cval 2705p 0 2900p 0 2903p cval 2905p 0 3100p 0 3103p cval 3105p 0 )
+
+* I_A1 0 I_A1 pwl(0 0 200p 0 203p cval 205p 0 300p 0 303p cval 305p 0 600p 0 603p cval 605p 0 700p 0 703p cval 705p 0 1000p 0 1003p cval 1005p 0 1100p 0 1103p cval 1105p 0 1400p 0 1403p cval 1405p 0 1500p 0 1503p cval 1505p 0
+* +1800p 0 1803p cval 1805p 0 1900p 0 1903p cval 1905p 0 2200p 0 2203p cval 2205p 0 2300p 0 2303p cval 2305p 0 2600p 0 2603p cval 2605p 0 2700p 0 2703p cval 2705p 0 3000p 0 3003p cval 3005p 0 3100p 0 3103p cval 3105p 0 ) 
+
+* I_A2 0 I_A2 pwl(0 0 400p 0 403p cval 405p 0 500p 0 503p cval 505p 0 600p 0 603p cval 605p 0 700p 0 703p cval 705p 0 1200p 0 1203p cval 1205p 0 1300p 0 1303p cval 1305p 0 1400p 0 1403p cval 1405p 0 1500p 0 1503p cval 1505p 0
+* + 2000p 0 2003p cval 2005p 0 2100p 0 2103p cval 2105p 0 2200p 0 2203p cval 2205p 0 2300p 0 2303p cval 2305p 0 2800p 0 2803p cval 2805p 0 2900p 0 2903p cval 2905p 0 3000p 0 3003p cval 3005p 0 3100p 0 3103p cval 3105p 0 )
+
+* I_A3 0 I_A3 pwl(0 0 800p 0 803p cval 805p 0 900p 0 903p cval 905p 0 1000p 0 1003p cval 1005p 0 1100p 0 1103p cval 1105p 0 1200p 0 1203p cval 1205p 0 1300p 0 1303p cval 1305p 0 1400p 0 1403p cval 1405p 0 1500p 0 1503p cval 1505p 0 
+* + 2400p 0 2403p cval 2405p 0 2500p 0 2503p cval 2505p 0 2600p 0 2603p cval 2605p 0 2700p 0 2703p cval 2705p 0 2800p 0 2803p cval 2805p 0 2900p 0 2903p cval 2905p 0 3000p 0 3003p cval 3005p 0 3100p 0 3103p cval 3105p 0 )
+
+
+* I_B0 0 I_B0 pwl(0 0 1700p 0 1703p cval 1705p 0 1900p 0 1903p cval 1905p 0 2100p 0 2103p cval 2105p 0 2300p 0 2303p cval 2305p 0 2500p 0 2503p cval 2505p 0 2700p 0 2703p cval 2705p 0 2900p 0 2903p cval 2905p 0 3100p 0 3103p cval 3105p 0 )
+* I_B1 0 I_B1 pwl(0 0 1800p 0 1803p cval 1805p 0 1900p 0 1903p cval 1905p 0 2200p 0 2203p cval 2205p 0 2300p 0 2303p cval 2305p 0 2600p 0 2603p cval 2605p 0 2700p 0 2703p cval 2705p 0 3000p 0 3003p cval 3005p 0 3100p 0 3103p cval 3105p 0 )
+* I_B2 0 I_B2 pwl(0 0 2000p 0 2003p cval 2005p 0 2100p 0 2103p cval 2105p 0 2200p 0 2203p cval 2205p 0 2300p 0 2303p cval 2305p 0 2800p 0 2803p cval 2805p 0 2900p 0 2903p cval 2905p 0 3000p 0 3003p cval 3005p 0 3100p 0 3103p cval 3105p 0 )
+* I_B3 0 I_B3 pwl(0 0 2400p 0 2403p cval 2405p 0 2500p 0 2503p cval 2505p 0 2600p 0 2603p cval 2605p 0 2700p 0 2703p cval 2705p 0 2800p 0 2803p cval 2805p 0 2900p 0 2903p cval 2905p 0 3000p 0 3003p cval 3005p 0 3100p 0 3103p cval 3105p 0 )
+
+
+.tran 0.25p 1500p 0 0.01p
+
+Xsrc_a0 LSmitll_DCSFQ i_a0 src_a0
+Xsrc_b0 LSmitll_DCSFQ i_b0 src_b0
+
+Xsrc_a1 LSmitll_DCSFQ i_a1 src_a1
+Xsrc_b1 LSmitll_DCSFQ i_b1 src_b1
+
+
+Xsrc_a2 LSmitll_DCSFQ i_a2 src_a2
+Xsrc_b2 LSmitll_DCSFQ i_b2 src_b2
+
+
+Xsrc_a3 LSmitll_DCSFQ i_a3 src_a3
+Xsrc_b3 LSmitll_DCSFQ i_b3 src_b3
+
+Xsrc_cin0 LSmitll_DCSFQ I_Cin0 src_icin0
+
+Xload_a0 LSMITLL_JTL src_a0 A0
+Xload_b0 LSMITLL_JTL src_b0 B0
+
+Xload_a1 LSMITLL_JTL src_a1 A1
+Xload_b1 LSMITLL_JTL src_b1 B1
+
+Xload_a2 LSMITLL_JTL src_a2 A2
+Xload_b2 LSMITLL_JTL src_b2 B2
+
+Xload_a3 LSMITLL_JTL src_a3 A3
+Xload_b3 LSMITLL_JTL src_b3 B3
+
+Xload_cin0 LSMITLL_JTL src_icin0 C0
+
+Xloadout_s0 LSMITLL_JTL s0 load_s0
+R_s0 load_s0 0 2
+Xloadout_s1 LSMITLL_JTL s1 load_s1
+R_s1 load_s1 0 2
+Xloadout_s2 LSMITLL_JTL s2 load_s2
+R_s2 load_s2 0 2
+Xloadout_s3 LSMITLL_JTL s3 load_s3
+R_s3 load_s3 0 2
+
+
+.model jjmit jj(rtype=1, vg=2.8mV, cap=0.07pF, r0=160, rn=16, icrit=100uA)
+
+
+I_c0 0 C0 pwl(0 0 100p 0 103p 0 105p 0)
+
+XFULL_ADDER0 FULL_ADDER A0 B0 C0 Cout0 S0
+XFULL_ADDER1 FULL_ADDER A1 B1 Cout0 Cout1 S1
+XFULL_ADDER2 FULL_ADDER A2 B2 Cout1 Cout2 S2
+XFULL_ADDER3 FULL_ADDER A3 B3 Cout2 Cout3 S3
+
+*.print v(A0) v(B0) v(A1) v(B1) v(A2) v(B2) v(A3) v(B3) v(S0) v(S1) v(S2) v(S3) v(Cout3)
+*.print v(A0) v(B0) v(A1) v(B1) v(A2) v(B2) v(A3) v(B3)
+*.print p(S0) p(S1) p(S2) p(S3) p(Cout3)
+
+.print v(A1) v(B1) v(S1) p(S1) v(Cout1)
+
+
+.end

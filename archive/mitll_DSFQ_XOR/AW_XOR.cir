@@ -1,0 +1,491 @@
+* JSIM deck file generated with TimEx
+* === DEVICE-UNDER-TEST ===
+
+* === SOURCE DEFINITION ===
+.SUBCKT SOURCECELL  8 11
+b1   1  2  jjmitll100 area=2.25
+b2   3  4  jjmitll100 area=2.25
+b3   5  6  jjmitll100 area=2.5
+ib1  0  2  pwl(0 0 5p 275ua)
+ib2  0  5  pwl(0 0 5p 175ua)
+l1   8  7  1p
+l2   7  0  3.9p
+l3   7  1  0.6p
+l4   2  3  1.1p
+l5   3  5  4.5p
+l6   5  11 2p
+lp2  4  0  0.2p
+lp3  6  0  0.2p
+lrb1 9  2  1p
+lrb2 10 4  1p
+lrb3 12 6  1p
+rb1  1  9  4.31
+rb2  3  10 4.31
+rb3  5  12 3.88
+.model jjmitll100 jj(rtype=1, vg=2.8mv, cap=0.07pf, r0=160, rn=16, icrit=0.1ma)
+.ENDS SOURCECELL
+* === INPUT LOAD DEFINITION ===
+.SUBCKT LOADINCELL  2 5
+b1 1 6 jjmitll100 area=2.5
+b2 4 8 jjmitll100 area=2.5
+ib1 0 3 pwl(0 0 5p 350ua)
+l1 2 1 2p
+l2 1 3 2p
+l3 3 4 2p
+l4 4 5 2p
+lb1 7 6 1p
+lb2 9 8 1p
+lp1 6 0 0.2p
+lp2 8 0 0.2p
+rb1 1 7 3.88
+rb2 4 9 3.88
+.model jjmitll100 jj(rtype=1, vg=2.8mv, cap=0.07pf, r0=160, rn=16, icrit=0.1ma)
+.ENDS LOADINCELL
+* === OUTPUT LOAD DEFINITION ===
+.SUBCKT LOADOUTCELL  2 5
+b1 1 6 jjmitll100 area=2.5
+b2 4 8 jjmitll100 area=2.5
+ib1 0 3 pwl(0 0 5p 350ua)
+l1 2 1 2p
+l2 1 3 2p
+l3 3 4 2p
+l4 4 5 2p
+lb1 7 6 1p
+lb2 9 8 1p
+lp1 6 0 0.2p
+lp2 8 0 0.2p
+rb1 1 7 3.88
+rb2 4 9 3.88
+.model jjmitll100 jj(rtype=1, vg=2.8mv, cap=0.07pf, r0=160, rn=16, icrit=0.1ma)
+.ENDS LOADOUTCELL
+* === SINK DEFINITION ===
+.SUBCKT SINKCELL  1
+r1 1 0 2
+.ENDS SINKCELL
+* ===== MAIN ===============================================================================
+.param cval=600u
+
+.tran 0.25p 400p 0 0.01p
+.model jjmit jj(rtype=1, vg=2.8mV, cap=0.07pF, r0=160, rn=16, icrit=100uA)
+
+I_A 0 1000 pwl(0 0 100p 0 103p cval 105p 0
++300p 0 303p cval 305p 0)
+*+500p 0 503p cval 505p 0
+*+540p 0 543p cval 545p 0
+
+
+I_B 0 1001 pwl(0 0 200p 0 203p cval 205p 0
++300p 0 303p cval 305p 0)
+*+700p 0 703p cval 705p 0
+*+710p 0 713p cval 715p 0
+
+Rlol xcx 0 2
+I_C 0 xcx pwl(0 0 
++100p 0 103p cval 105p 0 
++110p 0 113p cval 115p 0
++300p 0 303p cval 305p 0
++320p 0 323p cval 325p 0
++500p 0 503p cval 505p 0
++530p 0 533p cval 535p 0
++700p 0 703p cval 705p 0
+*+740p 0 743p cval 745p 0
++900p 0 903p cval 905p 0
++950p 0 953p cval 955p 0)
+
+
+
+
+XSOURCEINa SOURCECELL 1000 2000
+XLOADINa LOADINCELL 2000 A
+
+XSOURCEINb SOURCECELL 1001 2001
+XLOADINb LOADINCELL 2001 B
+
+
+
+XLOADOUTq LOADOUTCELL q xd1
+Rmes xd1 output 0
+XSINKOUTq SINKCELL output
+
+XLoopA DSFQ_Loop A1 ia0
+XLoopB DSFQ_Loop B1 ib0
+
+
+XSPLITA LSmitll_SPLIT A A1 A2
+XSPLITB LSmitll_SPLIT B B1 B2
+
+XLXOR LSmitll_XOR A2 B2 aclk q
+XCLK DSFQ_MERGECLK ia0 ib0 aclk
+
+
+
+********************************* DSFQ_MERGECLK ********************
+
+.subckt DSFQ_MERGECLK A B enable
+.model jjmit jj(rtype=1, vg=2.8mV, cap=0.07pF, r0=160, rn=16, icrit=100uA)
+
+*Protect the Inputs, and MERGE A and B onto one line.
+
+* Merge inputs A and B, and transform into a signal which will be used as the CLK input for the XOR Gate
+* Rstable adds a bit of stability and delay in the circuit - acts as a LR circuit with the Lii
+* Circuit is very sensitive to Lii - in the range of 4-10p roughly
+* Reducing the inductances for the inputs is GOOD.
+* The gate has a time of roughly 30ps from input to output.
+
+Lia A ia1 0p
+Bia1 ia1 0 jjmit area=1.4
+Ria1 ia1 g1 4.899
+Lia1 g1 0   2.768p
+
+Bia2 ia1 ii3 jjmit area=1
+Ria2 ia1 g2 6.8599
+Lia2 g2 ii3 3.875p
+
+Lib B ib1 0p
+Bib1 ib1 0 jjmit area=1.4
+Rib1 ib1 g3 4.899
+Lib1 g3 0   2.768p
+
+Bib2 ib1 ii3 jjmit area=1
+Rib2 ib1 g4 6.8599
+Lib2 g4 ii3 3.875p
+
+Ib2 0 ii3 pwl(0 0 5p 140u)
+
+Lii ii3 q1 8p
+Rstable q1 0 8
+
+
+Bclk q1 0 jjmit area=1
+Rclk q1 g5 6.8599
+Lclk g5 0 3.875p
+*Iclk 0 q1 pwl(0 0 5p 70u)
+Lco q1 enable 2p
+
+.ends
+
+
+
+
+********************************* DSFQ_LOOP ***************************************************************************
+* $Ports    A q
+.subckt DSFQ_Loop A q
+.model jjmit jj(rtype=1, vg=2.8mV, cap=0.07pF, r0=160, rn=16, icrit=100uA)
+
+.param LD = 6p
+.param RD = 0.4
+.param RS =  4
+
+
+LD A vleak LD
+RD vleak d1 RD
+RS vleak q RS
+
+*The Naming Convention is as follows:
+* RS - The DYNAMIC resistor in series with BD
+* RD - The shunt resistor across the two terminals 
+* BD - Dynamic. This JJ drives the dynamic switching action
+* BP - Pulse. This JJ produces the output SFQ pulse
+
+BD d1 q jjmit area=0.7
+RD1 d1 gg 9.7999
+LD1 gg q 5.5369p
+
+
+BS vleak q jjmit area=1
+RS1 vleak g9 6.8599
+LS1 g9 q 3.8758p
+
+
+.ends
+
+********************************** LIEZE XOR GATE WHICH I WILL CANABALIZE ***************************
+* Author: L. Schindler
+* Version: 2.1
+* Last modification date: 4 June 2021
+* Last modification by: L. Schindler
+
+* Copyright (c) 2018-2021 Lieze Schindler, Stellenbosch University
+
+* Permission is hereby granted, free of charge, to any person obtaining a copy
+* of this cell library and associated documentation files (the "Library"), to deal
+* in the Library without restriction, including without limitation the rights
+* to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+* copies of the Library, and to permit persons to whom the Library is
+* furnished to do so, subject to the following conditions:
+
+* The above copyright notice and this permission notice shall be included in all
+* copies or substantial portions of the Library.
+
+* THE LIBRARY IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+* OUT OF OR IN CONNECTION WITH THE LIBRARY OR THE USE OR OTHER DEALINGS IN THE
+* LIBRARY.
+
+*For questions about the library, contact Lieze Schindler, lschindler@sun.ac.za
+
+* The cell is not designed to be connected directly to passive transmission lines
+
+*$Ports a b clk q
+.subckt LSmitll_XOR a	b	clk 	q
+*.subckt LSmitll_XOR	a	b	clk 	q
+
+.model jjmit jj(rtype=1, vg=2.8mV, cap=0.07pF, r0=160, rn=16, icrit=0.1mA)
+.param Phi0=2.067833848E-15
+.param B0=1
+.param Ic0=0.0001
+.param IcRs=100u*6.859904418
+.param B0Rs=IcRs/Ic0*B0
+.param Rsheet=2 
+.param Lsheet=1.13e-12 
+.param LP=0.5p
+.param IC=2.5
+.param LB=2p
+.param BiasCoef=0.70
+.param B1=IC
+.param B2=IC
+.param B3=IC
+.param B4=B1
+.param B5=B2
+.param B6=B3
+.param B7=IC/1.25
+.param B8=IC
+.param B9=IC/1.25
+.param B10=IC
+.param B11=IC
+.param IB1=BiasCoef*Ic0*B1
+.param IB2=BiasCoef*Ic0*B2
+.param IB3=IB1
+.param IB4=IB2
+.param IB5=BiasCoef*Ic0*B8
+.param IB6=BiasCoef*Ic0*B11
+.param L1=Phi0/(4*IC*Ic0)
+.param L2=Phi0/(2*B1*Ic0)
+.param L3=1.2p
+.param L4=Phi0/(B2*Ic0)
+.param L5=L1
+.param L6=L2
+.param L7=L3
+.param L8=L4
+.param L9=1.2p
+.param L10=Phi0/(4*IC*Ic0)
+.param L11=Phi0/(2*B8*Ic0)
+.param L12=Phi0/(2*B10*Ic0)
+.param L13=Phi0/(4*IC*Ic0)
+.param RB1=B0Rs/B1       
+.param RB2=B0Rs/B2       
+.param RB3=B0Rs/B3          
+.param RB4=B0Rs/B4         
+.param RB5=B0Rs/B5         
+.param RB6=B0Rs/B6          
+.param RB7=B0Rs/B7
+.param RB8=B0Rs/B8         
+.param RB9=B0Rs/B9         
+.param RB10=B0Rs/B10
+.param RB11=B0Rs/B11
+.param LRB1=(RB1/Rsheet)*Lsheet+LP
+.param LRB2=(RB2/Rsheet)*Lsheet+LP
+.param LRB3=(RB3/Rsheet)*Lsheet+LP
+.param LRB4=(RB4/Rsheet)*Lsheet+LP
+.param LRB5=(RB5/Rsheet)*Lsheet+LP
+.param LRB6=(RB6/Rsheet)*Lsheet+LP
+.param LRB7=(RB7/Rsheet)*Lsheet+LP
+.param LRB8=(RB8/Rsheet)*Lsheet+LP
+.param LRB9=(RB9/Rsheet)*Lsheet+LP
+.param LRB10=(RB10/Rsheet)*Lsheet+LP
+.param LRB11=(RB11/Rsheet)*Lsheet+LP
+B1 1 2 jjmit area=B1
+B2 4 5 jjmit area=B2
+B3 25 6 jjmit area=B3
+B4 9 10 jjmit area=B4
+B5 12 13 jjmit area=B5
+B6 26 14 jjmit area=B6
+B7 27 16 jjmit area=B7
+B8 17 18 jjmit area=B8
+B9 20 16 jjmit area=B9
+B10 16 21 jjmit area=B10
+B11 22 23 jjmit area=B11
+IB1 0 3 pwl(0 0 5p IB1)
+IB2 0 7 pwl(0 0 5p IB2)
+IB3 0 11 pwl(0 0 5p IB3)
+IB4 0 15 pwl(0 0 5p IB4)
+IB5 0 19 pwl(0 0 5p IB5)
+IB6 0 24 pwl(0 0 5p IB6)
+LB1 3 1 LB
+LB2 7 6 LB
+LB3 11 9 LB
+LB4 15 14 LB
+LB5 19 17 LB
+LB6 24 22 LB
+L1 a 1 L1
+*L1 a 25 L1
+L2 1 4 L2
+********
+
+L3 4 25 L3
+
+********
+L4 6 8 L4
+L5 b 9 L5
+L6 9 12 L6
+**********
+
+L7 12 26 L7
+
+**********
+L8 14 8 L8
+L9 8 27 L9
+L10 clk 17 L10
+L11 17 20 L11
+L12 16 22 L12
+L13 22 q L13
+LP1 2 0 LP
+LP2 5 0 LP
+LP4 10 0 LP
+LP5 13 0 LP
+LP8 18 0 LP
+LP10 21 0 LP
+LP11 23 0 LP
+RB1 1 101 RB1
+LRB1 101 0 LRB1
+RB2 4 104 RB2
+LRB2 104 0 LRB2
+RB3 4 106 RB3
+LRB3 106 6 LRB3
+RB4 9 109 RB4
+LRB4 109 0 LRB4
+RB5 12 112 RB5
+LRB5 112 0 LRB5
+RB6 12 114 RB6
+LRB6 114 14 LRB6
+RB7 8 108 RB7
+LRB7 108 16 LRB7
+RB8 17 117 RB8
+LRB8 117 0 LRB8
+RB9 20 120 RB9
+LRB9 120 16 LRB9
+RB10 16 116 RB10
+LRB10 116 0 LRB10
+RB11 22 122 RB11
+LRB11 122 0 LRB11
+.ends
+
+
+************* SPLIT ***********
+
+* Author: L. Schindler
+* Version: 2.1
+* Last modification date: 9 March 2021
+* Last modification by: L. Schindler
+
+* Copyright (c) 2018-2021 Lieze Schindler, Stellenbosch University
+
+* Permission is hereby granted, free of charge, to any person obtaining a copy
+* of this cell library and associated documentation files (the "Library"), to deal
+* in the Library without restriction, including without limitation the rights
+* to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+* copies of the Library, and to permit persons to whom the Library is
+* furnished to do so, subject to the following conditions:
+
+* The above copyright notice and this permission notice shall be included in all
+* copies or substantial portions of the Library.
+
+* THE LIBRARY IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+* OUT OF OR IN CONNECTION WITH THE LIBRARY OR THE USE OR OTHER DEALINGS IN THE
+* LIBRARY.
+
+* For questions about the library, contact Lieze Schindler, lschindler@sun.ac.za
+
+* The cell is not designed to be connected directly to passive transmission lines
+
+*$Ports a q0 q1
+.subckt LSmitll_SPLIT a q0 q1
+.model jjmit jj(rtype=1, vg=2.8mV, cap=0.07pF, r0=160, rn=16, icrit=0.1mA)
+.param Phi0=2.067833848E-15
+.param B0=1
+.param Ic0=0.0001
+.param IcRs=100u*6.859904418
+.param B0Rs=IcRs/Ic0*B0
+.param Rsheet=2 
+.param Lsheet=1.13e-12 
+.param LP=0.2p
+.param IC=2.5
+.param Lptl=2p
+.param LB=2p
+.param BiasCoef=0.7
+.param RD=1.36
+
+.param B1=IC
+.param B2=1.4*IC
+.param B3=IC
+.param B4=IC
+
+.param IB1=BiasCoef*Ic0*B1
+.param IB2=BiasCoef*Ic0*B2
+.param IB3=BiasCoef*Ic0*B3
+.param IB4=IB3
+
+.param L1=Lptl
+.param L2=Phi0/(2*B1*Ic0)
+.param L3=(Phi0/(2*B2*Ic0))/2
+.param L4=L3
+.param L5=Lptl
+.param L6=L3
+.param L7=Lptl
+
+.param RB1=B0Rs/B1
+.param RB2=B0Rs/B2
+.param RB3=B0Rs/B3
+.param RB4=B0Rs/B4
+.param LRB1=(RB1/Rsheet)*Lsheet
+.param LRB2=(RB2/Rsheet)*Lsheet
+.param LRB3=(RB3/Rsheet)*Lsheet
+.param LRB4=(RB4/Rsheet)*Lsheet
+
+IB1 0 3 pwl(0 0 5p IB1)
+IB2 0 6 pwl(0 0 5p IB2)
+IB3 0 10 pwl(0 0 5p IB3)
+IB4 0 13 pwl(0 0 5p IB4)
+LB1 3 1 LB
+LB2 6 4 LB
+LB3 10 8 LB
+LB4 13 11 LB
+
+B1 1 2 jjmit area=B1
+B2 4 5 jjmit area=B2
+B3 8 9 jjmit area=B3
+B4 11 12 jjmit area=B4
+L1 a 1 L1
+L2 1 4 L2
+L3 4 7 L3
+L4 7 8 L4
+L5 8 q0 L5
+L6 7 11 L6
+L7 11 q1 L7
+
+LP1 2 0 0.2p
+LP2 5 0 0.2p
+LP3 9 0 0.2p
+LP4 12 0 0.2p
+RB1 1 101 RB1
+LRB1 101 0 LRB1
+RB2 4 104 RB2
+LRB2 104 0 LRB2
+RB3 8 108 RB3
+LRB3 108 0 LRB3
+RB4 11 111 RB4
+LRB4 111 0 LRB4
+.ends
+
+
+
+
+
+.end

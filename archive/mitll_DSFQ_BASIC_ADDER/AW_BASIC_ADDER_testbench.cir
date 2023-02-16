@@ -1,0 +1,1063 @@
+* This Basic Adder does not use XOR gates, but instead tries to reconstruct them using a mixture of DSFQ and RSFQ architecture.
+* JSIM deck file generated with TimEx
+* === DEVICE-UNDER-TEST ===
+
+* === SOURCE DEFINITION ===
+.SUBCKT SOURCECELL  8 11
+b1   1  2  jjmitll100 area=2.25
+b2   3  4  jjmitll100 area=2.25
+b3   5  6  jjmitll100 area=2.5
+ib1  0  2  pwl(0 0 5p 275ua)
+ib2  0  5  pwl(0 0 5p 175ua)
+l1   8  7  1p
+l2   7  0  3.9p
+l3   7  1  0.6p
+l4   2  3  1.1p
+l5   3  5  4.5p
+l6   5  11 2p
+lp2  4  0  0.2p
+lp3  6  0  0.2p
+lrb1 9  2  1p
+lrb2 10 4  1p
+lrb3 12 6  1p
+rb1  1  9  4.31
+rb2  3  10 4.31
+rb3  5  12 3.88
+.model jjmitll100 jj(rtype=1, vg=2.8mv, cap=0.07pf, r0=160, rn=16, icrit=0.1ma)
+.ENDS SOURCECELL
+* === INPUT LOAD DEFINITION ===
+.SUBCKT LOADINCELL  2 5
+b1 1 6 jjmitll100 area=2.5
+b2 4 8 jjmitll100 area=2.5
+ib1 0 3 pwl(0 0 5p 350ua)
+l1 2 1 2p
+l2 1 3 2p
+l3 3 4 2p
+l4 4 5 2p
+lb1 7 6 1p
+lb2 9 8 1p
+lp1 6 0 0.2p
+lp2 8 0 0.2p
+rb1 1 7 3.88
+rb2 4 9 3.88
+.model jjmitll100 jj(rtype=1, vg=2.8mv, cap=0.07pf, r0=160, rn=16, icrit=0.1ma)
+.ENDS LOADINCELL
+* === OUTPUT LOAD DEFINITION ===
+.SUBCKT LOADOUTCELL  2 5
+b1 1 6 jjmitll100 area=2.5
+b2 4 8 jjmitll100 area=2.5
+ib1 0 3 pwl(0 0 5p 350ua)
+l1 2 1 2p
+l2 1 3 2p
+l3 3 4 2p
+l4 4 5 2p
+lb1 7 6 1p
+lb2 9 8 1p
+lp1 6 0 0.2p
+lp2 8 0 0.2p
+rb1 1 7 3.88
+rb2 4 9 3.88
+.model jjmitll100 jj(rtype=1, vg=2.8mv, cap=0.07pf, r0=160, rn=16, icrit=0.1ma)
+.ENDS LOADOUTCELL
+* === SINK DEFINITION ===
+.SUBCKT SINKCELL  1
+r1 1 0 2
+.ENDS SINKCELL
+* ===== MAIN =====
+.param cval=700u
+
+I_a 0 1000 pwl(0 0 
++200p 0 203p cval 205p 0 
++800p 0 803p cval 805p 0)
+
+I_b 0 4000 pwl(0 0
++400p 0 403p cval 405p 0 
++800p 0 803p cval 805p 0)
+
+I_Cin 0 C pwl(0 0)
+
+I_ext_clk 0 ext_clk pulse(0 600u 100p 2p 2p 1p 100p)
+I_int_clk 0 int_clk pulse(0 600u 100p 2p 2p 1p 25p)
+
+XSFQ_EXT LSmitll_DCSFQ ext_clk ext_clkq
+XSFQ_INT LSmitll_DCSFQ int_clk int_clkq
+XSFQ_C LSmitll_DCSFQ    C 6
+
+
+XSOURCEINa SOURCECELL 1000 2000
+XLOADINa LOADINCELL 2000 A
+
+XSOURCEINb SOURCECELL 4000 5000
+XLOADINb LOADINCELL 5000 B
+
+XLOADOUTq LOADOUTCELL q 8000
+XSINKOUTq SINKCELL 8000
+
+*ADDER CONSTRUCTION BEGINS HERE
+
+* NEED TO DISTRIBUTE CLK SINGAL TO EVERYONE YAY :D
+
+XSPLIT_int_clk0 LSmitll_SPLIT int_clkq iCLKA iCLKB
+XSPLIT_int_clk1 LSmitll_SPLIT iCLKA iCLK1 iCLK2
+XSPLIT_int_clk2 LSmitll_SPLIT iCLKB iCLK3 iCLK4
+
+XSPLIT_ext_clk0 LSmitll_SPLIT int_clkq eCLK1 eCLK2
+
+XSPLITa1 LSmitll_SPLIT A A1 A2
+XSPLITa2 LSmitll_SPLIT A1 A3 A4
+
+XSPLITb1 LSmitll_SPLIT B B1 B2
+XSPLITb2 LSmitll_SPLIT B1 B3 B4
+
+*NED TO INCLUDE FOR COUT TOO IF THIS WORKS
+
+XBUFFA2 LSMITLL_BUFF A2 A22
+XBUFFB2 LSMITLL_BUFF B2 B22
+
+XBUFFC3A LSMITLL_BUFF 63 63A
+XBUFFC3B LSMITLL_BUFF 63A 633
+
+XBUFFC2 LSMITLL_BUFF 62 622
+
+XNOT1 LSMITLL_NOT B2 iCLK1 1
+XNOT2 LSMITLL_NOT A2 iCLK2 2
+
+XAND1 DSFQ_AND A3 1 3
+XAND2 DSFQ_AND 2 B3 4
+
+XOR1 DSFQ_OR 3 4 5
+
+XBUFF5 LSMITLL_BUFF 52 522
+
+XSPLIT51 LSmitll_SPLIT  5   51  52
+XSPLIT52 LSmitll_SPLIT  51  53  54
+
+XSPLIT61 LSmitll_SPLIT  6 61 62
+XSPLIT62 LSmitll_SPLIT 61 63 64
+
+XNOT3 LSMITLL_NOT 622 iCLK3 7
+XNOT4 LSMITLL_NOT 53 iCLK4 8
+
+
+XAND3 DSFQ_AND 522 7 9
+XAND4 DSFQ_AND 8 633 10
+XOR2 DSFQ_OR   9 10 q0
+XDFF1 LSmitll_DFF q0 eCLK1 q
+
+XAND5 DSFQ_AND 64 54 12
+XAND6 DSFQ_AND A4 B4 13
+XOR3 DSFQ_OR 12 13 Cout0
+
+XDFF2 LSmitll_DFF Cout0 eCLK2 Cout
+
+*MUST REVISIT AND GATE - THATS WHERE THE PROBLEM LIES.
+
+*.print i(I_int_clk) v(int_clk) p(A) p(B) p(A2) v(A2) p(1) v(1) p(3) v(3) i(B3.XAND1)
+
+
+*.print p(A) p(B) p(A2) v(A2) p(1) v(1) p(3) v(3) i(B3.XAND1)
+
+*.print v(A) v(B) v(3) v(5) v(9) v(10) v(q0) v(q)
+.print i(I_int_clk) i(I_ext_clk) v(L4.XLOADINa) v(L4.XLOADINb) v(r1.XSINKOUTq) v(Cout)
+
+
+
+*.print i(I_int_clk) i(iCLK1) v(iCLK2) v(iCLK3) v(iCLK4)
+
+*.print i(I_int_clk) i(L4.XNOT1) i(L4.XNOT2)
+
+*.print i(I_int_clk) i(L1.XNOT1) i(L4.XNOT1) v(L12.XNOT1) i(L1.XNOT2) i(L4.XNOT2) v(L12.XNOT2)
+
+
+
+.tran 0.25p 1000p 0 0.01p
+.model jjmit jj(rtype=1, vg=2.8mV, cap=0.07pF, r0=160, rn=16, icrit=100uA)
+
+
+
+
+
+******************** DSFQ AND*******************
+* Author: Adriaan van Wijk
+* Version: 1.2
+* Last modification date: 2 March 2022
+* Last modification by: Adriaan van Wijk
+* Based on the design by Rylov [2019]
+
+* Copyright (c) 2021 Adriaan van Wijk, Stellenbosch University
+
+* Permission is hereby granted, free of charge, to any person obtaining a copy
+* of this cell library and associated documentation files (the "Library"), to deal
+* in the Library without restriction, including without limitation the rights
+* to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+* copies of the Library, and to permit persons to whom the Library is
+* furnished to do so, subject to the following conditions:
+
+* The above copyright notice and this permission notice shall be included in all
+* copies or substantial portions of the Library.
+
+* THE LIBRARY IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+* OUT OF OR IN CONNECTION WITH THE LIBRARY OR THE USE OR OTHER DEALINGS IN THE
+* LIBRARY.
+
+*For questions about the library, contact Adriaan van Wijk, 21786275@sun.ac.za
+
+*Edited BASIC And Gate with modified rententionResistor and IBiasz
+
+*$Ports    A B q
+.subckt DSFQ_AND A B q
+.param pInduc = 1p
+
+.param main=0.84
+.param secondary=0.60
+.param third=1.68
+
+*Original 4 Ohms
+.param retentionResistor=40
+
+*Original 70u
+.param Ibias=15u
+.param L1=12p
+.param L2=12p 
+.param Lout=2p
+
+LAin A Ain 2p
+LBin B Bin 2p
+L1 Ain 1 L1
+L2 Bin 4 L2
+
+RD1 1 2 0.67
+RD2 4 5 0.67
+BD1 2 C jjmit area=secondary
+RDp1 2 14 1
+Ld1 14 C pInduc
+BD2 5 C jjmit area=secondary
+RDp2 5 15 1
+Ld2 15 C pInduc
+Rh1 1 C retentionResistor
+Rh2 4 C retentionResistor
+B1 1 C jjmit area=main
+Rb1 1 10 1
+Lb1 10 C pInduc
+B2 4 C jjmit area=main
+Rb2 4 11 1
+Lb2 11 C pInduc
+B3 C 0 jjmit area=third
+Rb3 C 13 1
+Lb3 13 0 pInduc
+Ibias 0 C dc Ibias
+Lout q C Lout
+.ends
+
+
+
+**************************** DSFQ OR ************************
+* Author: Adriaan van Wijk
+* Version: 1.0
+* Last modification date: 21 Feburary 2021
+* Last modification by: Adriaan van Wijk
+* Based on the design by Rylov [2019]
+
+* Copyright (c) 2021 Adriaan van Wijk, Stellenbosch University
+
+* Permission is hereby granted, free of charge, to any person obtaining a copy
+* of this cell library and associated documentation files (the "Library"), to deal
+* in the Library without restriction, including without limitation the rights
+* to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+* copies of the Library, and to permit persons to whom the Library is
+* furnished to do so, subject to the following conditions:
+
+* The above copyright notice and this permission notice shall be included in all
+* copies or substantial portions of the Library.
+
+* THE LIBRARY IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+* OUT OF OR IN CONNECTION WITH THE LIBRARY OR THE USE OR OTHER DEALINGS IN THE
+* LIBRARY.
+
+*For questions about the library, contact Adriaan van Wijk, 21786275@sun.ac.za
+
+
+*$Ports 		 A B q
+.subckt DSFQ_OR A B q
+
+.model jjmit jj(rtype=1, vg=2.8mV, cap=0.07pF, r0=160, rn=16, icrit=0.1mA)
+
+.param B_JIA=    1.08172342e+00
+.param B_JUA=    9.98731934e-01
+.param B_JLA=    9.61678975e-01
+
+.param B_JIB=    1.08172342e+00
+.param B_JUB=    9.98731934e-01
+.param B_JLB=    9.61678975e-01
+
+.param B_JP =    5.19248148e-01
+.param B_JPS =   4.07603769e-01
+.param B_JLIM=   1.96555868e+00 
+
+
+.param Ibias=    2.53670849e-04 
+
+.param LBias=    3.46560565e-10
+.param Lpoff=    1.29760632e-11
+.param Rs   =    9.90210690e-01 
+.param RH   =    2.95746005e+00 
+
+.param LP  =     8.19946788e-13
+.param RP  =     1.08687967e+00
+
+LinA A Ain 2p 
+LinB B Bin 2p
+
+
+B_JIA Ain 1   jjmit area=B_JIA
+B_JUA 1 N   jjmit area=B_JUA
+B_JLA 1 0   jjmit area=B_JLA
+
+B_JIB Bin 3   jjmit area=B_JIB
+B_JUB 3 N   jjmit area=B_JUB
+B_JLB 3 0   jjmit area=B_JLB
+
+B_JP 4 0    jjmit area=B_JP
+B_JPS 5 0   jjmit area=B_JPS
+
+B_JLIM 2 6  jjmit area=B_JLIM
+
+Lpoff 2 4 Lpoff
+Rs 4 5 Rs
+RH 4 0 RH
+
+Lbias 0 6 Lbias
+Lcon N 2 4p
+IBM 0 N pwl(0 0 5p Ibias)
+
+*Parasitic Inductances and Resistances for each JJ
+RJIA Ain 1a RP
+RJUA 1 Na RP
+RJLA 1 G1 RP
+
+RJIB Bin 3b RP
+RJUB 3 Nb RP
+RJLB 3 G3 RP
+
+RJP 4 G4 RP
+RJPS 5 G5 RP
+
+RJLIM 2 6q RP
+
+LJIA 1a 1   LP
+LJUA Na N   LP
+LJLA G1 0   LP
+
+LJIB 3b 3   LP
+LJUB Nb N   LP
+LJLB G3 0   LP
+
+LJP  G4 0   LP
+LJPS G5 0   LP
+
+LJLIM 6q 6  LP
+
+Lout 2 q 2p
+.ends
+
+
+*************************** RSFQ NOT *********************
+* Back-annotated simulation file written by InductEx v.6.0.4 on 8-4-21.
+* Author: L. Schindler
+* Version: 2.1
+* Last modification date: 3 June 2021
+* Last modification by: L. Schindler
+
+* Copyright (c) 2018-2021 Lieze Schindler, Stellenbosch University
+
+* Permission is hereby granted, free of charge, to any person obtaining a copy
+* of this cell library and associated documentation files (the "Library"), to deal
+* in the Library without restriction, including without limitation the rights
+* to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+* copies of the Library, and to permit persons to whom the Library is
+* furnished to do so, subject to the following conditions:
+
+* The above copyright notice and this permission notice shall be included in all
+* copies or substantial portions of the Library.
+
+* THE LIBRARY IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+* OUT OF OR IN CONNECTION WITH THE LIBRARY OR THE USE OR OTHER DEALINGS IN THE
+* LIBRARY.
+
+*For questions about the library, contact Lieze Schindler, lschindler@sun.ac.za
+
+* The cell is not designed to be connected directly to passive transmission lines
+
+*$Ports  a clk q
+.subckt LSMITLL_NOT a clk q
+.model jjmit jj(rtype=1, vg=2.8mV, cap=0.07pF, r0=160, rn=16, icrit=0.1mA)
+.param Phi0=2.067833848E-15
+.param B0=1
+.param Ic0=0.0001
+.param IcRs=100u*6.859904418
+.param B0Rs=IcRs/Ic0*B0
+.param Rsheet=2 
+.param Lsheet=1.13e-12 
+.param LP=0.2p
+.param IC=2.5
+.param LB=2p
+.param BiasCoef=0.7
+
+.param B1=IC
+.param B2=2.57
+.param B3=1.07
+.param B4=IC
+.param B5=1.34
+.param B6=3.03
+.param B7=1.38
+.param B8=0.8
+.param B9=IC
+
+.param IB1=BiasCoef*Ic0*B1
+.param IB2=87u
+.param IB3=257u
+.param IB4=BiasCoef*Ic0*B4
+.param IB5=BiasCoef*Ic0*B9
+
+.param LB1=LB
+.param LB2=LB
+.param LB3=LB
+.param LB4=LB
+.param LB5=LB
+
+.param RB1=B0Rs/B1
+.param RB2=B0Rs/B2
+.param RB3=B0Rs/B3
+.param RB4=B0Rs/B4
+.param RB5=B0Rs/B5
+.param RB6=B0Rs/B6
+.param RB7=B0Rs/B7
+.param RB8=B0Rs/B8
+.param RB9=B0Rs/B9
+
+.param LRB1=(RB1/Rsheet)*Lsheet
+.param LRB2=(RB2/Rsheet)*Lsheet
+.param LRB3=(RB3/Rsheet)*Lsheet
+.param LRB4=(RB4/Rsheet)*Lsheet
+.param LRB5=(RB5/Rsheet)*Lsheet
+.param LRB6=(RB6/Rsheet)*Lsheet
+.param LRB7=(RB7/Rsheet)*Lsheet
+.param LRB8=(RB8/Rsheet)*Lsheet
+.param LRB9=(RB9/Rsheet)*Lsheet
+
+.param RD=4
+.param LRD=2p
+
+B1 1 2 jjmit area=B1
+B2 4 5 jjmit area=B2
+B3 7 8 jjmit area=B3
+B4 13 14 jjmit area=B4
+B5 17 18 jjmit area=B5
+B6 10 11 jjmit area=B6
+B7 20 18 jjmit area=B7
+B8 18 19 jjmit area=B8
+B9 21 22 jjmit area=B9
+
+IB1 0 3 pwl(0 0 5p IB1)
+IB2 0 6 pwl(0 0 5p IB2)
+IB3 0 9 pwl(0 0 5p IB3)
+IB4 0 15 pwl(0 0 5p IB4)
+IB5 0 23 pwl(0 0 5p IB5)
+
+LB1 3 1 LB1
+LB2 6 4 LB2
+LB3 8 9 LB3
+LB4 13 15 LB4
+LB5 21 23 LB5
+
+L1 a 1 2.062E-12
+L2 1 4 1.889E-12
+L3 4 7 2.72E-12
+L4 clk 13 2.057E-12
+L5 13 16 1.029E-12
+L6 16 17 1.241E-12
+L7 16 12 1.973E-12
+L8 10 12 1.003E-12
+L9 10 8 7.524E-12
+L10 8 20 1.234E-12
+L11 18 21 2.607E-12
+L12 21 q 2.062E-12
+
+LP1 2 0 5.271E-13
+LP2 5 0 5.237E-13
+LP4 14 0 4.759E-13
+LP6 11 0 5.021E-13
+LP8 19 0 6.33E-13
+LP9 22 0 4.749E-13
+
+RB1 1 101 RB1
+LRB1 101 0 LRB1
+RB2 4 104 RB2
+LRB2 104 5 LRB2
+RB3 7 107 RB3
+LRB3 107 8 LRB3
+RB4 13 113 RB4
+LRB4 113 0 LRB4
+RB5 17 117 RB5
+LRB5 117 18 LRB5
+RB6 10 110 RB6
+LRB6 110 0 LRB6
+RB7 20 120 RB7
+LRB7 120 18 LRB7
+RB8 18 118 RB8
+LRB8 118 0 LRB8
+RB9 21 121 RB9
+LRB9 121 0 LRB9
+LRD 12 112 LRD
+RD 112 0 RD
+.ends
+
+************************ RSFQ DFF *********************************
+
+* Back-annotated simulation file written by InductEx v.6.0.4 on 12-3-21.
+* Author: L. Schindler
+* Version: 2.1
+* Last modification date: 3 June 2021
+* Last modification by: L. Schindler
+
+* Copyright (c) 2018-2021 Lieze Schindler, Stellenbosch University
+
+* Permission is hereby granted, free of charge, to any person obtaining a copy
+* of this cell library and associated documentation files (the "Library"), to deal
+* in the Library without restriction, including without limitation the rights
+* to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+* copies of the Library, and to permit persons to whom the Library is
+* furnished to do so, subject to the following conditions:
+
+* The above copyright notice and this permission notice shall be included in all
+* copies or substantial portions of the Library.
+
+* THE LIBRARY IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+* OUT OF OR IN CONNECTION WITH THE LIBRARY OR THE USE OR OTHER DEALINGS IN THE
+* LIBRARY.
+
+* For questions about the library, contact Lieze Schindler, lschindler@sun.ac.za
+
+* The cell is not designed to be connected directly to passive transmission lines
+
+*$Ports		a		clk		q
+.subckt LSmitll_DFF	  a	clk q	
+.model jjmit jj(rtype=1, vg=2.8mV, cap=0.07pF, r0=160, rn=16, icrit=0.1mA)
+.param Phi0=2.067833848E-15
+.param B0=1
+.param Ic0=0.0001
+.param IcRs=100u*6.859904418
+.param B0Rs=IcRs/Ic0*B0
+.param Rsheet=2 
+.param Lsheet=1.13e-12 
+.param LP=0.2p
+.param IC=2.5
+.param LB=2p
+.param BiasCoef=0.70
+
+.param B1=2.5
+.param B2=1.61
+.param B3=1.54
+.param B4=1.69
+.param B5=1.38
+.param B6=2.5
+.param B7=2.5
+
+.param IB1=175u     
+.param IB2=173u      
+.param IB3=175u            
+.param IB4=175u        
+
+.param L1=Phi0/(4*IC*Ic0)               
+.param L2=Phi0/(2*B1*Ic0)         
+.param L3=Phi0/(B3*Ic0)       
+.param L4=Phi0/(2*B6*Ic0)      
+.param L5=Phi0/(4*IC*Ic0)     
+.param L6=Phi0/(2*B4*Ic0)       
+.param L7=Phi0/(4*B7*Ic0)         
+.param LB1=LB            
+.param LB2=LB           
+.param LB3=LB           
+.param LB4=LB        
+.param LP1=LP         
+.param LP3=LP          
+.param LP4=LP         
+.param LP6=LP          
+.param LP7=LP          
+.param RB1=B0Rs/B1       
+.param RB2=B0Rs/B2       
+.param RB3=B0Rs/B3          
+.param RB4=B0Rs/B4         
+.param RB5=B0Rs/B5         
+.param RB6=B0Rs/B6          
+.param RB7=B0Rs/B7
+.param LRB1=(RB1/Rsheet)*Lsheet
+.param LRB2=(RB2/Rsheet)*Lsheet
+.param LRB3=(RB3/Rsheet)*Lsheet
+.param LRB4=(RB4/Rsheet)*Lsheet
+.param LRB5=(RB5/Rsheet)*Lsheet
+.param LRB6=(RB6/Rsheet)*Lsheet
+.param LRB7=(RB7/Rsheet)*Lsheet
+
+B1 1 2 jjmit area=B1
+B2 4 5 jjmit area=B2
+B3 5 6 jjmit area=B3
+B4 8 9 jjmit area=B4
+B5 10 8 jjmit area=B5
+B6 11 12 jjmit area=B6
+B7 14 15 jjmit area=B7
+
+IB1 0 3 pwl(0 0 5p IB1)
+IB2 0 7 pwl(0 0 5p IB2)
+IB3 0 13 pwl(0 0 5p IB3)
+IB4 0 16 pwl(0 0 5p IB4)
+
+LB1 3 1 LB1
+LB2 7 5 LB2
+LB3 11 13 LB3
+LB4 16 14 LB4
+
+L1 a 1 2.059E-12
+L2 1 4 4.123E-12
+L3 5 8 6.873E-12
+L4 10 11 5.195E-12
+L5 clk 11 2.071E-12
+L6 8 14 3.287E-12
+L7 14 q 2.066E-12
+
+LP1 2 0 5.042E-13    
+LP3 6 0 5.799E-13    
+LP4 9 0 5.733E-13    
+LP6 12 0 4.605E-13    
+LP7 15 0 4.961E-13    
+
+RB1 1 101 RB1
+LRB1 101 0 LRB1
+RB2 4 104 RB2
+LRB2 104 5 LRB2
+RB3 5 105 RB3
+LRB3 105 0 LRB3
+RB4 8 108 RB4
+LRB4 108 0 LRB4
+RB5 10 110 RB5
+LRB5 110 8 LRB5
+RB6 11 111 RB6
+LRB6 111 0 LRB6
+RB7 14 114 RB7
+LRB7 114 0 LRB7
+.ends
+
+********************** RSFQ SPLITTER ***********************
+* Back-annotated simulation file written by InductEx v.6.0.4 on 1-4-21.
+* Author: L. Schindler
+* Version: 2.1
+* Last modification date: 9 March 2021
+* Last modification by: L. Schindler
+
+* Copyright (c) 2018-2021 Lieze Schindler, Stellenbosch University
+
+* Permission is hereby granted, free of charge, to any person obtaining a copy
+* of this cell library and associated documentation files (the "Library"), to deal
+* in the Library without restriction, including without limitation the rights
+* to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+* copies of the Library, and to permit persons to whom the Library is
+* furnished to do so, subject to the following conditions:
+
+* The above copyright notice and this permission notice shall be included in all
+* copies or substantial portions of the Library.
+
+* THE LIBRARY IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+* OUT OF OR IN CONNECTION WITH THE LIBRARY OR THE USE OR OTHER DEALINGS IN THE
+* LIBRARY.
+
+* For questions about the library, contact Lieze Schindler, lschindler@sun.ac.za
+
+* The cell is not designed to be connected directly to passive transmission lines
+
+*$Ports a q0 q1
+.subckt LSmitll_SPLIT a q0 q1
+.model jjmit jj(rtype=1, vg=2.8mV, cap=0.07pF, r0=160, rn=16, icrit=0.1mA)
+.param Phi0=2.067833848E-15
+.param B0=1
+.param Ic0=0.0001
+.param IcRs=100u*6.859904418
+.param B0Rs=IcRs/Ic0*B0
+.param Rsheet=2 
+.param Lsheet=1.13e-12 
+.param LP=0.2p
+.param IC=2.5
+.param Lptl=2p
+.param LB=2p
+.param BiasCoef=0.7
+.param RD=1.36
+
+.param B1=2.5
+.param B2=3.0
+.param B3=2.5
+.param B4=2.5
+
+.param IB1=175u
+.param IB2=280u
+.param IB3=175u
+.param IB4=175u
+
+.param L1=Lptl
+.param L2=Phi0/(2*B1*Ic0)
+.param L3=(Phi0/(2*B2*Ic0))/2
+.param L4=L3
+.param L5=Lptl
+.param L6=L3
+.param L7=Lptl
+
+.param RB1=B0Rs/B1
+.param RB2=B0Rs/B2
+.param RB3=B0Rs/B3
+.param RB4=B0Rs/B4
+.param LRB1=(RB1/Rsheet)*Lsheet
+.param LRB2=(RB2/Rsheet)*Lsheet
+.param LRB3=(RB3/Rsheet)*Lsheet
+.param LRB4=(RB4/Rsheet)*Lsheet
+
+IB1 0 3 pwl(0 0 5p IB1)
+IB2 0 6 pwl(0 0 5p IB2)
+IB3 0 10 pwl(0 0 5p IB3)
+IB4 0 13 pwl(0 0 5p IB4)
+LB1 3 1 9.175E-13
+LB2 6 4 7.666E-13
+LB3 10 8 1.928E-12
+LB4 13 11 8.786E-13
+
+B1 1 2 jjmit area=B1
+B2 4 5 jjmit area=B2
+B3 8 9 jjmit area=B3
+B4 11 12 jjmit area=B4
+L1 a 1 2.063E-12
+L2 1 4 3.637E-12
+L3 4 7 1.278E-12
+L4 7 8 1.305E-12
+L5 8 q0 2.05E-12
+L6 7 11 1.315E-12
+L7 11 q1 2.06E-12
+
+LP1 2 0 4.676E-13
+LP2 5 0 4.498E-13
+LP3 9 0 5.183E-13
+LP4 12 0 4.639E-13
+RB1 1 101 RB1
+LRB1 101 0 LRB1
+RB2 4 104 RB2
+LRB2 104 0 LRB2
+RB3 8 108 RB3
+LRB3 108 0 LRB3
+RB4 11 111 RB4
+LRB4 111 0 LRB4
+.ends
+
+
+****************************** RSFQ JTL ***********************************
+* Back-annotated simulation file written by InductEx v.6.0.4 on 10-3-21.
+* Author: L. Schindler
+* Version: 2.1
+* Last modification date: 12 January 2021
+* Last modification by: L. Schindler
+
+* Copyright (c) 2018-2021 Lieze Schindler, Stellenbosch University
+
+* Permission is hereby granted, free of charge, to any person obtaining a copy
+* of this cell library and associated documentation files (the "Library"), to deal
+* in the Library without restriction, including without limitation the rights
+* to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+* copies of the Library, and to permit persons to whom the Library is
+* furnished to do so, subject to the following conditions:
+
+* The above copyright notice and this permission notice shall be included in all
+* copies or substantial portions of the Library.
+
+* THE LIBRARY IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+* OUT OF OR IN CONNECTION WITH THE LIBRARY OR THE USE OR OTHER DEALINGS IN THE
+* LIBRARY.
+
+*For questions about the library, contact Lieze Schindler, lschindler@sun.ac.za
+
+* The cell is not designed to be connected directly to passive transmission lines
+
+*$Ports 			a q
+.subckt LSMITLL_JTL a q
+.model jjmit jj(rtype=1, vg=2.8mV, cap=0.07pF, r0=160, rn=16, icrit=0.1mA)
+.param Phi0=2.067833848E-15
+.param B0=1
+.param Ic0=0.0001
+.param IcRs=100u*6.859904418
+.param B0Rs=IcRs/Ic0*B0
+.param Rsheet=2 
+.param Lsheet=1.13e-12 
+.param LP=0.2p
+.param IC=2.5
+.param Lptl=2p
+.param LB=2p
+.param BiasCoef=0.7
+
+.param B1=IC
+.param B2=IC
+.param IB1=(B1+B2)*Ic0*BiasCoef
+.param LB1=LB
+.param L1=Phi0/(4*B1*Ic0)
+.param L2=Phi0/(4*B1*Ic0)
+.param L3=Phi0/(4*B1*Ic0)
+.param L4=Phi0/(4*B2*Ic0)
+.param RB1=B0Rs/B1   
+.param RB2=B0Rs/B2
+.param LRB1=(RB1/Rsheet)*Lsheet+LP
+.param LRB2=(RB2/Rsheet)*Lsheet+LP
+.param LP1=LP
+.param LP2=LP
+
+B1 1 2 jjmit area=B1
+B2 6 7 jjmit area=B2
+IB1 0 5 pwl(0 0 5p IB1)
+L1 a 1 2.082E-12
+L2 1 4 2.06E-12
+L3 4 6 2.067E-12
+L4 6 q 2.075E-12
+LP1 2 0 4.998E-13
+LP2 7 0 5.011E-13
+LB1 5 4 LB1
+RB1 1 3 RB1
+RB2 6 8 RB2
+LRB1 3 0 LRB1
+LRB2 8 0 LRB2
+.ends
+
+******************************** RSFQ DC TO SFQ CONVERTER ****************************
+
+* Back-annotated simulation file written by InductEx v.6.0.4 on 2-6-21.
+* Author: L. Schindler
+* Version: 2.1
+* Last modification date: 2 June 2021
+* Last modification by: L. Schindler
+
+* Copyright (c) 2018-2021 Lieze Schindler, Stellenbosch University
+
+* Permission is hereby granted, free of charge, to any person obtaining a copy
+* of this cell library and associated documentation files (the "Library"), to deal
+* in the Library without restriction, including without limitation the rights
+* to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+* copies of the Library, and to permit persons to whom the Library is
+* furnished to do so, subject to the following conditions:
+
+* The above copyright notice and this permission notice shall be included in all
+* copies or substantial portions of the Library.
+
+* THE LIBRARY IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+* OUT OF OR IN CONNECTION WITH THE LIBRARY OR THE USE OR OTHER DEALINGS IN THE
+* LIBRARY.
+
+*For questions about the library, contact Lieze Schindler, lschindler@sun.ac.za
+
+*$Ports 			a q
+.subckt LSmitll_DCSFQ a q
+.model jjmit jj(rtype=1, vg=2.8mV, cap=0.07pF, r0=160, rn=16, icrit=0.1mA)
+.param B0=1.0
+.param Ic0=0.0001
+.param IcRs=100u*6.859904418
+.param B0Rs=IcRs/Ic0*B0
+.param Rsheet=2 
+.param Lsheet=1.13e-12 
+.param LB=2p
+.param LP=0.2p
+
+.param B1=2.25
+.param B2=2.25
+.param B3=2.5
+.param L1=1p
+.param L2=3.9p
+.param L3=0.6p
+.param L4=1.1p
+.param L5=4.5p
+.param L6=2p
+.param IB1=275u
+.param IB2=175u
+.param LB1=LB
+.param LB2=LB
+.param LP2=LP
+.param LP3=LP
+.param RB1=B0Rs/B1
+.param RB2=B0Rs/B2
+.param RB3=B0Rs/B3
+.param LRB1=(RB1/Rsheet)*Lsheet
+.param LRB2=(RB2/Rsheet)*Lsheet
+.param LRB3=(RB3/Rsheet)*Lsheet
+
+B1 2 3 jjmit area=B1
+B2 5 6 jjmit area=B2
+B3 7 8 jjmit area=B3
+IB1 0 4 pwl(0 0 5p IB1)
+IB2 0 9 pwl(0 0 5p IB2)
+LB1 3 4 3.12E-12
+LB2 7 9 2.281E-12
+L1 a 1 1.295E-12
+L2 1 0 3.904E-12
+L3 1 2 5.998E-13
+L4 3 5 1.095E-12
+L5 5 7 4.448E-12
+L6 7 q 1.334E-12
+LP2 6 0 5.16E-13
+LP3 8 0 4.733E-13
+RB1 2 102 RB1
+LRB1 102 3 LRB1
+RB2 5 105 RB2
+LRB2 105 0 LRB2
+RB3 7 107 RB3
+LRB3 107 0 LRB3
+.ends
+
+
+
+********************************** RSFQ BUFF *******************************************
+* Back-annotated simulation file written by InductEx v.6.0.4 on 11-6-21.
+* Author: L. Schindler
+* Version: 2.1
+* Last modification date: 11 June 2021
+* Last modification by: L. Schindler
+
+* Copyright (c) 2018-2021 Lieze Schindler, Stellenbosch University
+
+* Permission is hereby granted, free of charge, to any person obtaining a copy
+* of this cell library and associated documentation files (the "Library"), to deal
+* in the Library without restriction, including without limitation the rights
+* to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+* copies of the Library, and to permit persons to whom the Library is
+* furnished to do so, subject to the following conditions:
+
+* The above copyright notice and this permission notice shall be included in all
+* copies or substantial portions of the Library.
+
+* THE LIBRARY IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+* OUT OF OR IN CONNECTION WITH THE LIBRARY OR THE USE OR OTHER DEALINGS IN THE
+* LIBRARY.
+
+* For questions about the library, contact Lieze Schindler, lschindler@sun.ac.za
+
+* The cell is not designed to be connected directly to passive transmission lines
+
+*$Ports a q
+.subckt LSMITLL_BUFF a q
+.model jjmit jj(rtype=1, vg=2.8mV, cap=0.07pF, r0=160, rn=16, icrit=0.1mA)
+.param Phi0=2.067833848E-15
+.param B0=1
+.param Ic0=0.0001
+.param IcRs=100u*6.859904418
+.param B0Rs=IcRs/Ic0*B0
+.param Rsheet=2 
+.param Lsheet=1.13e-12 
+.param LP=0.2p
+.param IC=2.5
+.param Lptl=2p
+.param LB=2p
+.param BiasCoef=0.7
+
+.param B1=IC
+.param B2=IC
+.param B3=IC
+.param B4=IC
+.param IB1=B1*Ic0*BiasCoef
+.param IB2=B2*Ic0*0.95
+.param IB3=B3*Ic0*0.95
+.param IB4=B4*Ic0*BiasCoef
+.param LB1=LB
+.param LB2=LB
+.param LB3=LB
+.param LB4=LB
+.param L1=Phi0/(4*IC*Ic0)
+.param L2=Phi0/(2*B1*Ic0)
+.param L3=Phi0/(2*B2*Ic0)
+.param L4=Phi0/(2*B3*Ic0)
+.param L5=Phi0/(4*IC*Ic0)
+.param RB1=B0Rs/B1   
+.param RB2=B0Rs/B2
+.param RB3=B0Rs/B3
+.param RB4=B0Rs/B4
+.param LRB1=(RB1/Rsheet)*Lsheet+LP
+.param LRB2=(RB2/Rsheet)*Lsheet+LP
+.param LRB3=(RB3/Rsheet)*Lsheet+LP
+.param LRB4=(RB4/Rsheet)*Lsheet+LP
+.param LP1=LP
+.param LP2=LP
+.param LP3=LP
+.param LP4=LP
+
+B1 1 2 jjmit area=B1
+B2 4 5 jjmit area=B2
+B3 7 8 jjmit area=B3
+B4 10 11 jjmit area=B4
+
+IB1 0 3 pwl(0 0 5p IB1)
+IB2 0 6 pwl(0 0 5p IB2)
+IB3 0 9 pwl(0 0 5p IB3)
+IB4 0 12 pwl(0 0 5p IB4)
+
+L1 a 1 2.057E-12
+L2 1 4 4.026E-12
+L3 4 7 4.155E-12
+L4 7 10 4.057E-12
+L5 10 q 2.057E-12
+
+LP1 2 0 5.283E-13
+LP2 5 0 5.327E-13
+LP3 8 0 5.084E-13
+LP4 11 0 5.269E-13
+
+LB1 1 3 LB1
+LB2 4 6 LB2
+LB3 7 9 LB3
+LB4 10 12 LB4
+
+RB1 1 101 RB1
+RB2 4 104 RB2
+RB3 7 107 RB3
+RB4 10 110 RB4
+
+LRB1 101 0 LRB1
+LRB2 104 0 LRB2
+LRB3 107 0 LRB3
+LRB4 110 0 LRB4
+.ends
+
+
+
+
+
+
+.end
