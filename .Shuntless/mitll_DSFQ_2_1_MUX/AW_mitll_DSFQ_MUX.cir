@@ -228,11 +228,11 @@ LRB2 8 0 LRB2
 .subckt DSFQ_ANDm A B Q
 .param b1  	=	 1.39878486e+00
 .param bd1  =	 1.38855937e+00
-.param l1  	=	 1.64204687e-12
+.param l1  	=	 2e-12
 .param rd1  =	 6.00718616e-01
 .param i1  	=	 1.54457273e-05
 .param b3  	=	 1.51517089e+00
-.param l3  	=	 4.24567618e-13
+.param l3  	=	 2e-12
 .param rh1  =	 4.76237371e+00
 
 *Parasitics and Matching
@@ -285,7 +285,7 @@ XNOTLS LSMITLL_NOTi A CLK Q
 .subckt DSFQ_ORi a b q
 .model jjmit jj(rtype=1, vg=2.8mV, cap=0.07pF, r0=160, rn=16, icrit=0.1mA)
 *Confluence Buffer A
-.param l1  	=	 	    6.35671436e-13
+.param l1  	=	 	    2e-12
 .param b1  	=	 	    1.37211310e+00
 .param b3  	=	 	    2.77209629e+00
 .param b4  	=	 	    3.78734058e-01
@@ -302,7 +302,7 @@ XNOTLS LSMITLL_NOTi A CLK Q
 * Output Stage
 .param b8  	=	 	    7.09413113e-01
 .param i1  	=	 	    3.23631555e-04
-.param l3  	=	 	    4.81982617e-13
+.param l3  	=	 	   2e-12
 .param l6  	=	 	    3.06315548e-12
 
 *Confluence Buffer B
@@ -348,7 +348,7 @@ r2   	22   	20   	 r2
 .subckt DSFQ_ORm a b q
 .model jjmit jj(rtype=1, vg=2.8mV, cap=0.07pF, r0=160, rn=16, icrit=0.1mA)
 *Confluence Buffer A
-.param l1  	=	 	    6.35671436e-13
+.param l1  	=	 	    2e-12
 .param b1  	=	 	    1.37211310e+00
 .param b3  	=	 	    2.77209629e+00
 .param b4  	=	 	    3.78734058e-01
@@ -365,7 +365,7 @@ r2   	22   	20   	 r2
 * Output Stage
 .param b8  	=	 	    7.09413113e-01
 .param i1  	=	 	    3.23631555e-04
-.param l3  	=	 	    4.81982617e-13
+.param l3  	=	 	    2e-12
 .param l6  	=	 	    3.06315548e-12
 
 *Confluence Buffer B

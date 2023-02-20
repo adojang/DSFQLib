@@ -17,6 +17,8 @@ Reccomended Time Between Inputs: 15ps - this is what the gate was optimized for.
 
 /* Margins */
 
+MARGIN IS SAME FOR INPUTS OF 2P and OUTPUT of 2P.
+
 Critical Margin: 20.0% for 15ps skew
 Critical  Component   (I1 -)
 Margin of 20ps: 7.8/% (I1 -)

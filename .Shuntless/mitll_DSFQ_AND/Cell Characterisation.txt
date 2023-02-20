@@ -13,6 +13,8 @@ Reccomended Time Between Inputs: 25ps - this includes a little bit of tolerance 
 
 /* Margins */
 
+NEW MARGIN IS 16.8. THIS IS DUE TO INPUT INDUCTORS BEING FORCED AS 2p.
+
 Critical Margin: 25.8%
 Critical  Component (B1 -)
 Margin of 2ps: 25.8% (B1 -)

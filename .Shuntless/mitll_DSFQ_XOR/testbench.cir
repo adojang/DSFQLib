@@ -35,7 +35,7 @@ XXOR DSFQ_XOR A0 B0 QQ
 XLOAD LSMITLL_JTL QQ Qload
 R_out Qload 0 2
 
-.print p(A0) p(B0) p(AND2.xxor) p(OR10.xxor) p(QQ)
+.print p(A0) p(B0) p(AND2.xxor) p(AND1.xxor) p(A11.xxor) p(B11.xxor) p(QQ)
 
 
 

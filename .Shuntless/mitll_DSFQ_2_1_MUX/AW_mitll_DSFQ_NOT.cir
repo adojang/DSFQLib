@@ -4,16 +4,16 @@
 *B and C are inputs for the OR gate.
 *Q is output.
 
-XDSFQ_OR DSFQ_ORi B C CLKD
+XDSFQ_OR DSFQ_OR B C CLKD
 XJTLCLK LSMITLL_JTLi CLKD CLK
 XNOTLS LSMITLL_NOTi A CLK Q
 
 
 
-.subckt DSFQ_ORi a b q
+.subckt DSFQ_OR a b q
 .model jjmit jj(rtype=1, vg=2.8mV, cap=0.07pF, r0=160, rn=16, icrit=0.1mA)
 *Confluence Buffer A
-.param l1  	=	 	    6.35671436e-13
+.param l1  	=	 	    2e-12
 .param b1  	=	 	    1.37211310e+00
 .param b3  	=	 	    2.77209629e+00
 .param b4  	=	 	    3.78734058e-01
@@ -30,7 +30,7 @@ XNOTLS LSMITLL_NOTi A CLK Q
 * Output Stage
 .param b8  	=	 	    7.09413113e-01
 .param i1  	=	 	    3.23631555e-04
-.param l3  	=	 	    4.81982617e-13
+.param l3  	=	 	    2e-12
 .param l6  	=	 	    3.06315548e-12
 
 *Confluence Buffer B
