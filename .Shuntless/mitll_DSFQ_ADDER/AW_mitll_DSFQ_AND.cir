@@ -1,7 +1,7 @@
 .subckt DSFQ_AND A B Q
 .param b1  	=	 1.39878486e+00
 .param bd1  =	 1.38855937e+00
-.param l1  	=	 2e-12
+.param l1  	=	 1.64204687e-12
 .param rd1  =	 6.00718616e-01
 .param i1  	=	 1.54457273e-05
 .param b3  	=	 1.51517089e+00

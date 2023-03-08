@@ -77,7 +77,7 @@ for x in any_range(rangemin, rangemax, steps):
 
 
 
-plt.title("JoSIM DSFQ Loop Resistance Variation Curve")
+plt.title("JoSIM DSFQ Loop Inductance Variation Curve")
 plt.xlabel("Time")
 plt.ylabel("Current")
 plt.legend(loc='best')

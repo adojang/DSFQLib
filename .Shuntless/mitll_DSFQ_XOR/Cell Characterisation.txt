@@ -10,7 +10,7 @@ Skew Tolerance Between Inputs:
 
 Cell Propagation Time - The time bewteen which the inputs are 4.44 RAD (0.707 * 2pi) and the output is 4.44 RAD
 Average Propagation Time: ~22.27ps
-Mininum Time between sucessive skew inputs: 8ps
+Mininum Time between sucessive skew inputs: 5ps
 Reccomended Time Between Inputs: 10ps - this is what the gate was optimized for.
 
 /* Margins */

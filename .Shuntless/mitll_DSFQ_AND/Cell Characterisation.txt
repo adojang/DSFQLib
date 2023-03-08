@@ -1,29 +1,30 @@
 DSFQ AND Cell with Rylov's DSFQ Loop with Dual Time Constants Characterisation Information
 
 
-
 /* Characteristics */
 
 Designed Skew Tolerance: 10ps
 True Skew Tolerance: 12ps
 Cell Propagation Time - The time bewteen which the inputs are 4.44 RAD (0.707 * 2pi) and the output is 4.44 RAD
 Cell Propagation Time: ~0.5ps.
-Mininum Time between sucessive 0 skew inputs: 24ps
+Mininum Time between sucessive 0 skew inputs: 8ps
 Reccomended Time Between Inputs: 25ps - this includes a little bit of tolerance for skew on the second set of inputs.
 
 /* Margins */
+Critical Margin: 21.5% for a Skew Tolerance of 10ps
+Critical  Component (bd1 +)
 
-NEW MARGIN IS 16.8. THIS IS DUE TO INPUT INDUCTORS BEING FORCED AS 2p.
+True Skew Time: 14ps - the time at which the gate no longer functions correctly.
 
-Critical Margin: 25.8%
-Critical  Component (B1 -)
-Margin of 2ps: 25.8% (B1 -)
-Margin of 1ps: 14.9% (B1 -)
-Margin of 0ps: 5.50% (B1 -)
+Margin Analysis Performed at 10ps.
+The gate is optimized for a skew tolerance of 11ps but allows an extereme tolerance of 14ps.
+It was only optimized for 11ps.
 
-A Margin of 2ps means that we design for a margin of 10ps, but the true skew tolerance limit is 12ps.
-
-
+10ps - 21.5%
+11ps - 21.5%
+12ps - 14.2%
+13ps - 5.9%
+14ps - 0.1%
 
 
 /* Margin Test Parameters */

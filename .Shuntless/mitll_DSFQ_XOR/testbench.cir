@@ -10,8 +10,8 @@
 .include AW_mitll_DSFQ_XOR.cir
 .param cval=600u
 
-I_a0 0 I_a0 pwl(0 0 100p 0 103p 0 105p 0        200p 0 203p 0 205p 0     300p 0 303p cval 305p 0     400p 0 403p cval 405p 0)
-I_b0 0 I_b0 pwl(0 0 100p 0 103p 0 105p 0     200p 0 203p cval 205p 0     300p 0 303p 0 305p 0        400p 0 403p cval 405p 0)
+I_a0 0 I_a0 pwl(0 0 100p 0 103p cval 105p 0        200p 0 203p 0 205p 0     300p 0 303p cval 305p 0     400p 0 403p cval 405p 0)
+I_b0 0 I_b0 pwl(0 0 105p 0 108p cval 110p 0     200p 0 203p cval 205p 0     300p 0 303p 0 305p 0        400p 0 403p cval 405p 0)
 * I_s0 0 I_s0 pwl(0 0 100p 0 103p 0 105p 0        200p 0 203p 0 205p 0        300p 0 303p cval 305p 0     400p 0 403p cval 405p 0)
 
 * A   0 0 1 1
@@ -35,7 +35,7 @@ XXOR DSFQ_XOR A0 B0 QQ
 XLOAD LSMITLL_JTL QQ Qload
 R_out Qload 0 2
 
-.print p(A0) p(B0) p(AND2.xxor) p(AND1.xxor) p(A11.xxor) p(B11.xxor) p(QQ)
+.print p(A0) p(B0) p(AND2.xxor) p(AND1.xxor) p(CLKA.xxor) p(CLKB.xxor) p(QQ)
 
 
 

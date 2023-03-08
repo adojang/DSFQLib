@@ -4,19 +4,15 @@
 XSPLITA LSmitll_SPLITo A A1 A2
 XSPLITB LSmitll_SPLITo B B1 B2
 
-XJTLA1 LSmitll_JTLi A1 A11
-XJTLA2 LSmitll_JTLi A11 CLKA
-XJTLB1 LSmitll_JTLi B1 B11
-XJTLB2 LSmitll_JTLi B11 CLKB
-
+XJTL1 LSmitll_JTLi A1 A11
+XJTL2 LSmitll_JTLi B1 B11
 XJTL3 LSmitll_JTLi OR1 OR2
 XJTL4 LSmitll_JTLi OR2 OR3
 
-XNAND1  DSFQ_ANDo    A1     B1      AND1
-XNAND2  DSFQ_NOTo    AND1   CLKA    CLKB   AND2
+XNAND1  DSFQ_ANDo    A1     B1   AND1
+XNAND2  DSFQ_NOTo    AND1   A11   B11   AND2
 XOR     DSFQ_ORi     A1     B2   OR1
 XAND    DSFQ_ANDo    AND2   OR3  Q
-
 
 *Libraries so the circuit can run by itself without requiring the user to add them.
 *Libraries Included: DSFQ_AND DSFQ_OR LSMITLL_JTL, LSMITLL_SPLIT, LSMITLL_NOT DSFQ_NOT, 
@@ -24,7 +20,7 @@ XAND    DSFQ_ANDo    AND2   OR3  Q
 .subckt DSFQ_ANDo A B Q
 .param b1  	=	 1.39878486e+00
 .param bd1  =	 1.38855937e+00
-.param l1  	=	 2e-12
+.param l1  	=	 1.64204687e-12
 .param rd1  =	 6.00718616e-01
 .param i1  	=	 1.54457273e-05
 .param b3  	=	 1.51517089e+00
