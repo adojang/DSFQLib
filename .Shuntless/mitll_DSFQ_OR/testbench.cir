@@ -5,10 +5,23 @@
 .include cells\LSmitll_JTL_v2p1_optimized.cir
 .include AW_mitll_DSFQ_OR.cir
 
-.tran 0.025p 300p 0
+.tran 0.015p 600p 0
 .param cval= 600u
-I_A0 0 xa pwl(0 0 100p 0 103p cval 105p 0 200p 0 203p cval 205p 0 300p 0 303p 0 305p 0) 
-I_B0 0 xb pwl(0 0 105p 0 108p 0 110p 0 205p 0 208p cval 210p 0 315p 0 318p 0 320p 0)
+I_A0 0 xa pwl(0 0 100p 0 103p cval 105p 0 200p 0 203p cval 205p 0 300p 0 303p cval 305p 0 400p 0 403p cval 405p 0 500p 0 503p cval 505p 0) 
+I_B0 0 xb pwl(0 0 100p 0 103p cval 105p 0 204p 0 207p cval 209p 0 306p 0 309p cval 311p 0 408p 0 411p cval 413p 0 510p 0 513p cval 515p 0)
+
+
+* I_B0 0 xb pwl(0 0 105p 0 108p cval 110p 0 210p 0 212p cval 215p 0 320p 0 322p cval 325p 0 425p 0 428p cval 430p 0 500p 0 503p 0 505p 0)
+
+*True Skew Tolerance: 8ps
+*Designed Skew Tolerance: 
+
+
+* 104p 0 107p cval 109p
+* 105p 0 108p cval 110p
+* 106p 0 109p cval 111p
+* 107p 0 110p cval 112p
+*at 10ps
 
 
 XDCSFQA LSmitll_DCSFQ xa xa1 
@@ -30,7 +43,8 @@ XDUT DSFQ_OR A B q
 XLOAD LSMITLL_JTL q qq
 
 Rsink qq 0 2
- .print i(L1.xdut) p(L2.XDUT) p(4.xdut) p(10.xdut) p(B6.xdut)  p(30.xdut) p(qq)
+*  .print i(L1.xdut) i(L2.XDUT) p(4.xdut) p(10.xdut) p(B6.xdut)  p(30.xdut) p(qq)
+.print p(A) p(B) p(Q) p(Q)
 *  .print p(A) p(B) p(C) p(D) p(Q0) p(Q1) p(Q)
 * .print p(q)
 

@@ -1,25 +1,26 @@
 .subckt DSFQ_OR a b q
 .model jjmit jj(rtype=1, vg=2.8mV, cap=0.07pF, r0=160, rn=16, icrit=0.1mA)
+
 *Confluence Buffer A
-.param l1  	=	 	    2e-12
-.param b1  	=	 	    1.37211310e+00
-.param b3  	=	 	    2.77209629e+00
-.param b4  	=	 	    3.78734058e-01
+ .PARAM l1  	=	 	    0.001e-12
+ .PARAM b1  	=	 	    1.44497758e+00
+ .PARAM b3  	=	 	    5.41067564e+00
+ .PARAM b4  	=	 	    7.95470698e-01
 
 * AND GATE LOOP
-.param l4  	=	 	    1.22182342e-12
-.param b7  	=	 	    1.19265113e+00
-.param b9  	=	 	    5.40924075e-01
-.param l7  	=	 	    1.62539785e-13
-.param r1  	=	 	    1.09745275e+01
-.param r2  	=	 	    5.58089917e-01
-.param l5  	=	 	    5.61756493e-13
+ .PARAM l4  	=	 	    1.22182342e-12
+ .PARAM b7  	=	 	    1.59265113e+00
+ .PARAM b9  	=	 	    5.40924075e-01
+ .PARAM l7  	=	 	    1.62539785e-13
+ .PARAM r1  	=	 	    1.09745275e+01
+ .PARAM r2  	=	 	    5.58089917e-01
+ .PARAM l5  	=	 	    5.61756493e-13
 
 * Output Stage
-.param b8  	=	 	    7.09413113e-01
-.param i1  	=	 	    3.23631555e-04
-.param l3  	=	 	    2e-12
-.param l6  	=	 	    3.06315548e-12
+ .PARAM b8  	=	 	    4.73543077e-01
+ .PARAM i1  	=	 	    3.40214819e-04
+ .PARAM l3  	=	 	    2e-12
+ .PARAM l6  	=	 	    3.06315548e-12
 
 *Confluence Buffer B
 .param 	l2  	= L1

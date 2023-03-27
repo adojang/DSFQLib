@@ -1,16 +1,14 @@
 
-l1  	=	 {nominal =	    6.35671436e-13}
-b1  	=	 {nominal =	    1.37211310e+00}
-b3  	=	 {nominal =	    2.77209629e+00}
-b4  	=	 {nominal =	    3.78734058e-01}
-l4  	=	 {nominal =	    1.22182342e-12}
-b7  	=	 {nominal =	    1.19265113e+00}
-b9  	=	 {nominal =	    5.40924075e-01}
-l7  	=	 {nominal =	    1.62539785e-13}
-r1  	=	 {nominal =	    1.09745275e+01}
-r2  	=	 {nominal =	    5.58089917e-01}
-l5  	=	 {nominal =	    5.61756493e-13}
-b8  	=	 {nominal =	    7.09413113e-01}
-i1  	=	 {nominal =	    3.23631555e-04}
-l3  	=	 {nominal =	    4.81982617e-13}
-l6  	=	 {nominal =	    3.06315548e-12}
+ b1 =	 {nominal =  1.52259469e+00}
+ b3 =	 {nominal =  1.17207082e+00}
+ b4 =	 {nominal =  1.25976570e+00}
+ l4 =	 {nominal =  1.12031648e-12}
+ b7 =	 {nominal =  1.13440275e+00}
+ b9 =	 {nominal =  5.12408347e-01}
+ l7 =	 {nominal =  1.54906465e-13}
+ r1 =	 {nominal =  1.11292253e+01}
+ r2 =	 {nominal =  5.84905944e-01}
+ l5 =	 {nominal =  5.27347263e-13}
+ b8 =	 {nominal =  6.94622129e-01}
+ i1 =	 {nominal =  2.86474331e-04}
+ l6 =	 {nominal =  3.29945982e-12}

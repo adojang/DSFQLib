@@ -9,16 +9,21 @@ If the user requires greater skew tolerance, the OR gate's inputs (B and C) shou
 Designed Skew Tolerance between A and CLK: 1ps
 
 Cell Propagation Time - The time bewteen which the inputs are 4.44 RAD (0.707 * 2pi) and the output is 4.44 RAD
-Average Cell Propagation Time: ~7.7ps
+Average Cell Propagation Time: ~9.1ps (Single and Double OR input)
 
-Mininum Time between sucessive CLK skew inputs: 9ps (Limited by DSFQ OR Gate)
-This minimum time is for purely CLK inputs with A being zero.
+The NOT cell has a skew tolerance:
 
-Reccomended Time Between Inputs: 10ps
+
+
+Minimum time between sucessive inputs: 8ps
+Reccomended Time Between Sucessive Inputs: 10ps or greater (Limited by the DSFQ OR Gate)
+
 
 /* Margins */
 
 The Margins of this gate will be the lowest margin of the DSFQ OR or RSFQ NOT gate.
+
+Operating at 15ps, this is 
 
 
 
