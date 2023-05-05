@@ -1,0 +1,95 @@
+def rename_parameters(content):
+    #Get the circuit name:
+    name_pattern = re.compile(r'^\.subckt\s+(\w+)\s+.*$', re.MULTILINE)
+
+    match = name_pattern.search(content)
+
+    # Extract the name of the subckt
+    if match:
+        name = match.group(1)
+        # print("NAME OF SUBCKT: " + name)
+    else:
+        print('ERROR - check subcircuit titles and names')
+
+    #Extract SUBCKT NODES
+
+
+
+    # .PARAM Line Editing
+    lines = content.split("\n")
+    processed_lines = []
+    for line in lines:
+        if line.startswith(".param"):
+            # print("Replace and Append:" ,name)
+            # Remove extra whitespaces
+            line = re.sub(r'\s+', ' ', line).strip()
+            # Split into two parts
+            name1, namex = re.split(r'\s*=\s*', line)
+            # Replace NAME1 with NAME1_cake
+            name1_cake = name1 + "_" + name
+            # Replace words in NAMEX with words_cake
+            namex = re.sub(r'\b([a-zA-Z]+(?:\d+)?)\b', r'\1_'+name, namex)
+            # Combine and add to processed_lines
+            processed_line = f"{name1_cake} = {namex}"
+            processed_lines.append(processed_line)
+        else:
+            processed_lines.append(line)
+    content = "\n".join(processed_lines)
+
+
+
+    # Replace node names
+    node_pattern = re.compile(r'^(?![xX])([BLRIV]\w*)\s+(\w+)\s+(\w+)\s+(.*)$', re.MULTILINE)
+    for match in node_pattern.finditer(content):
+        old_name, value1, value2, rest = match.groups()
+        new_name = f"{old_name}_{name}"
+        content = content.replace(f"{old_name} {value1} {value2}", f"{new_name} {value1}_{name} {value2}_{name}") + rest
+
+    node_pattern = re.compile(r'^(?![xX])([a-zA-Z]\w*)\s+(\S+)\s+(\S+)\s+(.*)$', re.MULTILINE)
+    content = node_pattern.sub(rf'\1_{name} \2_{name} \3_{name} \4', content)
+
+
+    lines = content.split("\n")
+    output = ""
+    for line in lines:
+        match = re.match(r"^(\w+\d+\w*)\s+(\S+)\s+(\S+)\s+(\S+)$", line)
+        if match:
+            if not re.match(r"^\d", match.group(4)):
+                output += f"{match.group(1)} {match.group(2)} {match.group(3)} {match.group(4).rstrip()}_{name}\n"
+            else:
+                output += line + "\n"
+        else:
+            output += line + "\n"
+    content = output
+
+    #FIX =area issue. This is a hacky solution, but it works.
+    regex = r'^(\S+\s+){4}(area=\S+)(\s+\S+)*$'
+    modified_lines = []
+    for i, line in enumerate(content.splitlines()):
+        match = re.match(regex, line)
+        if match:
+            fifth_word = match.group(2)
+            if fifth_word.startswith('area='):
+                line = line.replace(fifth_word, fifth_word + "_" + name)
+        modified_lines.append(line)
+    content = "\n".join(modified_lines)
+
+    #Fix PWL Error:
+    modified_lines = []
+    for line in content.splitlines():
+        line = re.sub(r'(?<=\s)(\w+)\)', rf'\1_{name})', line)
+        modified_lines.append(line)
+    content = "\n".join(modified_lines)
+
+
+
+
+    # Exception for nodes that are '0'
+    content = re.sub(rf'(?<!\S)0_{name}(?!\S)', '0', content)
+
+    #Spit out the modified name:
+    # name = name + "_" + topname
+
+    return content,name
+
+    #Exception for nodes that are part of the subckt name

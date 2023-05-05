@@ -1,0 +1,219 @@
+* This is a DSFQ NOT Cell that is explicitly torn apart for margin analysis.
+* This subcircuit contains no additional subcircuits
+* Names of parameters have been chagned to avoid conflicts with other cells within this subcircuit.
+* This cell has a margin of 21.7% at a frequency of 66GHz.
+
+.subckt DSFQ_NOTTT A B C Q
+.model jjmit jj(rtype=1, vg=2.8mV, cap=0.07pF, r0=160, rn=16, icrit=0.1mA)
+*A is inverting input.
+*B and C are inputs for the OR gate.
+*Q is output.
+
+* XDSFQ_OR DSFQ_OR B C CLK
+* XJTLCLK LSMITLL_JTLi CLK CLK1
+* XNOTLS LSMITLL_NOTi A CLK1 Q
+
+*DSFQ OR GATE
+
+.param l1o  	=	 	    0.001e-12o
+.param b1o  	=	 	    1.44497758e+00
+.param b3o  	=	 	    5.41067564e+00
+.param b4o  	=	 	    7.95470698e-01
+
+
+.param l4o  	=	 	    1.22182342e-12
+.param b7o  	=	 	    1.59265113e+00
+.param b9o  	=	 	    5.40924075e-01
+.param l7o  	=	 	    1.62539785e-13
+.param r1o  	=	 	    1.09745275e+01
+.param r2o  	=	 	    5.58089917e-01
+.param l5o  	=	 	    5.61756493e-13
+
+.param b8o  	=	 	    4.73543077e-01
+.param i1o  	=	 	    3.40214819e-04
+.param l3o  	=	 	    2e-12
+.param l6o  	=	 	    3.06315548e-12
+
+.param 	l2o  	= L1o
+.param 	b2o  	= B1o
+.param 	b5o  	= B3o
+.param 	b6o  	= B4o
+
+.param 	lp1o  	= 0o.2e-12o
+.param 	lp2o  	= 0o.2e-12o
+.param 	lp3o  	= 0o.2e-12o
+.param 	lp4o  	= 0o.2e-12o
+
+
+b1o   	3o   	1o   	 jjmit area=b1o
+b2o   	4o   	2o   	 jjmit area=b2o
+b3o   	3o   	10o   	 jjmit area=b3o
+b4o   	5o   	3o   	 jjmit area=b4o
+b5o   	4o   	10o   	 jjmit area=b5o
+b6o   	6o   	4o   	 jjmit area=b6o
+b7o   	24o   	20o   	 jjmit area=b7o
+b8o   	30o   	31o   	 jjmit area=b8o
+b9o   	24o   	23o   	 jjmit area=b9o
+i1o   	0   	10o   	pwl(0   	0   	5p      i1o)
+l1o   	B   	1o   	 l1o
+l2o   	C   	2o   	 l2o
+l3o   	10o   	30o   	 l3o
+l4o   	30o   	20o   	 l4o
+l5o   	21o   	24o   	 l5o
+l6o   	30o   	CLK   	 l6o
+l7o   	22o   	23o   	 l7o
+lp1o   	5o   	0   	 lp1o
+lp2o   	6o   	0   	 lp2o
+lp3o   	24o   	0   	 lp3o
+lp4o   	31o   	0   	 lp4o
+r1o   	21o   	20o   	 r1o
+r2o   	22o   	20o   	 r2o
+
+*RSFQ NOT GATE
+
+.param b0  = 1
+.param ic0  = 1.0000e-04
+.param icrs  = 6.8599e-04
+.param b0rs  = 6.8599
+.param rsheet  = 2
+.param lsheet  = 1.1300e-12
+.param lp  = 2.0000e-13
+.param ic  = 2.5000
+.param lb  = 2.0000e-12
+.param biascoef  = 0.7000
+.param b1  = 2.5000
+.param b2  = 2.5700
+.param b3  = 1.0700
+.param b4  = 2.5000
+.param b5  = 1.3400
+.param b6  = 3.0300
+.param b7  = 1.3800
+.param b8  = 0.8000
+.param b9  = 2.5000
+.param ib1  = 1.7500e-04
+.param ib2  = 8.7000e-05
+.param ib3  = 2.5700e-04
+.param ib4  = 1.7500e-04
+.param ib5  = 1.7500e-04
+.param lb1  = 2.0000e-12
+.param lb2  = 2.0000e-12
+.param lb3  = 2.0000e-12
+.param lb4  = 2.0000e-12
+.param lb5  = 2.0000e-12
+.param rb1  = 2.7440
+.param rb2  = 2.6692
+.param rb3  = 6.4111
+.param rb4  = 2.7440
+.param rb5  = 5.1193
+.param rb6  = 2.2640
+.param rb7  = 4.9709
+.param rb8  = 8.5749
+.param rb9  = 2.7440
+.param lrb1  = 1.5503e-12
+.param lrb2  = 1.5081e-12
+.param lrb3  = 3.6223e-12
+.param lrb4  = 1.5503e-12
+.param lrb5  = 2.8924e-12
+.param lrb6  = 1.2792e-12
+.param lrb7  = 2.8086e-12
+.param lrb8  = 4.8448e-12
+.param lrb9  = 1.5503e-12
+.param rd  = 4
+.param lrd  = 2.0000e-12
+
+
+B1 1 2 jjmit area=B1
+B2 4 5 jjmit area=B2
+B3 7 8 jjmit area=B3
+B4 13 14 jjmit area=B4
+B5 17 18 jjmit area=B5
+B6 10 11 jjmit area=B6
+B7 20 18 jjmit area=B7
+B8 18 19 jjmit area=B8
+B9 21 22 jjmit area=B9
+
+IB1 0 3 pwl(0 0 5p IB1)
+IB2 0 6 pwl(0 0 5p IB2)
+IB3 0 9 pwl(0 0 5p IB3)
+IB4 0 15 pwl(0 0 5p IB4)
+IB5 0 23 pwl(0 0 5p IB5)
+
+LB1 3 1 LB1
+LB2 6 4 LB2
+LB3 8 9 LB3
+LB4 13 15 LB4
+LB5 21 23 LB5
+
+L1 a 1 2.062E-12
+L2 1 4 1.889E-12
+L3 4 7 2.72E-12
+L4 clk1 13 2.057E-12
+L5 13 16 1.029E-12
+L6 16 17 1.241E-12
+L7 16 12 1.973E-12
+L8 10 12 1.003E-12
+L9 10 8 7.524E-12
+L10 8 20 1.234E-12
+L11 18 21 2.607E-12
+L12 21 q 2.062E-12
+
+LP1 2 0 5.271E-13
+LP2 5 0 5.237E-13
+LP4 14 0 4.759E-13
+LP6 11 0 5.021E-13
+LP8 19 0 6.33E-13
+LP9 22 0 4.749E-13
+
+RB1 1 101 RB1
+LRB1 101 0 LRB1
+RB2 4 104 RB2
+LRB2 104 5 LRB2
+RB3 7 107 RB3
+LRB3 107 8 LRB3
+RB4 13 113 RB4
+LRB4 113 0 LRB4
+RB5 17 117 RB5
+LRB5 117 18 LRB5
+RB6 10 110 RB6
+LRB6 110 0 LRB6
+RB7 20 120 RB7
+LRB7 120 18 LRB7
+RB8 18 118 RB8
+LRB8 118 0 LRB8
+RB9 21 121 RB9
+LRB9 121 0 LRB9
+LRD 12 112 LRD
+RD 112 0 RD
+
+*RSFQ JTL GATE
+
+.param B1m = 2.5000
+.param B2m = 2.5000
+.param IB1m = 3.5000e-04
+.param LB1m = 2.0000e-12
+.param L1m = 2.0678e-12
+.param L2m = 2.0678e-12
+.param L3m = 2.0678e-12
+.param L4m = 2.0678e-12
+.param RB1m = 2.7440
+.param RB2m = 2.7440
+.param LRB1m = 1.7503e-12
+.param LRB2m = 1.7503e-12
+.param LP1m = 2.0000e-13
+.param LP2m = 2.0000e-13
+
+B1m 1m 2m jjmit area=B1m
+B2m 6m 7m jjmit area=B2m
+IB1m 0 5m pwl(0 0 5p IB1m)
+L1m CLK 1m 2.082e-12
+L2m 1m 4m 2.06e-12
+L3m 4m 6m 2.067e-12
+L4m 6m CLK1 2.075e-12
+LP1m 2m 0 4.998e-13
+LP2m 7m 0 5.011e-13
+LB1m 5m 4m LB1m
+RB1m 1m 3m RB1m
+RB2m 6m 8m RB2m
+LRB1m 3m 0 LRB1m
+LRB2m 8m 0 LRB2m
+.ends

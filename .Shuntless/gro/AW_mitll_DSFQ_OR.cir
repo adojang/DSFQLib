@@ -1,0 +1,61 @@
+.subckt DSFQ_OR a b q
+.model jjmit jj(rtype=1, vg=2.8mV, cap=0.07pF, r0=160, rn=16, icrit=0.1mA)
+
+*Confluence Buffer A
+ .PARAM l1  	=	 	    0.001e-12
+ .PARAM b1  	=	 	    1.44497758e+00
+ .PARAM b3  	=	 	    5.41067564e+00
+ .PARAM b4  	=	 	    7.95470698e-01
+
+* AND GATE LOOP
+ .PARAM l4  	=	 	    1.22182342e-12
+ .PARAM b7  	=	 	    1.59265113e+00
+ .PARAM b9  	=	 	    5.40924075e-01
+ .PARAM l7  	=	 	    1.62539785e-13
+ .PARAM r1  	=	 	    1.09745275e+01
+ .PARAM r2  	=	 	    5.58089917e-01
+ .PARAM l5  	=	 	    5.61756493e-13
+
+* Output Stage
+ .PARAM b8  	=	 	    4.73543077e-01
+ .PARAM i1  	=	 	    3.40214819e-04
+ .PARAM l3  	=	 	    2e-12
+ .PARAM l6  	=	 	    3.06315548e-12
+
+*Confluence Buffer B
+.param 	l2  	= L1
+.param 	b2  	= B1
+.param 	b5  	= B3
+.param 	b6  	= B4
+
+*Parasitics
+.param 	lp1  	= 0.2e-12
+.param 	lp2  	= 0.2e-12
+.param 	lp3  	= 0.2e-12
+.param 	lp4  	= 0.2e-12
+
+* Back Annotated .cir file from KiCad
+b1   	3   	1   	 jjmit area=b1
+b2   	4   	2   	 jjmit area=b2
+b3   	3   	10   	 jjmit area=b3
+b4   	5   	3   	 jjmit area=b4
+b5   	4   	10   	 jjmit area=b5
+b6   	6   	4   	 jjmit area=b6
+b7   	24   	20   	 jjmit area=b7
+b8   	30   	31   	 jjmit area=b8
+b9   	24   	23   	 jjmit area=b9
+i1   	0   	10   	pwl(0   	0   	5p      i1)
+l1   	a   	1   	 l1
+l2   	b   	2   	 l2
+l3   	10   	30   	 l3
+l4   	30   	20   	 l4
+l5   	21   	24   	 l5
+l6   	30   	q   	 l6
+l7   	22   	23   	 l7
+lp1   	5   	0   	 lp1
+lp2   	6   	0   	 lp2
+lp3   	24   	0   	 lp3
+lp4   	31   	0   	 lp4
+r1   	21   	20   	 r1
+r2   	22   	20   	 r2
+.ends

@@ -1,0 +1,253 @@
+.model jjmit jj(rtype=1, vg=2.8mV, cap=0.07pF, r0=160, rn=16, icrit=0.1mA)
+*A is inverting input.
+*B and C are inputs for the OR gate.
+*Q is output.
+*The JTL connects the two.
+
+XJTLCLK LSMITLL_JTLi CLK CLK1
+
+
+*Parameters
+.param l1o  = 1.0000e-15
+.param b1o  = 1.4450
+.param b3o  = 5.4107
+.param b4o  = 0.7955
+.param l4o  = 1.2218e-12
+.param b7o  = 1.5927
+.param b9o  = 0.5409
+.param l7o  = 1.6254e-13
+.param r1o  = 10.9745
+.param r2o  = 0.5581
+.param l5o  = 5.6176e-13
+.param b8o  = 0.4735
+.param i1o  = 3.4021e-04
+.param l3o  = 2.0000e-12
+.param l6o  = 3.0632e-12
+.param l2o  = 1.0000e-15
+.param b2o  = 1.4450
+.param b5o  = 5.4107
+.param b6o  = 0.7955
+.param lp1o  = 2.0000e-13
+.param lp2o  = 2.0000e-13
+.param lp3o  = 2.0000e-13
+.param lp4o  = 2.0000e-13
+.param phi0  = 2.0678e-15
+.param b0  = 1
+.param ic0  = 1.0000e-04
+.param icrs  = 6.8599e-04
+.param b0rs  = 6.8599
+.param rsheet  = 2
+.param lsheet  = 1.1300e-12
+.param lp  = 2.0000e-13
+.param ic  = 2.5000
+.param lb  = 2.0000e-12
+.param biascoef  = 0.7000
+.param b1  = 2.5000
+.param b2  = 2.5700
+.param b3  = 1.0700
+.param b4  = 2.5000
+.param b5  = 1.3400
+.param b6  = 3.0300
+.param b7  = 1.3800
+.param b8  = 0.8000
+.param b9  = 2.5000
+.param ib1  = 1.7500e-04
+.param ib2  = 8.7000e-05
+.param ib3  = 2.5700e-04
+.param ib4  = 1.7500e-04
+.param ib5  = 1.7500e-04
+.param lb1  = 2.0000e-12
+.param lb2  = 2.0000e-12
+.param lb3  = 2.0000e-12
+.param lb4  = 2.0000e-12
+.param lb5  = 2.0000e-12
+.param rb1  = 2.7440
+.param rb2  = 2.6692
+.param rb3  = 6.4111
+.param rb4  = 2.7440
+.param rb5  = 5.1193
+.param rb6  = 2.2640
+.param rb7  = 4.9709
+.param rb8  = 8.5749
+.param rb9  = 2.7440
+.param lrb1  = 1.5503e-12
+.param lrb2  = 1.5081e-12
+.param lrb3  = 3.6223e-12
+.param lrb4  = 1.5503e-12
+.param lrb5  = 2.8924e-12
+.param lrb6  = 1.2792e-12
+.param lrb7  = 2.8086e-12
+.param lrb8  = 4.8448e-12
+.param lrb9  = 1.5503e-12
+.param rd  = 4
+.param lrd  = 2.0000e-12
+
+
+
+* Back Annotated .cir file from KiCad
+b1o   	3   	1   	 jjmit area=b1o
+b2o   	4   	2   	 jjmit area=b2o
+b3o   	3   	10   	 jjmit area=b3o
+b4o   	5   	3   	 jjmit area=b4o
+b5o   	4   	10   	 jjmit area=b5o
+b6o   	6   	4   	 jjmit area=b6o
+b7o   	24   	20   	 jjmit area=b7o
+b8o   	30   	31   	 jjmit area=b8o
+b9o   	24   	23   	 jjmit area=b9o
+i1o   	0   	10   	pwl(0   	0   	5p      i1)
+l1o   	B   	1   	 l1o
+l2o   	C   	2   	 l2o
+l3o   	10   	30   	 l3o
+l4o   	30   	20   	 l4o
+l5o   	21   	24   	 l5o
+l6o   	30   	CLK   	 l6o
+l7o   	22   	23   	 l7o
+lp1o   	5   	0   	 lp1o
+lp2o   	6   	0   	 lp2o
+lp3o   	24   	0   	 lp3o
+lp4o   	31   	0   	 lp4o
+r1o   	21   	20   	 r1o
+r2o   	22   	20   	 r2o
+
+
+B1 1 2 jjmit area=B1
+B2 4 5 jjmit area=B2
+B3 7 8 jjmit area=B3
+B4 13 14 jjmit area=B4
+B5 17 18 jjmit area=B5
+B6 10 11 jjmit area=B6
+B7 20 18 jjmit area=B7
+B8 18 19 jjmit area=B8
+B9 21 22 jjmit area=B9
+
+IB1 0 3 pwl(0 0 5p IB1)
+IB2 0 6 pwl(0 0 5p IB2)
+IB3 0 9 pwl(0 0 5p IB3)
+IB4 0 15 pwl(0 0 5p IB4)
+IB5 0 23 pwl(0 0 5p IB5)
+
+LB1 3 1 LB1
+LB2 6 4 LB2
+LB3 8 9 LB3
+LB4 13 15 LB4
+LB5 21 23 LB5
+
+L1 a 1 2.062E-12
+L2 1 4 1.889E-12
+L3 4 7 2.72E-12
+L4 CLK1 13 2.057E-12
+L5 13 16 1.029E-12
+L6 16 17 1.241E-12
+L7 16 12 1.973E-12
+L8 10 12 1.003E-12
+L9 10 8 7.524E-12
+L10 8 20 1.234E-12
+L11 18 21 2.607E-12
+L12 21 q 2.062E-12
+
+LP1 2 0 5.271E-13
+LP2 5 0 5.237E-13
+LP4 14 0 4.759E-13
+LP6 11 0 5.021E-13
+LP8 19 0 6.33E-13
+LP9 22 0 4.749E-13
+
+RB1 1 101 RB1
+LRB1 101 0 LRB1
+RB2 4 104 RB2
+LRB2 104 5 LRB2
+RB3 7 107 RB3
+LRB3 107 8 LRB3
+RB4 13 113 RB4
+LRB4 113 0 LRB4
+RB5 17 117 RB5
+LRB5 117 18 LRB5
+RB6 10 110 RB6
+LRB6 110 0 LRB6
+RB7 20 120 RB7
+LRB7 120 18 LRB7
+RB8 18 118 RB8
+LRB8 118 0 LRB8
+RB9 21 121 RB9
+LRB9 121 0 LRB9
+LRD 12 112 LRD
+RD 112 0 RD
+
+
+* Back-annotated simulation file written by InductEx v.6.0.4 on 10-3-21.
+* Author: L. Schindler
+* Version: 2.1
+* Last modification date: 12 January 2021
+* Last modification by: L. Schindler
+
+* Copyright (c) 2018-2021 Lieze Schindler, Stellenbosch University
+
+* Permission is hereby granted, free of charge, to any person obtaining a copy
+* of this cell library and associated documentation files (the "Library"), to deal
+* in the Library without restriction, including without limitation the rights
+* to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+* copies of the Library, and to permit persons to whom the Library is
+* furnished to do so, subject to the following conditions:
+
+* The above copyright notice and this permission notice shall be included in all
+* copies or substantial portions of the Library.
+
+* THE LIBRARY IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+* OUT OF OR IN CONNECTION WITH THE LIBRARY OR THE USE OR OTHER DEALINGS IN THE
+* LIBRARY.
+
+*For questions about the library, contact Lieze Schindler, lschindler@sun.ac.za
+
+* The cell is not designed to be connected directly to passive transmission lines
+
+*$Ports 			a q
+.subckt LSMITLL_JTLi a q
+.model jjmit jj(rtype=1, vg=2.8mV, cap=0.07pF, r0=160, rn=16, icrit=0.1mA)
+.param Phi0=2.067833848E-15
+.param B0=1
+.param Ic0=0.0001
+.param IcRs=100u*6.859904418
+.param B0Rs=IcRs/Ic0*B0
+.param Rsheet=2 
+.param Lsheet=1.13e-12 
+.param LP=0.2p
+.param IC=2.5
+.param Lptl=2p
+.param LB=2p
+.param BiasCoef=0.7
+
+.param B1=IC
+.param B2=IC
+.param IB1=(B1+B2)*Ic0*BiasCoef
+.param LB1=LB
+.param L1=Phi0/(4*B1*Ic0)
+.param L2=Phi0/(4*B1*Ic0)
+.param L3=Phi0/(4*B1*Ic0)
+.param L4=Phi0/(4*B2*Ic0)
+.param RB1=B0Rs/B1   
+.param RB2=B0Rs/B2
+.param LRB1=(RB1/Rsheet)*Lsheet+LP
+.param LRB2=(RB2/Rsheet)*Lsheet+LP
+.param LP1=LP
+.param LP2=LP
+
+B1 1 2 jjmit area=B1
+B2 6 7 jjmit area=B2
+IB1 0 5 pwl(0 0 5p IB1)
+L1 a 1 2.082E-12
+L2 1 4 2.06E-12
+L3 4 6 2.067E-12
+L4 6 q 2.075E-12
+LP1 2 0 4.998E-13
+LP2 7 0 5.011E-13
+LB1 5 4 LB1
+RB1 1 3 RB1
+RB2 6 8 RB2
+LRB1 3 0 LRB1
+LRB2 8 0 LRB2
+.ends
+.ends

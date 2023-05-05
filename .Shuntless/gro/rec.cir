@@ -1,0 +1,44 @@
+.subckt master A B C Q
+.PARAM LAD  	=	 	    5
+
+xtest1 one A B Q1
+xtest2 two Q1 C Q
+
+.subckt one Am Bm Q1m
+L1 Am XAA 5
+R1 XBB Bm 5
+C1 XBB Qm1
+xtest3 three XAA XBB
+
+
+.subckt three sAA sBB
+L1 sAA fR1 55
+LR fR1  xRR 553
+LK xYY sBB 33
+
+xrinox rhino xRR xYY
+
+.subckt rhino oupa hannes
+.param opsies = 55
+.param katjie = 767
+R1 oupa hannes opsies
+R2 hannes 0 katjie
+.ends
+
+
+.ends
+
+.ends
+
+
+.subckt two Q1m Cm Q
+L1 Q1m Cm 5
+R1 Q1 0 5
+C1 Q11 Q
+.ends
+
+
+
+
+
+.ends

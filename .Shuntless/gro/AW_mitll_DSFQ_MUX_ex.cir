@@ -1,0 +1,6 @@
+.subckt DSFQ_MUX D0 D1 S QQ
+.subckt LSmitll_SPLITm a q0 q1
+RB4 11 111 RB4
+LRB4 111 0 LRB4
+.ends
+.ends

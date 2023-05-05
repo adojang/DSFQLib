@@ -1,0 +1,11 @@
+josim -o ./testbench.csv ./testbench.cir -V 1
+python josim-plot.py ./testbench.csv
+
+python sp_generator.py -t 0.70 -s 40E-12 -o testbench.sp -v testbench.csv 
+
+josim-tools .\verify.toml
+josim-tools .\margins.toml
+
+josim-tools .\optimize.toml
+
+python sp_generator.py -t 0.70 -s 40E-12 -o testbench.sp -v testbench.csv 
