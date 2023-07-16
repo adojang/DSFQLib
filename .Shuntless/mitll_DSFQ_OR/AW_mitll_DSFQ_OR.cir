@@ -1,3 +1,4 @@
+*25.8% Skew for a tolerance of 15ps
 .subckt DSFQ_OR a b q
 .model jjmit jj(rtype=1, vg=2.8mV, cap=0.07pF, r0=160, rn=16, icrit=0.1mA)
 
@@ -35,15 +36,15 @@
 .param 	lp4  	= 0.2e-12
 
 * Back Annotated .cir file from KiCad
-b1   	3   	1   	 jjmit area=b1
-b2   	4   	2   	 jjmit area=b2
+b1   	1   	3   	 jjmit area=b1
+b2   	2   	4   	 jjmit area=b2
 b3   	3   	10   	 jjmit area=b3
-b4   	5   	3   	 jjmit area=b4
+b4   	3   	5   	 jjmit area=b4
 b5   	4   	10   	 jjmit area=b5
-b6   	6   	4   	 jjmit area=b6
-b7   	24   	20   	 jjmit area=b7
+b6   	4   	6   	 jjmit area=b6
+b7   	20   	24   	 jjmit area=b7
 b8   	30   	31   	 jjmit area=b8
-b9   	24   	23   	 jjmit area=b9
+b9   	23   	24   	 jjmit area=b9
 i1   	0   	10   	pwl(0   	0   	5p      i1)
 l1   	a   	1   	 l1
 l2   	b   	2   	 l2
@@ -56,6 +57,6 @@ lp1   	5   	0   	 lp1
 lp2   	6   	0   	 lp2
 lp3   	24   	0   	 lp3
 lp4   	31   	0   	 lp4
-r1   	21   	20   	 r1
-r2   	22   	20   	 r2
+r1   	20   	21   	 r1
+r2   	20   	22   	 r2
 .ends
