@@ -15,7 +15,7 @@ if (Enabled) {
 }
 return
 
-Numpad0::
+!0::
 if (Enabled) {
     SendInput josim -o ./testbench.csv ./testbench.cir -V 1{Enter}
     Sleep 250
@@ -25,7 +25,7 @@ if (Enabled) {
 }
 return
 
-Numpad1::
+!1::
 if (Enabled) {
     SendInput josim -o ./testbench.csv ./testbench.cir -V 1{Enter}
     Sleep 250
@@ -37,7 +37,7 @@ if (Enabled) {
 }
 return
 
-Numpad2::
+!2::
 if (Enabled) {
     SendInput josim -o ./testbench.csv ./testbench.cir -V 1{Enter}
     Sleep 250
@@ -53,7 +53,7 @@ if (Enabled) {
 }
 return
 
-Numpad3::
+!3::
 if (Enabled) {
     SendInput josim-tools .\optimize.toml{Enter}
 } else {
@@ -75,3 +75,15 @@ RemoveToolTip:
 SetTimer, RemoveToolTip, Off
 Tooltip
 return
+
+!p::
+Run, cmd.exe /c cd /d "C:\JoSim\.LAYOUTS\2023_Layouts\DSFQ_AND" & python param.py & exit
+return
+
+!o::
+Run, cmd.exe /k cd /d "C:\JoSim\.LAYOUTS\2023_Layouts\DSFQ_OR" & inductex or.GDS -n or.cir -l mitll_sfq5ee_res.ldf -th & pause
+
+return
+
+
+::drcx::C:/JoSim/.LAYOUTS/Design Rules/KLayout_DRC_MITLL_SFQ5ee_1_3_v211117_1444 (1)/KLayout_DRC_MITLL_SFQ5ee_1_3.drc

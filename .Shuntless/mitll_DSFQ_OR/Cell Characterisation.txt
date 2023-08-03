@@ -3,8 +3,9 @@ DSFQ OR Cell with Rylov's DSFQ Loop with Dual Time Constants Characterisation In
 
 /* Characteristics */
 
-Designed Skew Tolerance: 15ps
-True Skew Tolerance: 7ps
+Designed Skew Tolerance: 15s
+True Skew Tolerance: 20ps - after this two pulses are viewed as sseperate and phase changess twice.
+
 Cell Propagation Time - The time bewteen which the inputs are 4.44 RAD (0.707 * 2pi) and the output is 4.44 RAD
 Cell Propagation Time for Single Input: ~3.85ps 
 Cell Propagation Time for Double Input no Skew: ~3.3ps
@@ -17,7 +18,7 @@ Reccomended Time Between Inputs: 15ps - this is what the gate was optimized for.
 
 /* Margins */
 
-Critical Margin: 25.8% for 15ps skew
+Critical Margin: 25.8% for 5ps skew
 Critical  Component   (I1 -)
 Margin of 20ps: 23.3% (I1 +)
 Margin of 15ps: 25.8% (I1 -)
