@@ -1,0 +1,60 @@
+.param 	b1  	= 
+.param 	b2  	= 
+.param 	b3  	= 
+.param 	b4  	= 
+.param 	b5  	= 
+.param 	b6  	= 
+.param 	b7  	= 
+.param 	b8  	= 
+.param 	b9  	= 
+.param 	l1  	= 
+.param 	l2  	= 
+.param 	l3  	= 
+.param 	l4  	= 
+.param 	l6  	= 
+.param 	lb7  	= 
+.param 	lbias1  	= 
+.param 	lc1  	= 
+.param 	lc2  	= 
+.param 	lc3  	= 
+.param 	lp1  	= 
+.param 	lp2  	= 
+.param 	lp3  	= 
+.param 	lp4  	= 
+.param 	lp5  	= 
+.param 	lr1  	= 
+.param 	r1  	= 
+.param 	r2  	= 
+.param 	rbias1  	= 
+
+
+* Back Annotated .cir file from KiCad
+b1   	3   	1   	 jjmit area=b1
+b2   	4   	2   	 jjmit area=b2
+b3   	3   	10a   	 jjmit area=b3
+b4   	5   	3   	 jjmit area=b4
+b5   	4   	10c   	 jjmit area=b5
+b6   	6   	4   	 jjmit area=b6
+b7   	24a   	20   	 jjmit area=b7
+b8   	40   	31   	 jjmit area=b8
+b9   	24   	22   	 jjmit area=b9
+l1   	a   	1   	 l1
+l2   	b   	2   	 l2
+l3   	10b   	30   	 l3
+l4   	30   	20   	 l4
+l6   	40   	q   	 l6
+lb7   	24a   	24   	 lb7
+lbias1   	biasa   	10b   	 lbias1
+lc1   	10a   	10b   	 lc1
+lc2   	10b   	10c   	 lc2
+lc3   	30   	40   	 lc3
+lp1   	5   	0   	 lp1
+lp2   	6   	0   	 lp2
+lp3   	24   	0   	 lp3
+lp4   	24   	0   	 lp4
+lp5   	31   	0   	 lp5
+lr1   	21   	24   	 lr1
+r1   	21   	20   	 r1
+r2   	22   	20   	 r2
+rbias1   	biasa   	bias   	 rbias1
+.end
