@@ -1,0 +1,16 @@
+.subckt DSFQ_XOR A B Q
+
+* XSPLITA LSmitll_SPLITo A A1 A2
+* XSPLITB LSmitll_SPLITo B B1 B2
+
+* XJTL1 LSmitll_JTLi A1 A11
+* XJTL2 LSmitll_JTLi B1 B11
+* XJTL3 LSmitll_JTLi OR1 OR2
+* XJTL4 LSmitll_JTLi OR2 OR3
+
+* XNAND1  DSFQ_ANDo    A1     B1   AND1
+* XNAND2  DSFQ_NOTo    AND1   A11   B11   AND2
+* XOR     DSFQ_ORi     A1     B2   OR1
+* XAND    DSFQ_ANDo    AND2   OR3  Q
+
+.ends

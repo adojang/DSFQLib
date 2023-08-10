@@ -7,12 +7,21 @@
 
 .include cells\LSmitll_DCSFQ_v2p1_optimized.cir
 .include cells\LSmitll_JTL_v2p1_optimized.cir
-.include AW_mitll_DSFQ_XOR_flat.cir
+.include cells\LSmitll_SPLIT_v2p1_optimized.cir
+.include cells\LSmitll_NOT_v2p1_optimized.cir
+.include AW_mitll_DSFQ_AND.cir
+.include AW_mitll_DSFQ_OR.cir
+.include AW_mitll_DSFQ_NOT.cir
+
+
+.include newXOR.cir
+
 .param cval=600u
 
-I_a0 0 I_a0 pwl(0 0 100p 0 103p 0 105p 0        200p 0 203p 0 205p 0     300p 0 303p cval 305p 0     400p 0 403p cval 405p 0)
-I_b0 0 I_b0 pwl(0 0 105p 0 108p 0 110p 0     200p 0 203p cval 205p 0     300p 0 303p 0 305p 0        400p 0 403p cval 405p 0)
-I_s0 0 I_s0 pwl(0 0 100p 0 103p 0 105p 0        200p 0 203p cval 205p 0        300p 0 303p cval 305p 0     400p 0 403p 0 405p 0)
+I_a0 0 I_a0 pwl(0 0 100p 0 103p cval 105p 0        19p 0 110p 0 113p 0     300p 0 303p 0 305p 0     400p 0 403p 0 405p 0)
+I_b0 0 I_b0 pwl(0 0 100p 0 103p 0 105p 0           140p 0 143p 0 145p 0       155p 0 158p cval 160p 0     300p 0 303p 0 305p 0        400p 0 403p 0 405p 0)
+I_s0 0 I_s0 pwl(0 0 100p 0 103p cval 105p 0        110p 0 113p 0 115p 0        300p 0 303p 0 305p 0     400p 0 403p 0 405p 0)
+I_m0 0 I_m0 pwl(0 0 100p 0 103p 0 105p 0        120p 0 123p cval 125p 0        300p 0 303p 0 305p 0     400p 0 403p 0 405p 0)
 
 * A     0 0 1 1
 * B     0 1 0 1
@@ -20,9 +29,16 @@ I_s0 0 I_s0 pwl(0 0 100p 0 103p 0 105p 0        200p 0 203p cval 205p 0        3
 * AND2  0 1 1 0
 * Q     0 1 1 0
 
+XSPLITtest LSmitll_SPLIT   S0      S1     S2
+
+Xsrc_m0 LSmitll_DCSFQ i_m0 src_m0
+*Feedback into SPLIT CELL
+Xload_m0 LSMITLL_JTL src_m0 S2
 
 
-.tran 0.25p 600p 0 0.01p
+RS1 S1 0 2
+
+.tran 0.25p 300p 0 0.01p
 
 Xsrc_a0 LSmitll_DCSFQ i_a0 src_a0
 Xsrc_b0 LSmitll_DCSFQ i_b0 src_b0
@@ -40,8 +56,11 @@ R_out Qload 0 2
 XLOADS LSMITLL_JTL S0 Sout
 R_REF Sout 0 2
 
-.print p(A0) p(B0) p(A11.xxor) p(B11.xxor) p(AND1.xxor) p(AND2.xxor) p(QQ) p(Sout)
+* .print p(A0) p(B0) p(A11.xxor) p(B11.xxor) p(AND1.xxor) p(AND2.xxor) p(QQ) p(Sout)
+* .print p(B4.XXOR) p(A4.XXOR) p(OR1.XXOR) p(OR2.XXOR) p(OR3.XXOR) p(B0) p(QQ) p(Sout)
 
+.print p(S0) p(S1) p(S2)
+ .print  p(A3.XXOR) p(src_b0) p(B0) p(B3.XXOR) p(AND1.XXOR) p(AND2.XXOR) p(B4.XXOR)
 
 
 

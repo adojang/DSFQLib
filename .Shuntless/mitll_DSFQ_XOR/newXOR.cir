@@ -1,0 +1,20 @@
+.subckt DSFQ_XOR A B Q
+
+XSPLITA LSmitll_SPLIT   A       A1      A2
+XSPLITB LSmitll_SPLIT   B       B1      B2
+
+XJTL1   LSmitll_JTL     A1      A3
+XJTL2   LSmitll_JTL     B1      B3
+XJTL3   LSmitll_JTL     OR1     OR2
+XJTL4   LSmitll_JTL     OR2     OR3
+XJTL5   LSmitll_JTL     A2      A4
+XJTL6   LSmitll_JTL     B2      B4
+XJTL7   LSmitll_JTL     A3      CLKA
+XJTL8   LSmitll_JTL     B3      CLKB
+
+XAND1   DSFQ_AND        A3      B3      AND1
+XNOT    DSFQ_NOT        AND1    CLKA    CLKB    AND2
+XOR     DSFQ_OR         A2      B2      OR1
+XAND2   DSFQ_AND        AND2    OR3     Q
+
+.ends
