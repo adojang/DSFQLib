@@ -1,0 +1,38 @@
+.subckt DSFQ_ADDDER A B Cin S Cout
+
+XJTA    LSmitll_JTL      A1   A3
+XJTLA2  LSmitll_JTL      A2   A4
+XJTLB   LSmitll_JTL      B1   B3
+XJTLB2  LSmitll_JTL      B2   B4
+XJTLR   LSmitll_JTL      R2   R3
+XJTLR1  LSmitll_JTL      R4   R5
+
+XJTLC   LSmitll_JTL      C1   C3a
+XORC3 DSFQ_XOR   C3a  NC1  C3b
+XJTLC3   LSmitll_JTL      C3b   C3c
+XSPLITC3 LSmitll_SPLIT   C3c       C3      C3
+
+XJTLC2  LSmitll_JTL      C2   C4a
+XORC4 DSFQ_XOR   C4a  NC2  C4b
+XJTLC4   LSmitll_JTL      C4b   C4c
+XSPLITC4 LSmitll_SPLIT   C4c       C4      C4
+
+XSPLITA LSmitll_SPLIT   A       A1      A2
+XSPLITB LSmitll_SPLIT   B       B1      B2
+XSPLITC LSmitll_SPLIT   Cin     C1      C2
+XSPLITR LSmitll_SPLIT   R1xxx      R2      R4
+
+XXORJTL  LSmitll_JTL    R1   R1xxx
+
+XOR1 DSFQ_XOR   A3  B3  R1
+XOR2 DSFQ_XOR   R3  C3  S
+XAND1 DSFQ_AND  R5  C4  N3
+XJTLRN2 LSmitll_JTL  N3  N4
+
+XAND2 DSFQ_AND  A4  B4  N1
+XJTLRN1 LSmitll_JTL  N1  N2
+
+XOR3 DSFQ_XOR   N2  N4  Cout
+
+
+.ends

@@ -4,8 +4,8 @@
 *B and C are inputs for the OR gate.
 *Q is output.
 
-XNOT LSMITLL_NOT A      CLKb    Q
-XJTL LSMITLL_JTL CLKa   CLKb
-XOR DSFQ_OR      B      C       CLKa
+XNOT LSMITLL_NOT A CLKb Q
+XJTLCLK LSMITLL_JTL CLKa CLKb
+XOR DSFQ_OR   B   C   CLKa
 
 .ends
