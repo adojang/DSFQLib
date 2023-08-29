@@ -1,5 +1,5 @@
 # DSFQLib
-This library is under active development, and as such there WILL be bugs.
+This library is no longer under active developement.
 The DSFQ Library aims to offer a standard DSFQ library of cells for use in superconductor logic systems.
 
 A Pipeline architecture is developed and also demonstrated where the advantages that DSFQ offer can be fully exploited.
