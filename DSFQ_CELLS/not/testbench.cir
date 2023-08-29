@@ -1,0 +1,42 @@
+.include cells\LSmitll_DCSFQ_v2p1_optimized.cir
+.include cells\LSmitll_SFQDC_v2p1_optimized.cir
+.include cells\LSmitll_JTL_v2p1_optimized.cir
+.include cells\LSmitll_NOT_v2p1_optimized.cir
+.include AW_mitll_DSFQ_OR.cir
+.include AW_mitll_DSFQ_NOT.cir
+
+.tran 0.025p 400p 0
+.param cval= 600u
+
+* I_A0 0 xa pwl(0 0 100p 0 103p 0 105p 0 200p 0 203p cval 205p 0 300p 0 303p 0 305p 0) 
+* I_B0 0 xb pwl(0 0 100p 0 103p cval 105p 0 200p 0 203p cval 205p 0 300p 0 303p 0 305p 0) 
+* I_C0 0 xc pwl(0 0 100p 0 103p 0 105p 0 200p 0 203p cval 205p 0 300p 0 303p 0 305p 0)
+
+*Expected Outputs: 0 1 0
+*A 0 0 1
+*B 0 1 0
+*C 0 0 1
+*Q 0 1 0
+
+
+I_A0 0 xa pwl(0 0 100p 0 103p cval 105p 0 200p 0 203p 0 205p 0 300p 0 303p 0 305p 0) 
+I_B0 0 xb pwl(0 0 100p 0 103p cval 105p 0 107p 0 110p 0 112p 0 200p 0 203p 0 205p 0 300p 0 303p 0 305p 0) 
+I_C0 0 xc pwl(0 0 100p 0 103p cval 105p 0 200p 0 203p 0 205p 0 300p 0 303p 0 305p 0)
+
+
+XDCSFQA LSmitll_DCSFQ xa xa1 
+XDCSFQB LSmitll_DCSFQ xb xb1
+XDCSFQC LSmitll_DCSFQ xc xc1 
+
+XJTLA LSMITLL_JTL xa1 A
+XJTLB LSMITLL_JTL xb1 B
+XJTLC LSMITLL_JTL xc1 C
+
+XNOT DSFQ_NOT A B C Q
+
+XLOAD LSMITLL_JTL q qq
+
+Rsink qq 0 2
+
+.print p(A) p(B) p(C) p(Q)
+

@@ -1,4 +1,0 @@
-josim -o ./adder.csv ./4bitAdder.cir -V 1
-josim-plot.py ./adder.csv
-sp_generator.py -t 0.90 -s 20E-12 -o adder.sp -v adder.csv 
-brush.py -sp adder.sp -p cake.pattern

@@ -1,0 +1,106 @@
+* DSFQ Self clocked Multiplexor
+* Author: Adriaan van Wijk
+* Version: 1.0
+* Last modification date: 21 June 2022
+* Last modification by: Adriaan van Wijk
+* This testbench uses cells from LS's library of RSFQ cells. This was the version that was tested for layout.
+
+.include cells\LSmitll_DCSFQ_v2p1_optimized.cir
+.include cells\LSmitll_JTL_v2p1_optimized.cir
+.include cells\LSmitll_SPLIT_v2p1_optimized.cir
+.include cells\LSmitll_NOT_v2p1_optimized.cir
+.include cells\LSmitll_BUFF_v2p1_optimized.cir
+.include AW_mitll_DSFQ_ADDER.cir
+.include AW_mitll_DSFQ_AND.cir
+.include AW_mitll_DSFQ_OR.cir
+.include AW_mitll_DSFQ_NOT.cir
+.include AW_mitll_DSFQ_XOR.cir
+
+
+.param cval=600u
+* I_a0 0 I_a0 pwl(0 0 200p 0 203p 0 205p 0       400p 0 403p 0 405p 0        600p 0 603p 0 605p 0        800p 0 803p cval 805p 0        1000p 0 1003p cval 1005p 0        1200p 0 1203p cval 1205p 0        1400p 0 1403p cval 1405p 0)
+* I_b0 0 I_b0 pwl(0 0 200p 0 203p 0 205p 0       400p 0 403p cval 405p 0        600p 0 603p cval 605p 0        800p 0 803p 0 805p 0        1000p 0 1003p 0 1005p 0        1200p 0 1203p cval 1205p 0        1400p 0 1403p cval 1405p 0)
+* I_ci 0 I_ci pwl(0 0 200p 0 203p cval 205p 0       400p 0 403p 0 405p 0        600p 0 603p cval 605p 0        800p 0 803p 0 805p 0        1000p 0 1003p cval 1005p 0        1200p 0 1203p 0 1205p 0        1400p 0 1403p cval 1405p 0)
+
+
+I_a0 0 I_a0 pwl(0 0 100p 0 103p cval 105p 0     118p 0 121p cval 123p 0       400p 0 403p 0 405p 0        600p 0 603p 0 605p 0        800p 0 803p cval 805p 0        1000p 0 1003p cval 1005p 0        1200p 0 1203p cval 1205p 0        1400p 0 1403p cval 1405p 0)
+I_b0 0 I_b0 pwl(0 0 100p 0 103p 0 105p 0     119p 0 122p 0 124p 0      400p 0 403p 0 405p 0        600p 0 603p cval 605p 0        800p 0 803p 0 805p 0        1000p 0 1003p 0 1005p 0        1200p 0 1203p cval 1205p 0        1400p 0 1403p cval 1405p 0)
+I_ci 0 I_ci pwl(0 0 100p 0 103p cval 105p 0     118p 0 121p cval 123p 0        600p 0 603p cval 605p 0        800p 0 803p 0 805p 0        1000p 0 1003p cval 1005p 0        1200p 0 1203p 0 1205p 0        1400p 0 1403p cval 1405p 0)
+
+
+*References
+* I_s0 0 I_s0 pwl(0 0 200p 0 203p cval 205p 0       400p 0 403p cval 405p 0        600p 0 603p 0 605p 0        800p 0 803p cval 805p 0        1000p 0 1003p 0 1005p 0        1200p 0 1203p 0 1205p 0        1400p 0 1403p cval 1405p 0)
+* I_z0 0 I_z0 pwl(0 0 200p 0 203p 0 205p 0       400p 0 403p 0 405p 0        600p 0 603p cval 605p 0        800p 0 803p 0 805p 0        1000p 0 1003p cval 1005p 0        1200p 0 1203p cval 1205p 0        1400p 0 1403p cval 1405p 0)
+
+I_s0 0 I_s0 pwl(0 0 300p 0 303p cval 305p 0 500p 0 503p cval 505p 0 700p 0 703p 0 705p 0 900p 0 903p cval 905p 0 1100p 0 1103p 0 1105p 0 1300p 0 1303p 0 1305p 0 1500p 0 1503p cval 1505p 0)
+I_z0 0 I_z0 pwl(0 0 300p 0 303p 0 305p 0 500p 0 503p 0 505p 0 700p 0 703p cval 705p 0 900p 0 903p 0 905p 0 1100p 0 1103p cval 1105p 0 1300p 0 1303p cval 1305p 0 1500p 0 1503p cval 1505p 0)
+
+* Time 0 200 400 600 800 1000 1200 1400
+* A   0 0 0 1 1 1 1
+* B   0 1 1 0 0 1 1
+* Ci  1 0 1 0 1 0 1
+* S   1 1 0 1 0 0 1
+* Cot 0 0 1 0 1 1 1
+
+* I_a0 0 I_a0 pwl(0 0 200p 0 203p 0 205p 0       400p 0 403p 0 405p 0        600p 0 603p 0 605p 0        800p 0 803p 0 805p 0        1000p 0 1003p 0 1005p 0        1200p 0 1203p 0 1205p 0        1400p 0 1403p 0 1405p 0)
+* I_b0 0 I_b0 pwl(0 0 200p 0 203p 0 205p 0       400p 0 403p 0 405p 0        600p 0 603p cval 605p 0        800p 0 803p 0 805p 0        1000p 0 1003p 0 1005p 0        1200p 0 1203p 0 1205p 0        1400p 0 1403p 0 1405p 0)
+* I_ci 0 I_ci pwl(0 0 200p 0 203p 0 205p 0       400p 0 403p 0 405p 0        600p 0 603p cval 605p 0        800p 0 803p 0 805p 0        1000p 0 1003p 0 1005p 0        1200p 0 1203p 0 1205p 0        1400p 0 1403p 0 1405p 0)
+
+* I_s0 0 I_s0 pwl(0 0 200p 0 203p cval 205p 0       400p 0 403p cval 405p 0        600p 0 603p 0 605p 0        800p 0 803p cval 805p 0        1000p 0 1003p 0 1005p 0        1200p 0 1203p 0 1205p 0        1400p 0 1403p cval 1405p 0)
+* * I_s0 0 I_s0 pwl(0 0 170p 0 173p cval 175p 0     270p 0 273p cval 275p 0      370p 0 373p 0 375p 0        470p 0 473p cval 475p 0        570p 0 573p 0 575p 0            670p 0 673p 0 675p 0            770p 0 773p cval 775p 0)
+* I_z0 0 I_z0 pwl(0 0 200p 0 203p 0 205p 0       400p 0 403p 0 405p 0        600p 0 603p cval 605p 0        800p 0 803p 0 805p 0        1000p 0 1003p cval 1005p 0        1200p 0 1203p cval 1205p 0        1400p 0 1403p cval 1405p 0)
+
+
+*S = 0 - Select A
+*S = 1 - Select B
+
+
+*A 0
+*B   1
+*Cin 1
+
+*Expected:
+*S 0
+*Co 1
+
+
+
+
+.tran 0.25p 1600p 0 0.05p
+
+Xsrc_a0 LSmitll_DCSFQ i_a0 src_a0
+Xsrc_b0 LSmitll_DCSFQ i_b0 src_b0
+Xsrc_ci LSmitll_DCSFQ i_ci src_ci
+Xsrc_s0 LSmitll_DCSFQ i_s0 src_s0
+Xsrc_z0 LSmitll_DCSFQ i_z0 src_z0
+
+Xload_a0 LSMITLL_JTL src_a0 A
+Xload_b0 LSMITLL_JTL src_b0 B
+Xload_c0 LSMITLL_JTL src_ci Cin
+Xload_s0 LSMITLL_JTL src_s0 S_REF
+Xload_z0 LSMITLL_JTL src_z0 C_REF
+
+*For Reference to confirm it is working correctly.
+R_QS S_REF 0 4
+R_Cout C_REF 0 4
+
+
+XDUT DSFQ_ADDDER A B Cin Sout Cout
+
+
+* .print p(S_BASE) p(Carry_BASE) p(Sout)  p(CarryOut) p(R3.xdut) p(C3.xdut)
+* .print p(A0) p(B0) p(Cin) p(Cout)
+
+.print p(A) p(B) p(Cin) p(Sout) p(Cout)
+* .print p(Cout) p(Sout) p(C_REF) p(S_REF)
+
+* .print p(N3.xdut) p(R5.xdut) p(R2.xdut) p(R3.xdut) p(C4.xdut)
+* .print p(Sout)  p(CarryOut) p(R3.xdut) p(C3.xdut) p(R5.xdut) p(C4.xdut) p(A3.xor1.xdut) p(B3.xor1.xdut)
+*  .print p(S_BASE) p(Carry_BASE) p(S)  p(Cout) p(AND1) p(XOR1b) p(AND2) p(C2) p(XOR1b) p(C1)
+
+XCOUT LSMITLL_JTL Cout Carryout
+R_Carry Carryout 0 2
+XLOAD LSMITLL_JTL S Sout
+R_out Sout 0 2
+
+.end

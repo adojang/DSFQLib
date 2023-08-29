@@ -1,0 +1,62 @@
+*File for Inductance Extraction with InducTex
+
+* Ports Input and Output
+PA		a		0
+PB		b		0
+PQ 		q 		0
+P4 		bias	0
+
+* Input/Output Inductors [in H]
+L1		a		10a	 	1.64204687p
+L2 		b		20a	 	1.64204687p
+L3 		50 		q		2.00p
+
+*Resistor Branches
+PRH1 	10a 	133a
+RH1 	133a 	133   	4.76237371
+Lhp1 	133 	13    	1p       
+
+PRH2 	20a 	233a
+RH2 	233a 	233   	4.76237371  
+Lhp2 	233 	23 		1p     
+
+
+LDp1 	11 		12    	1p      
+LDp2 	21 		22 		1p      
+RD1 	10 		11 	0.600718616 
+RD2 	20		21 	0.600718616 
+
+*JJs [ in A]
+J1   	10   	10j   	0.139878486m
+LJ1     10j     13      
+J2   	20   	20j  	0.139878486m
+LJ2     20j     23      
+JD1   	12   	12j   	0.138855937m
+LJD1    12j     14      
+JD2   	22   	22j   	0.138855937m
+LJD2    22j     24      
+J3  	50   	41  	0.151517089m
+LP1 	41 		0 		1p       
+
+
+*Connection Inductors
+LC1 	10a 	10
+LC1a  	13      14
+LC2 	20a 	20
+LC2b  	23      24
+LC3 	14 	 	30 
+LC4 	24  	30
+LC5 	30  	40
+LC6 	40  	50
+
+
+*Bias Resistor (Current Source)
+RBIAS bias biasa 16.83
+LRBIAS	biasa	40
+.end
+
+
+
+
+
+
